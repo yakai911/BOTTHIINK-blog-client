@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { APP_NAME } from "../config";
+import { signout, isAuth } from "../actions/auth";
 import {
   Collapse,
   Navbar,
@@ -14,21 +15,25 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import { useRouter } from "next/router";
 
 const Header = (props) => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-
   const toggle = () => setIsOpen(!isOpen);
 
   return (
     <div>
       <Navbar color='dark' dark expand='md'>
-        <Link href='/'>
-          <NavbarBrand>{APP_NAME}</NavbarBrand>
-        </Link>
+        <NavbarBrand>{APP_NAME}</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className='mr-auto' navbar>
+            <NavItem>
+              <Link href='/'>
+                <NavLink style={{ cursor: "pointer" }}>首页</NavLink>
+              </Link>
+            </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 分类
@@ -40,16 +45,29 @@ const Header = (props) => {
                 <DropdownItem>返回首页</DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
-            <NavItem>
-              <Link href='/Signin'>
-                <NavLink>登录</NavLink>
-              </Link>
-            </NavItem>
-            <NavItem>
-              <Link href='/Signup'>
-                <NavLink>注册</NavLink>
-              </Link>
-            </NavItem>
+
+            {isAuth() ? (
+              <NavItem>
+                <NavLink
+                  style={{ cursor: "pointer" }}
+                  onClick={() => signout(() => router.replace("/Signin"))}>
+                  退出登录
+                </NavLink>
+              </NavItem>
+            ) : (
+              <>
+                <NavItem>
+                  <Link href='/Signin'>
+                    <NavLink>登录</NavLink>
+                  </Link>
+                </NavItem>
+                <NavItem>
+                  <Link href='/Signup'>
+                    <NavLink>注册</NavLink>
+                  </Link>
+                </NavItem>
+              </>
+            )}
           </Nav>
         </Collapse>
       </Navbar>

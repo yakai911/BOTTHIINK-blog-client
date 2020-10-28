@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { signup } from "../../actions/auth";
+import { signup, isAuth } from "../../actions/auth";
 
 const SignupComponent = () => {
   const [values, setValues] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
     error: "",
@@ -12,20 +12,31 @@ const SignupComponent = () => {
     showForm: true,
   });
 
-  const { name, email, password, error, loading, message, showForm } = values;
+  const {
+    username,
+    email,
+    password,
+    error,
+    loading,
+    message,
+    showForm,
+  } = values;
+
+  useEffect(() => {
+    isAuth() && router.push("/");
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setValues({ ...values, loading: true, error: false });
-    const user = { name, email, password };
+    const user = { username, email, password };
     signup(user).then((data) => {
-      console.log(data);
       if (data.error) {
         setValues({ ...values, error: data.error, loading: false });
       } else {
         setValues({
           ...values,
-          name: "",
+          username: "",
           email: "",
           password: "",
           error: "",
@@ -43,16 +54,24 @@ const SignupComponent = () => {
     setValues({ ...values, error: false, [name]: value });
   };
 
+  const showLoading = () =>
+    loading ? <div className='alert alert-info'>Loading...</div> : "";
+
+  const showError = () =>
+    error ? <div className='alert alert-danger'>{error}</div> : "";
+
+  const showMessage = () =>
+    message ? <div className='alert alert-info'>{message}</div> : "";
+
   const signupForm = () => {
     return (
       <form onSubmit={handleSubmit}>
         <div className='form-group'>
           <input
             type='text'
-            name='name'
-            value={name}
+            name='username'
+            value={username}
             onChange={handleChange}
-            className='form-control'
             placeholder='用户名'
           />
         </div>
@@ -62,7 +81,6 @@ const SignupComponent = () => {
             name='email'
             value={email}
             onChange={handleChange}
-            className='form-control'
             placeholder='邮箱'
           />
         </div>
@@ -72,7 +90,6 @@ const SignupComponent = () => {
             name='password'
             value={password}
             onChange={handleChange}
-            className='form-control'
             placeholder='密码'
           />
         </div>
@@ -83,7 +100,14 @@ const SignupComponent = () => {
     );
   };
 
-  return <>{signupForm()}</>;
+  return (
+    <>
+      {showError()}
+      {showLoading()}
+      {showMessage()}
+      {showForm && signupForm()}
+    </>
+  );
 };
 
 export default SignupComponent;
