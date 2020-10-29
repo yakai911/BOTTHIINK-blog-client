@@ -1,16 +1,13 @@
-import Layout from "../components/Layout";
 import SignupComponent from "../components/auth/SignupComponent";
 
 const Signup = () => {
   return (
-    <Layout>
-      <h2 className='text-center'>新用户注册</h2>
-      <div className='row'>
-        <div className='col-md-6 offset-md-3'>
-          <SignupComponent />
-        </div>
+    <div className='sign'>
+      <div className='container bg-white my-4 p-3 w-50'>
+        <h2 className='text-center my-4'>新用户注册</h2>
+        <SignupComponent />
       </div>
-    </Layout>
+    </div>
   );
 };
 

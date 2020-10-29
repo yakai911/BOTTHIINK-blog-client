@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Link from "next/link";
-import { APP_NAME } from "../config";
 import { signout, isAuth } from "../actions/auth";
 import {
   Collapse,
@@ -23,26 +22,26 @@ const Header = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div>
-      <Navbar color='dark' dark expand='md'>
-        <NavbarBrand>{APP_NAME}</NavbarBrand>
+    <>
+      <Navbar expand='md' className='bg-white px-4 py-2'>
+        <NavbarBrand href='/'>自写</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className='mr-auto' navbar>
+          <Nav className='ml-auto mr-2' navbar>
             <NavItem>
               <Link href='/'>
                 <NavLink style={{ cursor: "pointer" }}>首页</NavLink>
               </Link>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
+              <DropdownToggle nav caret dark>
                 分类
               </DropdownToggle>
               <DropdownMenu right color='dark'>
-                <DropdownItem>文学</DropdownItem>
-                <DropdownItem>科技</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>返回首页</DropdownItem>
+                <DropdownItem>全部</DropdownItem>
+                <DropdownItem>小说</DropdownItem>
+                <DropdownItem>诗歌</DropdownItem>
+                <DropdownItem>其他</DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
 
@@ -71,7 +70,7 @@ const Header = (props) => {
           </Nav>
         </Collapse>
       </Navbar>
-    </div>
+    </>
   );
 };
 

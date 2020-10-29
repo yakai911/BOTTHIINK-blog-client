@@ -1,14 +1,10 @@
-import Layout from "../components/Layout";
-import Link from "next/link";
+import Carousel from "../components/Carousel";
 
 const Index = () => {
   return (
-    <Layout>
-      <h2>index page</h2>
-      <Link href='/Signup'>
-        <a>注册</a>
-      </Link>
-    </Layout>
+    <div>
+      <Carousel />
+    </div>
   );
 };
 

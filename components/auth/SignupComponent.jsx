@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { signup, isAuth } from "../../actions/auth";
 
 const SignupComponent = () => {
@@ -65,36 +65,50 @@ const SignupComponent = () => {
 
   const signupForm = () => {
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='form-login'>
         <div className='form-group'>
+          <label htmlFor='inputUsername' className='sr-only form-label'>
+            用户名
+          </label>
           <input
+            id='inputUsername'
             type='text'
             name='username'
+            className='form-control form-input'
             value={username}
             onChange={handleChange}
-            placeholder='用户名'
+            placeholder='请输入您的用户名'
           />
         </div>
         <div className='form-group'>
+          <label htmlFor='inputEmail' className='sr-ony form-label'>
+            邮箱
+          </label>
           <input
+            id='inputEmail'
+            className='form-control form-input'
             type='email'
             name='email'
             value={email}
             onChange={handleChange}
-            placeholder='邮箱'
+            placeholder='请输入您的邮箱'
           />
         </div>
-        <div className='form-group'>
+        <div className='form-group mb-4'>
+          <label htmlFor='inputEmail' className='sr-ony form-label'>
+            密码
+          </label>
           <input
             type='password'
+            className='form-control form-input'
             name='password'
             value={password}
             onChange={handleChange}
-            placeholder='密码'
+            placeholder='请输入您的密码'
           />
         </div>
         <div>
-          <button className='btn btn-primary'>注册</button>
+          <button className='form-btn'>注册</button>
         </div>
       </form>
     );

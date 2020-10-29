@@ -52,28 +52,37 @@ const SigninComponent = () => {
 
   const signinForm = () => {
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='form-login'>
         <div className='form-group'>
+          <label htmlFor='inputEmail' className='sr-ony form-label'>
+            邮箱
+          </label>
           <input
+            id='inputEmail'
+            className='form-control form-input'
             type='email'
             name='email'
             value={email}
             onChange={handleChange}
-            placeholder='邮箱'
+            placeholder='请输入您的邮箱'
           />
         </div>
-        <div className='form-group'>
+        <div className='form-group mt-3'>
+          <label htmlFor='inputEmail' className='sr-ony form-label'>
+            密码
+          </label>
           <input
             type='password'
+            className='form-control form-input'
             name='password'
             value={password}
             onChange={handleChange}
-            placeholder='密码'
+            placeholder='请输入您的密码'
           />
         </div>
         <div>
-          <button type='submit' className='btn btn-primary'>
-            登录
+          <button type='submit' className='form-btn'>
+            登 录
           </button>
         </div>
       </form>
