@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
+import MyIcon from "../components/MyIcon";
 import { signout, isAuth } from "../actions/auth";
 import {
   Collapse,
@@ -24,7 +25,10 @@ const Header = (props) => {
   return (
     <>
       <Navbar expand='md' className='bg-white px-4 py-2'>
-        <NavbarBrand href='/'>自写</NavbarBrand>
+        <NavbarBrand href='/'>
+          BOT THINK
+          <MyIcon />
+        </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className='ml-auto mr-2' navbar>
@@ -34,10 +38,10 @@ const Header = (props) => {
               </Link>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret dark>
+              <DropdownToggle nav caret>
                 分类
               </DropdownToggle>
-              <DropdownMenu right color='dark'>
+              <DropdownMenu right>
                 <DropdownItem>全部</DropdownItem>
                 <DropdownItem>小说</DropdownItem>
                 <DropdownItem>诗歌</DropdownItem>

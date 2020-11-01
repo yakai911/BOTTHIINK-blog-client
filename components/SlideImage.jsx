@@ -1,4 +1,4 @@
-const Image = ({ img }) => {
+const SlideImage = ({ img }) => {
   console.log(img);
   return (
     <div
@@ -12,4 +12,4 @@ const Image = ({ img }) => {
   );
 };
 
-export default Image;
+export default SlideImage;

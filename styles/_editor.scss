@@ -1,0 +1,109 @@
+.editor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background-color: white;
+  margin: 80px;
+  border-radius: 5px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 80vw;
+
+  .btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .btn {
+      width: 90px;
+      height: 45px;
+      margin-right: 20px;
+      font-weight: 900;
+    }
+  }
+}
+
+.input-group {
+  margin-right: 10px;
+
+  & .input-group-text {
+    border: none;
+    padding: 4px;
+    background-color: white;
+    font-weight: 800;
+  }
+}
+
+.article {
+  margin-bottom: 100px;
+
+  & textarea {
+    border-radius: 10px;
+    width: 80vw;
+    height: 100vh;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .editor {
+    margin: 10px;
+    flex: 1;
+    background-color: white;
+  }
+  .input-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+  }
+
+  .input-group,
+  .input-group-text {
+    width: 80vw;
+    margin-bottom: 5px;
+  }
+
+  .form-group {
+    margin-top: 10px;
+  }
+
+  .input-container {
+    margin: 5px;
+    width: 80vw;
+  }
+
+  .btn-container {
+    width: 80vw;
+    margin: 20px;
+    display: inline-flex;
+    align-items: center;
+    align-content: center;
+
+    & .btn {
+      width: 90px;
+      height: 30px;
+      margin-right: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .article {
+    margin-bottom: 50px;
+
+    & textarea {
+      border-radius: 10px;
+      width: 80vw;
+      height: 80vh;
+    }
+  }
+}

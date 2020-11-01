@@ -6,7 +6,7 @@ import {
   CarouselIndicators,
   CarouselCaption,
 } from "reactstrap";
-import Image from "./Image";
+import SlideImage from "./SlideImage";
 
 const items = [
   {
@@ -67,7 +67,7 @@ const CarouselComponent = (props) => {
         key={item.id}
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}>
-        <Image img={item.src} />
+        <SlideImage img={item.src} />
         <CarouselCaption
           className='text-white'
           captionText={item.description}
