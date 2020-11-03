@@ -86,6 +86,12 @@ const CarouselComponent = (props) => {
               background-size: cover;
               background-position: center center;
             }
+
+            @media screen and (max-width:900px){
+              .custom-tag{
+               height:300px;
+              }
+            }
             `}
       </style>
       <Carousel activeIndex={activeIndex} next={next} previous={previous}>
