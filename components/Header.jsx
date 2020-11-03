@@ -34,7 +34,7 @@ const Header = (props) => {
           <Nav className='ml-auto mr-2' navbar>
             <NavItem>
               <Link href='/'>
-                <NavLink style={{ cursor: "pointer" }}>首页</NavLink>
+                <NavLink>首页</NavLink>
               </Link>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
@@ -52,20 +52,19 @@ const Header = (props) => {
             {isAuth() ? (
               <NavItem>
                 <NavLink
-                  style={{ cursor: "pointer" }}
-                  onClick={() => signout(() => router.replace("/Signin"))}>
+                  onClick={() => signout(() => router.replace("/signin"))}>
                   退出登录
                 </NavLink>
               </NavItem>
             ) : (
               <>
                 <NavItem>
-                  <Link href='/Signin'>
+                  <Link href='/signin'>
                     <NavLink>登录</NavLink>
                   </Link>
                 </NavItem>
                 <NavItem>
-                  <Link href='/Signup'>
+                  <Link href='/signup'>
                     <NavLink>注册</NavLink>
                   </Link>
                 </NavItem>

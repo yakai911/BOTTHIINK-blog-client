@@ -4,11 +4,11 @@ import Link from "next/link";
 const Signin = () => {
   return (
     <div className='sign'>
-      <div className='container bg-white my-4 p-3 w-50'>
+      <div className='sign-container'>
         <h2 className='text-center my-4'>登录</h2>
         <p className='text-center'>
           还没有账号？点击
-          <Link href='/Signup'>
+          <Link href='/signup'>
             <span
               style={{
                 textDecoration: "underline",

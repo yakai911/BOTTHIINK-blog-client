@@ -1,10 +1,14 @@
-import React from "react";
+import Post from "./PostGrid";
 
-const BlogCategory = () => {
+const BlogCategory = ({ posts, columns, tagsOntop }) => {
   return (
-    <div>
-      <h3>tag</h3>
-    </div>
+    <section
+      className='masonry'
+      style={{ gridTemplateColumns: `repeat($columns),minmax(275px,1fr)` }}>
+      {posts.map((post, index) => (
+        <Post {...{ post, index, tagsOntop, key: index }} />
+      ))}
+    </section>
   );
 };
 

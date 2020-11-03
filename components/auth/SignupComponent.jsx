@@ -3,7 +3,7 @@ import { signup, isAuth } from "../../actions/auth";
 
 const SignupComponent = () => {
   const [values, setValues] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
     error: "",
@@ -12,15 +12,7 @@ const SignupComponent = () => {
     showForm: true,
   });
 
-  const {
-    username,
-    email,
-    password,
-    error,
-    loading,
-    message,
-    showForm,
-  } = values;
+  const { name, email, password, error, loading, message, showForm } = values;
 
   useEffect(() => {
     isAuth() && router.push("/");
@@ -29,14 +21,14 @@ const SignupComponent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setValues({ ...values, loading: true, error: false });
-    const user = { username, email, password };
+    const user = { name, email, password };
     signup(user).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error, loading: false });
       } else {
         setValues({
           ...values,
-          username: "",
+          name: "",
           email: "",
           password: "",
           error: "",
@@ -73,9 +65,9 @@ const SignupComponent = () => {
           <input
             id='inputUsername'
             type='text'
-            name='username'
+            name='name'
             className='form-control form-input'
-            value={username}
+            value={name}
             onChange={handleChange}
             placeholder='请输入您的用户名'
           />
