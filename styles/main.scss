@@ -18,6 +18,11 @@ body {
   height: 100%;
 }
 
+#nprogress .bar {
+  height: 4px !important;
+  background-color: #1bb2f9 !important;
+}
+
 a {
   text-decoration: none;
   cursor: pointer;
