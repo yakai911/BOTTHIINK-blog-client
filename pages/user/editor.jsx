@@ -1,4 +1,4 @@
-import Creator from "../components/Creator";
+import Creator from "../../components/Creator";
 
 const Editor = () => {
   return (
