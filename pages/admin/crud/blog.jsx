@@ -1,6 +1,5 @@
 import Admin from "../../../components/Admin";
 import BlogCreate from "../../../components/crud/BlogCreate";
-import Link from "next/link";
 
 const Blog = () => {
   return (
