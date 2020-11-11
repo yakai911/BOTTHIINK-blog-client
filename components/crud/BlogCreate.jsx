@@ -11,6 +11,7 @@ const ReactQuill = dynamic(() => import("react-quill"), {
 });
 
 const CreateBlog = ({ router }) => {
+  const token = getCookie("token");
   //parse blog from localStorage
   const blogFromLS = () => {
     if (typeof window === "undefined") {
@@ -77,7 +78,22 @@ const CreateBlog = ({ router }) => {
 
   const publishBlog = (e) => {
     e.preventDefault();
-    console.log("ready to publishBlog");
+    // console.log("ready to publishBlog");
+    createBlog(formData, token).then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        setValues({
+          ...values,
+          title: "",
+          error: "",
+          success: `新文章${data.title}已成功发布！`,
+        });
+        setBody("");
+        setCategories([]);
+        setTags([]);
+      }
+    });
   };
 
   const handleChange = (name) => (e) => {
@@ -91,7 +107,7 @@ const CreateBlog = ({ router }) => {
     console.log(e);
     setBody(e);
     formData.set("body", e);
-    if (typeof window !== undefined) {
+    if (typeof window !== "undefined") {
       localStorage.setItem("blog", JSON.stringify(e));
     }
   };
@@ -162,11 +178,27 @@ const CreateBlog = ({ router }) => {
     );
   };
 
+  const showError = () => (
+    <div
+      className='alert alert-danger'
+      style={{ dispaly: error ? "" : "none" }}>
+      {error}
+    </div>
+  );
+
+  const showSuccess = () => (
+    <div
+      className='alert alert-success'
+      style={{ dispaly: success ? "" : "none" }}>
+      {success}
+    </div>
+  );
+
   const createBLogForm = () => {
     return (
       <form onSubmit={publishBlog}>
-        <div className='form-group'>
-          <label className='text-muted'>标题</label>
+        <div className='input-group input-group-sm mb-3'>
+          <div className='input-group-text title text-muted'>标题</div>
           <input
             type='text'
             className='form-control'
@@ -183,9 +215,9 @@ const CreateBlog = ({ router }) => {
             onChange={handleBody}
           />
         </div>
-        <div>
-          <button type='submit' className='btn btn-black'>
-            发表
+        <div className='btn-container'>
+          <button type='submit' className='btn btn-outline-dark my-3 right'>
+            发布文章
           </button>
         </div>
       </form>
@@ -195,28 +227,38 @@ const CreateBlog = ({ router }) => {
   return (
     <div className='container-fluid'>
       <div className='row'>
-        <div className='col-md-8'>
-          {createBLogForm()}
-          <hr />
-          {JSON.stringify(title)}
-          <hr />
-          {JSON.stringify(body)}
-          <hr />
-          {JSON.stringify(categories)}
-          <hr />
-          {JSON.stringify(tags)}
+        <div className='pt-3'>
+          {error && showError()}
+          {success && showSuccess()}
         </div>
+        <div className='col-md-8'>{createBLogForm()}</div>
 
         <div className='col-md-4'>
           <div>
-            <h5>Categories</h5>
+            <div className='form-group pb-2'>
+              <h5>配图（可选）</h5>
+              <hr />
+              <small className='text-muted mr-3'>图片不可大于1Mb</small>
+              <label className='btn btn-outline-dark'>
+                上传图片
+                <input
+                  type='file'
+                  onChange={handleChange("image")}
+                  accept='image/*'
+                  hidden
+                />
+              </label>
+            </div>
+          </div>
+          <div>
+            <h5>分类</h5>
             <hr />
             <ul style={{ maxHeight: "200px", overflow: "scroll" }}>
               {showCategories()}
             </ul>
           </div>
           <div>
-            <h5>Tags</h5>
+            <h5>标签</h5>
             <hr />
             <ul style={{ maxHeight: "200px", overflow: "scroll" }}>
               {showTags()}
