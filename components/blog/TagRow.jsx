@@ -11,8 +11,8 @@ const TagRow = ({ tags }) => {
         <span
           key={ind}
           className='tag'
-          style={{ backgroundColor: categoryColors[tag] }}>
-          {tag.toUpperCase()}
+          style={{ backgroundColor: categoryColors[tag.name] }}>
+          {tag.name.toUpperCase()}
         </span>;
       })}
     </div>

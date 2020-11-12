@@ -1,6 +1,6 @@
-import Post from "./BlogPost";
+import BlogPost from "./BlogPost";
 import TagRow from "./TagRow";
 import BlogCategory from "./BlogCategory";
 import PostGrid from "./PostGrid";
 
-export { Post, TagRow, BlogCategory, PostGrid };
+export { BlogPost, TagRow, BlogCategory, PostGrid };

@@ -87,7 +87,7 @@ const CreateBlog = ({ router }) => {
           ...values,
           title: "",
           error: "",
-          success: `新文章${data.title}已成功发布！`,
+          success: `《${data.title}》已成功发布！`,
         });
         setBody("");
         setCategories([]);
@@ -216,7 +216,7 @@ const CreateBlog = ({ router }) => {
           />
         </div>
         <div className='btn-container'>
-          <button type='submit' className='btn btn-outline-dark my-3 right'>
+          <button type='submit' className='form-btn my-3 right'>
             发布文章
           </button>
         </div>
@@ -238,7 +238,7 @@ const CreateBlog = ({ router }) => {
             <div className='form-group pb-2'>
               <h5>配图（可选）</h5>
               <hr />
-              <small className='text-muted mr-3'>图片不可大于1Mb</small>
+              <small className='text-muted mr-3'>配图不可大于1Mb</small>
               <label className='btn btn-outline-dark'>
                 上传图片
                 <input

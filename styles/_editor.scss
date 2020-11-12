@@ -14,4 +14,8 @@
 .btn-container {
   display: flex;
   justify-content: flex-end;
+
+  & .form-btn {
+    width: 120px;
+  }
 }

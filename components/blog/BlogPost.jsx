@@ -1,7 +1,12 @@
 import React from "react";
+import useWindowSize from "../../actions/useWindowSize";
+import { TagRow } from "./index";
+import Link from "next/link";
 
-const BlogPost = ({ post, tagsOnTop }) => {
-  const windowWidth = window.innerWidth;
+const BlogPost = ({ post, tagsOnTop, tags }) => {
+  const size = useWindowSize();
+  const windowWidth = size.width;
+
   const imageBackground = {
     backgroundImage: `url()`,
   };
@@ -9,23 +14,23 @@ const BlogPost = ({ post, tagsOnTop }) => {
   const style =
     windowWidth > 900 ? { ...imageBackground, ...post.style } : imageBackground;
   return (
-    <a
+    <Link
       className='post overlay'
       style={style}
       href='/blog/[id]'
-      as={`/blog/${id}`}>
+      as={`/blog/${post._id}`}>
       <div
         className='image-text'
         style={{
           justifyContent: tagsOnTop ? "space-between" : "flex-end",
         }}>
-        <TagRow tages={post.tags} />
+        <TagRow tags={tags} />
         <div>
           <h2 className='image-title'>{post.title}</h2>
           <span className='image-date'>{post.createdAt}</span>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

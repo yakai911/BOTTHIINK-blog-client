@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const MyIcon = () => {
   return (
-    <Link href='/editor'>
+    <Link href='/admin/crud/blog'>
       <img
         src='/moshIcon.png'
         alt='logo'

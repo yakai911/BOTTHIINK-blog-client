@@ -44,8 +44,8 @@ const Header = (props) => {
   return (
     <>
       <Navbar expand='md' className='bg-white px-4 py-2'>
-        <NavbarBrand href='/'>
-          BOT THINK
+        <NavbarBrand>
+          <Link href='/'>BOT THINK</Link>
           <MyIcon />
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
