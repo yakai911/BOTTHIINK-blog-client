@@ -2,19 +2,26 @@ import fetch from "isomorphic-fetch";
 import { BlogCategory, BlogPost, PostGrid } from "../../components/blog";
 import { withRouter } from "next/router";
 import { API } from "../../config";
-import { listBlogsWithCategoriesAndTags } from "../../actions/blog";
 
-const Blogs = ({ posts, router, tags }) => {
+const Blogs = ({ posts, router }) => {
   return (
     <main className='home'>
       <section className='container'>
         <div className='row'>
           <section className='featured-posts-container'>
-            <BlogCategory posts={posts} columns={2} tags={tags} />
-            {/* <BlogPost post={lastFeatured} /> */}
+            <BlogCategory posts={posts} columns={2} tagsOnTop={true} />
+            <BlogPost post={posts[3]} />
           </section>
         </div>
       </section>
+      {/* <section className='bg-white'>
+        <section className='container'>
+          <div className='row'>
+            <h1>Reacent Post</h1>
+            <PostGrid posts={posts} />
+          </div>
+        </section>
+      </section> */}
     </main>
   );
 };

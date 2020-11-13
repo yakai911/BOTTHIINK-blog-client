@@ -5,6 +5,7 @@ const categoryColors = {
 };
 
 const TagRow = ({ tags }) => {
+  console.log(tags);
   return (
     <div className='tags-container'>
       {tags.map((tag, ind) => {

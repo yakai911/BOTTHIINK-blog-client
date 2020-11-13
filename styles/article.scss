@@ -1,0 +1,20 @@
+article {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.article-container {
+  width: 50vw;
+  margin: 50px 0;
+}
+
+@media screen and (max-width: 900px) {
+  .banner {
+    height: 300px !important;
+  }
+  .article-container {
+    width: 80vw;
+    margin: 30px 0;
+  }
+}

@@ -1,12 +1,12 @@
 import BlogPost from "./BlogPost";
 
-const BlogCategory = ({ posts, columns, tagsOntop, tags }) => {
+const BlogCategory = ({ posts, columns, tagsOnTop }) => {
   return (
     <section
       className='masonry'
-      style={{ gridTemplateColumns: `repeat($columns),minmax(275px,1fr)` }}>
+      style={{ gridTemplateColumns: `repeat(${columns},minmax(300px,1fr))` }}>
       {posts.map((post, index) => (
-        <BlogPost {...{ post, index, tagsOntop, key: index, tags }} />
+        <BlogPost {...{ post, index, tagsOnTop, key: index }} />
       ))}
     </section>
   );

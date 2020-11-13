@@ -2,6 +2,7 @@ const SlideImage = ({ img }) => {
   console.log(img);
   return (
     <div
+      className='banner'
       style={{
         height: "500px",
         width: "100%",
