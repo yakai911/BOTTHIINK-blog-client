@@ -1,5 +1,5 @@
 import { Pagination } from "antd";
-import { useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { TagRow } from "./";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ const PostGrid = ({ posts }) => {
     const lastIndex = pageSize * current;
     const firstIndex = lastIndex - pageSize;
 
-    return posts.slice(firstIndex, LastIndex);
+    return posts.slice(firstIndex, lastIndex);
   }, [current, pageSize, posts]);
 
   useEffect(() => {
@@ -26,12 +26,12 @@ const PostGrid = ({ posts }) => {
     <section className='grid-pagination-container'>
       <section className='post-grid container'>
         {paginatedPosts.map((post, index) => (
-          <div className='post-container'>
-            <figure>
+          <div className='post-container' key={index}>
+            {/* <figure>
               <Link href={posts.link}>
                 <img src={`${post.image}`} alt={post.title} />
               </Link>
-            </figure>
+            </figure> */}
             <TagRow tags={post.categories} />
             <h2>{post.title}</h2>
             <p className='author-text'>

@@ -15,7 +15,7 @@ const BlogPost = ({ post, tagsOnTop, tags }) => {
     windowWidth > 900 ? { ...imageBackground, ...post.style } : imageBackground;
   return (
     <Link
-      className='post overlay'
+      className='masonry-post overlay'
       style={style}
       href='/blog/[id]'
       as={`/blog/${post._id}`}>

@@ -28,13 +28,3 @@ export const listBlogsWithCategoriesAndTags = () => {
     })
     .catch((err) => console.log(err));
 };
-
-export const list = () => {
-  return fetch(`${API}/blogs`)
-    .then((res) => {
-      return res.json();
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
