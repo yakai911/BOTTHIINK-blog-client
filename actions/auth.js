@@ -1,9 +1,8 @@
 import fetch from "isomorphic-fetch";
-import { API } from "../config";
 import cookie from "js-cookie";
 
 export const signup = (user) => {
-  return fetch(`${API}/signup`, {
+  return fetch(`${process.env.NEXT_PUBLIC_API}/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -18,7 +17,7 @@ export const signup = (user) => {
 };
 
 export const signin = (user) => {
-  return fetch(`${API}/signin`, {
+  return fetch(`${process.env.NEXT_PUBLIC_API}/signin`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -38,7 +37,7 @@ export const signout = (next) => {
   removeLocalStorage("user");
   next();
 
-  return fetch(`${API}/signout`, {
+  return fetch(`${process.env.NEXT_PUBLIC_API}/signout`, {
     method: "GET",
   })
     .then((response) => {

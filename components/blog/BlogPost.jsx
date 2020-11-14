@@ -2,14 +2,14 @@ import React from "react";
 import useWindowSize from "../../actions/useWindowSize";
 import { TagRow } from "./index";
 import Link from "next/link";
-import { API } from "../../config";
+import moment from "moment";
 
 const BlogPost = ({ post, tagsOnTop }) => {
   const size = useWindowSize();
   const windowWidth = size.width;
 
   const imageBackground = {
-    backgroundImage: `url('${API}/blog/image/${post._id}')`,
+    backgroundImage: `url('${process.env.API}/blog/image/${post._id}')`,
     cursor: "pointer",
   };
 
@@ -17,7 +17,7 @@ const BlogPost = ({ post, tagsOnTop }) => {
     windowWidth > 900 ? { ...imageBackground, ...post.style } : imageBackground;
 
   return (
-    <Link href='/blog/[id]' as={`/blog/${post._id}`}>
+    <Link href='/blogs/[id]' as={`/blogs/${post._id}`}>
       <div className='post overlay' style={style}>
         <div
           className='image-text'
@@ -27,7 +27,9 @@ const BlogPost = ({ post, tagsOnTop }) => {
           <TagRow tags={post.tags} />
           <div>
             <h2 className='image-title'>{post.title}</h2>
-            <span className='image-date'>{post.createdAt}</span>
+            <span className='image-date'>
+              {moment(post.createdAt).format("MMMM,DD,YYYY")}
+            </span>
           </div>
         </div>
       </div>

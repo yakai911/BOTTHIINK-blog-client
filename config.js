@@ -2,8 +2,7 @@ import getConfig from "next/config";
 
 const { publicRuntimeConfig } = getConfig();
 
-export const API = publicRuntimeConfig.PRODUCTION
-  ? "https://myseo-blog-backend.herokuapp.com/api"
-  : "http://[::1]:5000/api";
+export const API = "http://[::1]:5000/api";
 
-export const APP_NAME = publicRuntimeConfig.APP_NAME;
+export const APP_NAME = "BOT THINK";
+export const DOMAIN = "https://bot-think/netlifyapp.com";

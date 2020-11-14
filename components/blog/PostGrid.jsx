@@ -1,8 +1,9 @@
 import { Pagination } from "antd";
 import { useState, useEffect, useMemo } from "react";
-import { TagRow } from "./";
+import { TagRow } from "./index";
 import Link from "next/link";
-import { API } from "../../config";
+import renderHTML from "react-render-html";
+import moment from "moment";
 
 const PostGrid = ({ posts }) => {
   const [pageSize, setPageSize] = useState(9);
@@ -30,7 +31,10 @@ const PostGrid = ({ posts }) => {
           <div className='post-container' key={index}>
             <figure>
               <Link href='/blog/[id]' as={`/blog/${post._id}`}>
-                <img src={`${API}/blog/image/${post._id}`} alt={post.title} />
+                <img
+                  src={`${process.env.API}/blog/image/${post._id}`}
+                  alt={post.title}
+                />
               </Link>
             </figure>
             <TagRow tags={post.tags} />
@@ -40,10 +44,10 @@ const PostGrid = ({ posts }) => {
                 By:
                 <Link href={post.author.profile}>{post.author.name}</Link>
               </span>
-              <span>-{post.createdAt}</span>
+              <span>-{moment(post.createdAt).format("MMM,DD,YYYY")}</span>
             </p>
-            <p className='description-text'>{post.description}</p>
-            <Link href='/blog/[id]' as={`/blog/${post._id}`}>
+            <p className='description-text'>{renderHTML(post.description)}</p>
+            <Link href='/blogs/[id]' as={`/blogs/${post._id}`}>
               Read More...
             </Link>
           </div>

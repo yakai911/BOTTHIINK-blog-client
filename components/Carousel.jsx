@@ -103,12 +103,12 @@ const CarouselComponent = (props) => {
         {slides}
         <CarouselControl
           direction='prev'
-          directionText='上一页'
+          directionText='prev'
           onClickHandler={previous}
         />
         <CarouselControl
           direction='next'
-          directionText='下一页'
+          directionText='next'
           onClickHandler={next}
         />
       </Carousel>

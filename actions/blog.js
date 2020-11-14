@@ -1,8 +1,7 @@
 import fetch from "isomorphic-fetch";
-import { API } from "../config";
 
 export const createBlog = (blog, token) => {
-  return fetch(`${API}/blog`, {
+  return fetch(`${process.env.NEXT_PUBLIC_API}/blog`, {
     method: "POST",
     headers: {
       Accept: "appliaction/json",

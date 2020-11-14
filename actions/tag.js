@@ -1,9 +1,8 @@
 import fetch from "isomorphic-fetch";
-import { API } from "../config";
 
 //创建类别，注意必须是英语的类别
 export const createTag = (tag, token) => {
-  return fetch(`${API}/tag`, {
+  return fetch(`${process.env.NEXT_PUBLIC_API}/tag`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -20,7 +19,7 @@ export const createTag = (tag, token) => {
 
 //list categories
 export const listTags = () => {
-  return fetch(`${API}/tags`)
+  return fetch(`${process.env.NEXT_PUBLIC_API}/tags`)
     .then((response) => {
       return response.json();
     })
@@ -29,7 +28,7 @@ export const listTags = () => {
 
 //read category
 export const singleTag = (slug) => {
-  return fetch(`${API}/tag/${slug}`)
+  return fetch(`${process.env.NEXT_PUBLIC_API}/tag/${slug}`)
     .then((response) => {
       return response.json();
     })
@@ -38,7 +37,7 @@ export const singleTag = (slug) => {
 
 //delete category
 export const removeTag = (slug, token) => {
-  return fetch(`${API}/tag/${slug}`, {
+  return fetch(`${process.env.NEXT_PUBLIC_API}/tag/${slug}`, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
