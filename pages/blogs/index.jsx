@@ -1,4 +1,3 @@
-import fetch from "isomorphic-fetch";
 import { BlogCategory, BlogPost, PostGrid } from "../../components/blog";
 import { withRouter } from "next/router";
 import Head from "next/head";
@@ -9,6 +8,9 @@ const Blogs = ({ posts, router }) => {
   const trendingConfig = {
     0: {
       gridArea: "1/1/2/2",
+    },
+    3: {
+      height: "300px",
     },
   };
 
@@ -21,9 +23,7 @@ const Blogs = ({ posts, router }) => {
       height: "300px",
     },
     3: {
-      height: "630px",
-      marginLeft: "30px",
-      width: "635px",
+      height: "300px",
     },
   };
 
@@ -33,8 +33,6 @@ const Blogs = ({ posts, router }) => {
   const featured = posts.filter((p) =>
     p.categories.filter((c) => c.name !== "Featured")
   );
-
-  console.log("trending :", trending, "featured :", featured);
 
   mergeStyles(trending, trendingConfig);
   mergeStyles(featured, featuredConfig);
@@ -62,19 +60,20 @@ const Blogs = ({ posts, router }) => {
   return (
     <>
       {head()}
-      <main className='home'>
-        <section className='container'>
+      <main className='home' style={{ backgroundColor: " #f8f9fa" }}>
+        <section className='container' style={{ backgroundColor: " #f8f9fa" }}>
           <div className='row'>
             <section className='featured-posts-container'>
+              <h1>Featured</h1>
               <BlogCategory posts={featured} columns={2} tagsOnTop={true} />
-              <BlogPost post={lastFeatured} tagsOnTop={true} />
+              {/* <BlogPost post={lastFeatured} tagsOnTop={true} /> */}
             </section>
           </div>
         </section>
         <section className='bg-white'>
           <section className='container'>
             <div className='row'>
-              <h1>Reacent Post</h1>
+              <h1 className='mt-5'>Reacent Post</h1>
               <PostGrid posts={posts} />
             </div>
           </section>
@@ -82,6 +81,7 @@ const Blogs = ({ posts, router }) => {
 
         <section className='container'>
           <div className='row'>
+            <h1>Trending</h1>
             <BlogCategory posts={trending} columns={3} />
           </div>
         </section>
@@ -91,14 +91,15 @@ const Blogs = ({ posts, router }) => {
 };
 
 Blogs.getInitialProps = async (ctx) => {
-  const res = await fetch(`${process.env.API}/blogs-categories-tags`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(),
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API}/blogs-categories-tags`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  );
 
   const json = await res.json();
 

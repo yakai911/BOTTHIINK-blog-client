@@ -1,34 +1,36 @@
 import Head from "next/head";
 import Link from "next/link";
-import { BlogPost, PostGrid, TagRow } from "../../components/blog";
-import fetch from "isomorphic-fetch";
+import {
+  BlogCategory,
+  BlogPost,
+  PostGrid,
+  TagRow,
+} from "../../components/blog";
 import renderHTML from "react-render-html";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import SlideImage from "../../components/SlideImage";
 import { APP_NAME, DOMAIN } from "../../config";
+import { listRelated } from "../../actions/blog";
+import { mergeStyles } from "../../helper/mergeStyles";
 
 const SingleBlog = ({ blog, query }) => {
-  // const [related, setRelated] = useState([]);
+  const [related, setRelated] = useState([]);
 
-  // const loadRelated = async (blog) => {
-  //   const res = await fetch(`${process.env.NEXT_PUBLIC_API}/blogs/related`, {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json",
-  //     },
-  //     body: JSON.stringify(blog),
-  //   });
+  const loadRelated = () => {
+    listRelated({ blog }).then((data) => {
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        console.log(data);
+        setRelated(data);
+      }
+    });
+  };
 
-  //   const data = await res.json();
-
-  //   setRelated(data);
-  // };
-
-  // useEffect(() => {
-  //   loadRelated();
-  //   console.log(related);
-  // }, []);
+  useEffect(() => {
+    loadRelated();
+  }, []);
 
   const head = () => {
     <Head>
@@ -53,15 +55,20 @@ const SingleBlog = ({ blog, query }) => {
     </Head>;
   };
 
-  // const showRelatedBlog = () => {
-  //   return related.map((blog, i) => {
-  //     <div className='col-md-4' key={i}>
-  //       <article>
-  //         <BlogPost post={blog} />
-  //       </article>
-  //     </div>;
-  //   });
-  // };
+  const relatedConfig = {
+    0: {
+      height: "275px",
+    },
+    2: {
+      height: "275px",
+    },
+  };
+
+  mergeStyles(related, relatedConfig);
+
+  const showRelatedBlog = () => {
+    return <BlogCategory posts={related} columns={3} tagsOnTop={true} />;
+  };
 
   return (
     <main>
@@ -75,16 +82,26 @@ const SingleBlog = ({ blog, query }) => {
       <article className='pt-5'>
         <section>
           <h1 className='text-center'>{blog.title}</h1>
-          <p className='author-text text-center'>
-            <span>
+          <p className='text-center'>
+            <span className='author-text'>
               By : {"  "}
-              <Link href='/blog/'>{blog.author.name}</Link>
+              <Link href='/blog/' className='a-blue'>
+                {blog.author.name}
+              </Link>
             </span>
             <span className='description-text'>
               {" "}
-              | {moment(blog.createdAt).format("MMMM,DD-YYYY")}
+              | {moment(blog.createdAt).format("MMMM,DD,YYYY")}
             </span>
           </p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "20px 0",
+            }}>
+            <TagRow tags={blog.tags} />
+          </div>
         </section>
       </article>
       <article>
@@ -92,10 +109,10 @@ const SingleBlog = ({ blog, query }) => {
           <section>{renderHTML(blog.body)}</section>
         </div>
       </article>
-      {/* <div className='container'>
-        <h4 className='text-center pt-5 pb-5 h2'>Related blogs</h4>
+      <div className='container'>
+        <h4 className='text-center pt-5  h3'>相关推荐</h4>
         <div className='row'>{showRelatedBlog()}</div>
-      </div> */}
+      </div>
     </main>
   );
 };
@@ -103,9 +120,13 @@ const SingleBlog = ({ blog, query }) => {
 SingleBlog.getInitialProps = async ({ query }) => {
   const res = await fetch(`${process.env.API}/blog/${query.id}`, {
     method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
   });
 
   const json = await res.json();
+
   return { blog: json };
 };
 

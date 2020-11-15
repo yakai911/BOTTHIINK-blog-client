@@ -50,9 +50,14 @@ const PostGrid = ({ posts }) => {
             <div className='description-text'>
               {post.description.replace(/<[^>]+>/g, "")}
             </div>
-            <Link href='/blogs/[id]' as={`/blogs/${post._id}`}>
-              Read More...
-            </Link>
+            <p className='author-text'>
+              <Link
+                href='/blogs/[id]'
+                as={`/blogs/${post._id}`}
+                className='a-blue'>
+                Read More...
+              </Link>{" "}
+            </p>
           </div>
         ))}
       </section>

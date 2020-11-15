@@ -8,6 +8,16 @@ article {
 .article-container {
   width: 50vw;
   margin: 50px 0;
+
+  p {
+    font-size: 20px;
+  }
+}
+
+.author-text {
+  & a {
+    color: rgb(15, 136, 206) !important;
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -17,5 +27,9 @@ article {
   .article-container {
     width: 80vw;
     margin: 30px 0;
+
+    p {
+      font-size: 17px;
+    }
   }
 }

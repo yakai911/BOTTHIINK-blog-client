@@ -7,7 +7,6 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
@@ -53,7 +52,9 @@ const Header = (props) => {
           <Nav className='ml-auto mr-2' navbar>
             <NavItem>
               <Link href='/'>
-                <span className='nav-link'>首页</span>
+                <span className='nav-link' style={{ cursor: "pointer" }}>
+                  首页
+                </span>
               </Link>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
