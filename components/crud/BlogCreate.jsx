@@ -97,14 +97,14 @@ const CreateBlog = ({ router }) => {
   };
 
   const handleChange = (name) => (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     const value = name === "image" ? e.target.files[0] : e.target.value;
     formData.set(name, value);
     setValues({ ...values, [name]: value, formData, error: "" });
   };
 
   const handleBody = (e) => {
-    console.log(e);
+    // console.log(e);
     setBody(e);
     formData.set("body", e);
     if (typeof window !== "undefined") {

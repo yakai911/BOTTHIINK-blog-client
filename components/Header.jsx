@@ -44,16 +44,16 @@ const Header = (props) => {
   return (
     <>
       <Navbar expand='md' className='bg-white px-4 py-2'>
-        <NavbarBrand>
+        <div className='navbar-brand'>
           <Link href='/'>BOT THINK</Link>
           <MyIcon />
-        </NavbarBrand>
+        </div>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className='ml-auto mr-2' navbar>
             <NavItem>
               <Link href='/'>
-                <NavLink>首页</NavLink>
+                <span className='nav-link'>首页</span>
               </Link>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
@@ -61,7 +61,10 @@ const Header = (props) => {
                 分类
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>全部</DropdownItem>
+                <Link href='/blogs/'>
+                  <DropdownItem>全部 </DropdownItem>
+                </Link>
+
                 <DropdownItem>小说</DropdownItem>
                 <DropdownItem>诗歌</DropdownItem>
                 <DropdownItem>其他</DropdownItem>

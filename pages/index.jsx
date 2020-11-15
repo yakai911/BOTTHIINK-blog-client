@@ -1,11 +1,15 @@
 import Carousel from "../components/Carousel";
+import { PostGrid } from "../components/blog";
 
-const Index = ({ tags, posts }) => {
+const Index = ({ posts }) => {
   console.log(process.env.API);
   return (
-    <div>
-      <Carousel />
-      <p>{process.env.NEXT_PUBLIC_API}</p>
+    <div className='index-container'>
+      <Carousel items={posts} />
+      <div className='container p-5 my-5' style={{ backgroundColor: "white" }}>
+        <h2 className='mb-5'>Recent Post</h2>
+        <PostGrid posts={posts} />
+      </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import useWindowSize from "../../actions/useWindowSize";
+import useWindowSize from "../../helper/useWindowSize";
 import { TagRow } from "./index";
 import Link from "next/link";
 import moment from "moment";

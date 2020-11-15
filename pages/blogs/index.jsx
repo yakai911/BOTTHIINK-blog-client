@@ -3,11 +3,44 @@ import { BlogCategory, BlogPost, PostGrid } from "../../components/blog";
 import { withRouter } from "next/router";
 import Head from "next/head";
 import { APP_NAME, DOMAIN } from "../../config";
-import getConfig from "next/config";
-
-const { publicRuntimeConfig } = getConfig();
+import { mergeStyles } from "../../helper/mergeStyles";
 
 const Blogs = ({ posts, router }) => {
+  const trendingConfig = {
+    0: {
+      gridArea: "1/1/2/2",
+    },
+  };
+
+  const featuredConfig = {
+    0: {
+      gridArea: "1/1/2/3",
+      height: "300px",
+    },
+    1: {
+      height: "300px",
+    },
+    3: {
+      height: "630px",
+      marginLeft: "30px",
+      width: "635px",
+    },
+  };
+
+  const trending = posts.filter((p) =>
+    p.categories.filter((c) => c.name !== "Trending")
+  );
+  const featured = posts.filter((p) =>
+    p.categories.filter((c) => c.name !== "Featured")
+  );
+
+  console.log("trending :", trending, "featured :", featured);
+
+  mergeStyles(trending, trendingConfig);
+  mergeStyles(featured, featuredConfig);
+
+  const lastFeatured = featured.pop();
+
   const head = () => (
     <Head>
       <title>All Blogs | BOT THINK</title>
@@ -33,8 +66,8 @@ const Blogs = ({ posts, router }) => {
         <section className='container'>
           <div className='row'>
             <section className='featured-posts-container'>
-              <BlogCategory posts={posts} columns={2} tagsOnTop={true} />
-              <BlogPost post={posts[3]} />
+              <BlogCategory posts={featured} columns={2} tagsOnTop={true} />
+              <BlogPost post={lastFeatured} tagsOnTop={true} />
             </section>
           </div>
         </section>
@@ -46,6 +79,12 @@ const Blogs = ({ posts, router }) => {
             </div>
           </section>
         </section>
+
+        <section className='container'>
+          <div className='row'>
+            <BlogCategory posts={trending} columns={3} />
+          </div>
+        </section>
       </main>
     </>
   );
@@ -56,7 +95,9 @@ Blogs.getInitialProps = async (ctx) => {
     method: "POST",
     headers: {
       Accept: "application/json",
+      "Content-Type": "application/json",
     },
+    body: JSON.stringify(),
   });
 
   const json = await res.json();
