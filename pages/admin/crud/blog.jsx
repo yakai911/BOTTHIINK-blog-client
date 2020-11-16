@@ -1,4 +1,4 @@
-import Admin from "../../../components/Admin";
+import Admin from "../../../components//auth/Admin";
 import BlogCreate from "../../../components/crud/BlogCreate";
 
 const Blog = () => {

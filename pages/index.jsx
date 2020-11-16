@@ -15,6 +15,10 @@ const Index = ({ posts }) => {
 };
 
 Index.getInitialProps = async (ctx) => {
+  const data = {
+    limit: 9,
+    skip: 0,
+  };
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API}/blogs-categories-tags`,
     {
@@ -22,6 +26,7 @@ Index.getInitialProps = async (ctx) => {
       headers: {
         Accept: "application/json",
       },
+      body: JSON.stringify(data),
     }
   );
 
