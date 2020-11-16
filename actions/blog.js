@@ -30,6 +30,35 @@ export const listRelated = (blog) => {
     .catch((err) => console.log(err));
 };
 
+export const listBlogsWithCategoriesAndTags = (skip, limit) => {
+  const data = {
+    limit,
+    skip,
+  };
+  return fetch(`${API}/blogs-categories-tags`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};
+
+export const singleBlog = (id) => {
+  return fetch(`${process.env.NEXT_PUBLIC_API}/blog/${id}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};
+
 //列出用于类别卡片展示的博客
 export const list = () => {
   return fetch(`${process.env.NEXT_PUBLIC_API}/blogs`, {
@@ -58,8 +87,8 @@ export const removeBlog = (_id, token) => {
 };
 
 //更新博客
-export const updateBlog = (blog, token, _id) => {
-  return fetch(`{API}/blog/${_id}`, {
+export const updateBlog = (blog, token, id) => {
+  return fetch(`${process.env.NEXT_PUBLIC_API}/blog/${id}`, {
     method: "PUT",
     headers: {
       Accept: "application/json",

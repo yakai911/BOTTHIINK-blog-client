@@ -1,61 +1,76 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { withRouter } from "next/router";
 import dynamic from "next/dynamic";
+import { useRouter, withRouter } from "next/router";
 import { getCookie, isAuth } from "../../actions/auth";
 import { listCategories } from "../../actions/category";
 import { listTags } from "../../actions/tag";
-import { createBlog } from "../../actions/blog";
+import { singleBlog, updateBlog } from "../../actions/blog";
+import SlideImage from "../../components/SlideImage";
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
 });
 import { QuillModules, QuillFormats } from "../../helper/quill";
 
-const CreateBlog = ({ router }) => {
-  const token = getCookie("token");
-  //parse blog from localStorage
-  const blogFromLS = () => {
-    if (typeof window === "undefined") {
-      return false;
-    }
-
-    if (localStorage.getItem("blog")) {
-      return JSON.parse(localStorage.getItem("blog"));
-    } else {
-      return false;
-    }
-  };
+const BlogUpdate = ({ router }) => {
+  const Router = useRouter();
+  const [body, setBody] = useState("");
 
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
 
-  const [checked, setChecked] = useState([]); //categories
-  const [checkedTag, setCheckedTag] = useState([]); //tags
+  const [checked, setChecked] = useState([]);
+  const [checkedTag, setCheckedTag] = useState([]);
 
-  const [body, setBody] = useState(blogFromLS());
   const [values, setValues] = useState({
+    title: "",
     error: "",
-    sizeError: "",
     success: "",
     formData: "",
     title: "",
-    hidePublishButton: false,
+    body: "",
   });
 
-  const {
-    error,
-    sizeError,
-    success,
-    formData,
-    title,
-    hidePublishButton,
-  } = values;
+  const { error, success, formData, title } = values;
+  const token = getCookie("token");
 
   useEffect(() => {
     setValues({ ...values, formData: new FormData() });
+    initBlog();
     initCategories();
     initTags();
   }, [router]);
+
+  const initBlog = () => {
+    if (router.query.id) {
+      singleBlog(router.query.id).then((data) => {
+        if (data.error) {
+          console.log(data.error);
+        } else {
+          setValues({ ...values, title: data.title });
+          setBody(data.body);
+          setCategoriesArray(data.categories);
+          setTagsArray(data.tags);
+        }
+      });
+    }
+  };
+
+  const setCategoriesArray = (blogCategories) => {
+    let ca = [];
+    blogCategories.map((c, i) => {
+      ca.push(c._id);
+    });
+    setChecked(ca);
+  };
+
+  const setTagsArray = (blogTags) => {
+    let ta = [];
+    blogTags.map((t, i) => {
+      ta.push(t._id);
+    });
+    setCheckedTag(ta);
+  };
 
   const initCategories = () => {
     listCategories().then((data) => {
@@ -77,45 +92,8 @@ const CreateBlog = ({ router }) => {
     });
   };
 
-  const publishBlog = (e) => {
-    e.preventDefault();
-    // console.log("ready to publishBlog");
-    createBlog(formData, token).then((data) => {
-      if (data.error) {
-        setValues({ ...values, error: data.error });
-      } else {
-        setValues({
-          ...values,
-          title: "",
-          error: "",
-          success: `《${data.title}》已成功发布！`,
-        });
-        setBody("");
-        setCategories([]);
-        setTags([]);
-      }
-    });
-  };
-
-  const handleChange = (name) => (e) => {
-    console.log(e.target.value);
-    const value = name === "image" ? e.target.files[0] : e.target.value;
-    formData.set(name, value);
-    setValues({ ...values, [name]: value, formData, error: "" });
-  };
-
-  const handleBody = (e) => {
-    // console.log(e);
-    setBody(e);
-    formData.set("body", e);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("blog", JSON.stringify(e));
-    }
-  };
-
   const handleToggle = (c) => () => {
     setValues({ ...values, error: "" });
-    //return the first index of -1
     const clickedCategory = checked.indexOf(c);
     const all = [...checked];
 
@@ -124,14 +102,13 @@ const CreateBlog = ({ router }) => {
     } else {
       all.splice(clickedCategory, 1);
     }
-
+    console.log(all);
     setChecked(all);
     formData.set("categories", all);
   };
 
   const handleTagsToggle = (t) => () => {
     setValues({ ...values, error: "" });
-    //return the first index of -1
     const clickedTag = checkedTag.indexOf(t);
     const all = [...checkedTag];
 
@@ -140,9 +117,27 @@ const CreateBlog = ({ router }) => {
     } else {
       all.splice(clickedTag, 1);
     }
-
+    console.log(all);
     setCheckedTag(all);
     formData.set("tags", all);
+  };
+
+  const findOutCategory = (c) => {
+    const result = checked.indexOf(c);
+    if (result !== -1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const findOutTag = (t) => {
+    const result = checkedTag.indexOf(t);
+    if (result !== -1) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const showCategories = () => {
@@ -152,8 +147,9 @@ const CreateBlog = ({ router }) => {
         <li key={i} className='list-unstyled'>
           <input
             type='checkbox'
-            className='mr-2'
             onChange={handleToggle(c._id)}
+            checked={findOutCategory(c._id)}
+            className='mr-2'
           />
           <label className='form-check-label'>{c.name}</label>
         </li>
@@ -168,8 +164,9 @@ const CreateBlog = ({ router }) => {
         <li key={i} className='list-unstyled'>
           <input
             type='checkbox'
-            className='mr-2'
             onChange={handleTagsToggle(t._id)}
+            checked={findOutTag(t._id)}
+            className='mr-2'
           />
           <label className='form-check-label'>{t.name}</label>
         </li>
@@ -177,10 +174,42 @@ const CreateBlog = ({ router }) => {
     );
   };
 
+  const handleChange = (name) => (e) => {
+    // console.log(e.target.value);
+    const value = name === "image" ? e.target.files[0] : e.target.value;
+    formData.set(name, value);
+    setValues({ ...values, [name]: value, formData, error: "" });
+  };
+
+  const handleBody = (e) => {
+    setBody(e);
+    formData.set("body", e);
+  };
+
+  const editBlog = (e) => {
+    e.preventDefault();
+    updateBlog(formData, token, router.query.id).then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error });
+      } else {
+        setValues({
+          ...values,
+          title: "",
+          sucess: `您的文章《${data.title}》已成功更新`,
+        });
+        if (isAuth() && isAuth().role === 1) {
+          Router.replace(`/admin`);
+        } else if (isAuth() && isAuth().role === 0) {
+          Router.replace(`/user`);
+        }
+      }
+    });
+  };
+
   const showError = () => (
     <div
       className='alert alert-danger'
-      style={{ dispaly: error ? "" : "none" }}>
+      style={{ display: error ? "" : "none" }}>
       {error}
     </div>
   );
@@ -188,14 +217,14 @@ const CreateBlog = ({ router }) => {
   const showSuccess = () => (
     <div
       className='alert alert-success'
-      style={{ dispaly: success ? "" : "none" }}>
+      style={{ display: success ? "" : "none" }}>
       {success}
     </div>
   );
 
-  const createBLogForm = () => {
+  const updateBlogForm = () => {
     return (
-      <form onSubmit={publishBlog}>
+      <form onSubmit={editBlog}>
         <div className='input-group input-group-sm mb-3'>
           <div className='input-group-text title text-muted'>标题</div>
           <input
@@ -216,7 +245,7 @@ const CreateBlog = ({ router }) => {
         </div>
         <div className='btn-container'>
           <button type='submit' className='form-btn my-3 right'>
-            发布文章
+            更新文章
           </button>
         </div>
       </form>
@@ -230,14 +259,18 @@ const CreateBlog = ({ router }) => {
           {error && showError()}
           {success && showSuccess()}
         </div>
-        <div className='col-md-8'>{createBLogForm()}</div>
-
+        <div className='col-md-8'>{updateBlogForm()}</div>
+        {body && (
+          <SlideImage
+            img={`${process.env.NEXT_PUBLIC_API}/blog/image/${router.query.id}`}
+          />
+        )}
         <div className='col-md-4'>
           <div>
             <div className='form-group pb-2'>
               <h5>配图</h5>
               <hr />
-              <small className='text-muted mr-3 md-3'>配图不可大于1Mb</small>
+              <small className='text-muted mr-3'>配图不可大于1Mb</small>
               <br />
               <label className='btn btn-outline-dark'>
                 上传图片
@@ -270,4 +303,4 @@ const CreateBlog = ({ router }) => {
   );
 };
 
-export default withRouter(CreateBlog);
+export default withRouter(BlogUpdate);
