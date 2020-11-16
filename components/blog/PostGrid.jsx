@@ -2,7 +2,6 @@ import { Pagination } from "antd";
 import { useState, useEffect, useMemo } from "react";
 import { TagRow } from "./index";
 import Link from "next/link";
-import renderHTML from "react-render-html";
 import moment from "moment";
 import "antd/dist/antd.css";
 
@@ -35,6 +34,7 @@ const PostGrid = ({ posts }) => {
                 <img
                   src={`${process.env.API}/blog/image/${post._id}`}
                   alt={post.title}
+                  unsized={true}
                 />
               </Link>
             </figure>

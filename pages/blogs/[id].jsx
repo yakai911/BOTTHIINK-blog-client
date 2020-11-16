@@ -1,11 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import {
-  BlogCategory,
-  BlogPost,
-  PostGrid,
-  TagRow,
-} from "../../components/blog";
+import { BlogCategory, TagRow } from "../../components/blog";
 import renderHTML from "react-render-html";
 import { useEffect, useState } from "react";
 import moment from "moment";
@@ -13,6 +8,9 @@ import SlideImage from "../../components/SlideImage";
 import { APP_NAME, DOMAIN } from "../../config";
 import { listRelated } from "../../actions/blog";
 import { mergeStyles } from "../../helper/mergeStyles";
+import getConfig from "next/config";
+
+const { publicRuntimeConfig } = getConfig();
 
 const SingleBlog = ({ blog, query }) => {
   const [related, setRelated] = useState([]);
@@ -121,7 +119,9 @@ SingleBlog.getInitialProps = async ({ query }) => {
   const res = await fetch(`${process.env.API}/blog/${query.id}`, {
     method: "GET",
     headers: {
-      Accept: "application/json",
+      "User-Agent":
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
+      Accept: "application/json; charset=UTF-8",
     },
   });
 
