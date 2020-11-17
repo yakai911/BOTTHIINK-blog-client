@@ -1,6 +1,6 @@
 import fetch from "isomorphic-fetch";
 
-//创建类别，注意必须是英语的类别
+//create tags
 export const createTag = (tag, token) => {
   return fetch(`${process.env.NEXT_PUBLIC_API}/tag`, {
     method: "POST",
@@ -17,7 +17,7 @@ export const createTag = (tag, token) => {
     .catch((err) => console.log(err));
 };
 
-//list categories
+//list tags
 export const listTags = () => {
   return fetch(`${process.env.NEXT_PUBLIC_API}/tags`)
     .then((response) => {
@@ -26,7 +26,7 @@ export const listTags = () => {
     .catch((err) => console.log(err));
 };
 
-//read category
+//read tag
 export const singleTag = (slug) => {
   return fetch(`${process.env.NEXT_PUBLIC_API}/tag/${slug}`)
     .then((response) => {
@@ -35,7 +35,7 @@ export const singleTag = (slug) => {
     .catch((err) => console.log(err));
 };
 
-//delete category
+//delete tag
 export const removeTag = (slug, token) => {
   return fetch(`${process.env.NEXT_PUBLIC_API}/tag/${slug}`, {
     method: "DELETE",

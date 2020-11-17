@@ -65,10 +65,18 @@ const Header = (props) => {
                 <Link href='/blogs/'>
                   <DropdownItem>全部 </DropdownItem>
                 </Link>
-
-                <DropdownItem>小说</DropdownItem>
-                <DropdownItem>诗歌</DropdownItem>
-                <DropdownItem>其他</DropdownItem>
+                <Link href='/tags/novel'>
+                  <DropdownItem>小说</DropdownItem>
+                </Link>
+                <Link href='/tags/poetry'>
+                  <DropdownItem>诗歌</DropdownItem>
+                </Link>
+                <Link href='/tags/original'>
+                  <DropdownItem>原创</DropdownItem>
+                </Link>{" "}
+                <Link href='/tags/else'>
+                  <DropdownItem>其他</DropdownItem>
+                </Link>
               </DropdownMenu>
             </UncontrolledDropdown>
 
