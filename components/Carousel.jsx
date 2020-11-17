@@ -34,7 +34,7 @@ const CarouselComponent = ({ items }) => {
       <CarouselItem
         className='custom-tag'
         tag='div'
-        key={item.id}
+        key={item._id}
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}>
         <SlideImage img={`${process.env.API}/blog/image/${item._id}`} />

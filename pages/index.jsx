@@ -3,14 +3,13 @@ import { useState, useEffect } from "react";
 import { PostGrid, BlogPost, BlogCategory } from "../components/blog";
 import { withRouter } from "next/router";
 import Head from "next/head";
-import { listBlogsWithCategoriesAndTags } from "../actions/blog";
+import { singleCategory } from "../actions/category";
 import { mergeStyles } from "../helper/mergeStyles";
 import { APP_NAME, DOMAIN } from "../config";
 
-const Index = ({ posts, router, categories, tags, totalBlogs, blogSkip }) => {
-  const [trending, setTrending] = useState({});
-  const [featured, setFeatured] = useState({});
-  const [recent, setRecent] = useState({});
+const Index = ({ router, recentPost }) => {
+  const [trending, setTrending] = useState([]);
+  const [featured, setFeatured] = useState([]);
 
   const initTrending = () => {
     singleCategory("trending").then((tren) => {
@@ -33,27 +32,17 @@ const Index = ({ posts, router, categories, tags, totalBlogs, blogSkip }) => {
     });
   };
 
-  const initRecent = () => {
-    singleCategory("recent-post").then((recent) => {
-      if (recent.error) {
-        console.log(recent.error);
-      } else {
-        setRecent(recent.blogs);
-      }
-    });
-  };
-
   useEffect(() => {
     initFeatured();
     initTrending();
-    initRecent();
   }, [router]);
 
   const trendingConfig = {
     0: {
+      height: "300px",
       gridArea: "1/1/2/2",
     },
-    3: {
+    1: {
       height: "300px",
     },
   };
@@ -67,6 +56,7 @@ const Index = ({ posts, router, categories, tags, totalBlogs, blogSkip }) => {
       height: "300px",
     },
     3: {
+      gridArea: "2/2/3/4",
       height: "300px",
     },
   };
@@ -109,13 +99,13 @@ const Index = ({ posts, router, categories, tags, totalBlogs, blogSkip }) => {
     <>
       {head()}
       <main>
-        <Carousel items={posts} />
+        <Carousel items={recentPost} />
         <section className='container' style={{ backgroundColor: " #f8f9fa" }}>
           <div className='row'>
             <h1>Featured</h1>
             <section className='featured-posts-container'>
-              <BlogCategory posts={featured} columns={2} tagsOnTop={true} />
-              {/* <BlogPost post={lastFeatured} tagsOnTop={true} /> */}
+              <BlogCategory posts={featured} columns={3} tagsOnTop={true} />
+              {/* <BlogPost post={lastFeatured} tagsOnTop={true} />  */}
             </section>
           </div>
         </section>
@@ -123,7 +113,7 @@ const Index = ({ posts, router, categories, tags, totalBlogs, blogSkip }) => {
           <section className='container'>
             <div className='row'>
               <h1 className='mt-5'>Reacent Post</h1>
-              <PostGrid posts={posts} />
+              <PostGrid posts={recentPost} />
             </div>
           </section>
         </section>
@@ -131,7 +121,7 @@ const Index = ({ posts, router, categories, tags, totalBlogs, blogSkip }) => {
         <section className='container'>
           <div className='row'>
             <h1>Trending</h1>
-            <BlogCategory posts={trending} columns={3} />
+            <BlogCategory posts={trending} columns={2} />
           </div>
         </section>
       </main>
@@ -140,20 +130,11 @@ const Index = ({ posts, router, categories, tags, totalBlogs, blogSkip }) => {
 };
 
 Index.getInitialProps = async (ctx) => {
-  let skip = 0;
-  let limit = 9;
-  return listBlogsWithCategoriesAndTags(skip, limit).then((data) => {
+  return singleCategory("recent-post").then((data) => {
     if (data.error) {
       console.log(data.error);
     } else {
-      return {
-        posts: data.blogs,
-        categories: data.categories,
-        tags: data.tags,
-        totalBlogs: data.size,
-        blogsLimit: limit,
-        blogSkip: skip,
-      };
+      return { recentPost: data.blogs };
     }
   });
 };
