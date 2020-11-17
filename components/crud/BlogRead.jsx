@@ -42,6 +42,16 @@ const BlogRead = () => {
     }
   };
 
+  const showUpdateButton = (blog) => {
+    if (isAuth() && isAuth().role === 1) {
+      return (
+        <Link href={`/admin/crud/${blog._id}`}>
+          <a className='btn btn-sm btn-warning ml-3'>更新</a>
+        </Link>
+      );
+    }
+  };
+
   const showAllBlogs = () => {
     return blogs.map((blog, i) => {
       return (
@@ -55,6 +65,7 @@ const BlogRead = () => {
             className='btn btn-sm btn-danger'>
             删除
           </button>
+          {showUpdateButton(blog)}
         </div>
       );
     });

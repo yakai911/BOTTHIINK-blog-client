@@ -1,47 +1,16 @@
 import { BlogCategory, BlogPost, PostGrid } from "../../components/blog";
 import { withRouter } from "next/router";
 import Head from "next/head";
+import { useState, useEffect } from "react";
 import { APP_NAME, DOMAIN } from "../../config";
 import { mergeStyles } from "../../helper/mergeStyles";
+import { listBlogsWithCategoriesAndTags } from "../../actions/blog";
+import { singleCategory } from "../../actions/category";
 
-const Blogs = ({ posts, router }) => {
-  const trendingConfig = {
-    0: {
-      gridArea: "1/1/2/2",
-    },
-    3: {
-      height: "300px",
-    },
-  };
-
-  const featuredConfig = {
-    0: {
-      gridArea: "1/1/2/3",
-      height: "300px",
-    },
-    1: {
-      height: "300px",
-    },
-    3: {
-      height: "300px",
-    },
-  };
-
-  const trending = posts.filter((p) =>
-    p.categories.filter((c) => c.name !== "Trending")
-  );
-  const featured = posts.filter((p) =>
-    p.categories.filter((c) => c.name !== "Featured")
-  );
-
-  mergeStyles(trending, trendingConfig);
-  mergeStyles(featured, featuredConfig);
-
-  const lastFeatured = featured.pop();
-
+const Blogs = ({ posts, categories, tags, totalBlogs, blogSkip, router }) => {
   const head = () => (
     <Head>
-      <title>All Blogs | BOT THINK</title>
+      <title>All Blogs | {APP_NAME}</title>
       <meta
         name='description'
         content='Cruel Literature,novels,poemes,and else'
@@ -57,33 +26,18 @@ const Blogs = ({ posts, router }) => {
       <meta property='og:site_name' content={`${APP_NAME}`} />
     </Head>
   );
+
   return (
     <>
       {head()}
       <main className='home' style={{ backgroundColor: " #f8f9fa" }}>
-        <section className='container' style={{ backgroundColor: " #f8f9fa" }}>
-          <div className='row'>
-            <section className='featured-posts-container'>
-              <h1>Featured</h1>
-              <BlogCategory posts={featured} columns={2} tagsOnTop={true} />
-              {/* <BlogPost post={lastFeatured} tagsOnTop={true} /> */}
-            </section>
-          </div>
-        </section>
         <section className='bg-white'>
           <section className='container'>
             <div className='row'>
-              <h1 className='mt-5'>Reacent Post</h1>
+              <h1 className='mt-5'>All Blogs</h1>
               <PostGrid posts={posts} />
             </div>
           </section>
-        </section>
-
-        <section className='container'>
-          <div className='row'>
-            <h1>Trending</h1>
-            <BlogCategory posts={trending} columns={3} />
-          </div>
         </section>
       </main>
     </>
@@ -91,24 +45,22 @@ const Blogs = ({ posts, router }) => {
 };
 
 Blogs.getInitialProps = async (ctx) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/blogs-categories-tags`,
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
+  let skip = 0;
+  let limit = 9;
+  return listBlogsWithCategoriesAndTags(skip, limit).then((data) => {
+    if (data.error) {
+      console.log(data.error);
+    } else {
+      return {
+        posts: data.blogs,
+        categories: data.categories,
+        tags: data.tags,
+        totalBlogs: data.size,
+        blogsLimit: limit,
+        blogSkip: skip,
+      };
     }
-  );
-
-  const json = await res.json();
-
-  return {
-    posts: json.blogs,
-    tags: json.tags,
-    categories: json.categories,
-    size: json.size,
-  };
+  });
 };
 
 export default withRouter(Blogs);

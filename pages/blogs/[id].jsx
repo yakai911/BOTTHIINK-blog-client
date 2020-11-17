@@ -6,11 +6,8 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import SlideImage from "../../components/SlideImage";
 import { APP_NAME, DOMAIN } from "../../config";
-import { listRelated } from "../../actions/blog";
+import { singleBlog, listRelated } from "../../actions/blog";
 import { mergeStyles } from "../../helper/mergeStyles";
-import getConfig from "next/config";
-
-const { publicRuntimeConfig } = getConfig();
 
 const SingleBlog = ({ blog, query }) => {
   const [related, setRelated] = useState([]);
@@ -70,13 +67,11 @@ const SingleBlog = ({ blog, query }) => {
 
   return (
     <main>
-      <article>
-        <SlideImage
-          img={`${process.env.API}/blog/image/${blog._id}`}
-          alt={blog.title}
-          className='banner'
-        />
-      </article>
+      <SlideImage
+        img={`${process.env.NEXT_PUBLIC_API}/blog/image/${blog._id}`}
+        alt={blog.title}
+        className='banner'
+      />
       <article className='pt-5'>
         <section>
           <h1 className='text-center'>{blog.title}</h1>
@@ -116,18 +111,13 @@ const SingleBlog = ({ blog, query }) => {
 };
 
 SingleBlog.getInitialProps = async ({ query }) => {
-  const res = await fetch(`${process.env.API}/blog/${query.id}`, {
-    method: "GET",
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36",
-      Accept: "application/json; charset=UTF-8",
-    },
+  return singleBlog(query.id).then((data) => {
+    if (data.error) {
+      console.log(data.error);
+    } else {
+      return { blog: data, query };
+    }
   });
-
-  const json = await res.json();
-
-  return { blog: json };
 };
 
 export default SingleBlog;

@@ -26,7 +26,7 @@ export const listCategories = () => {
     .catch((err) => console.log(err));
 };
 
-//read category
+//read category with blogs
 export const singleCategory = (slug) => {
   return fetch(`${process.env.NEXT_PUBLIC_API}/category/${slug}`, {
     method: "GET",

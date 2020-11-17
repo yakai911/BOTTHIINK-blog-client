@@ -254,17 +254,18 @@ const BlogUpdate = ({ router }) => {
 
   return (
     <div className='container-fluid'>
+      {body && (
+        <SlideImage
+          img={`${process.env.NEXT_PUBLIC_API}/blog/image/${router.query.id}`}
+        />
+      )}
       <div className='row'>
         <div className='pt-3'>
           {error && showError()}
           {success && showSuccess()}
         </div>
         <div className='col-md-8'>{updateBlogForm()}</div>
-        {body && (
-          <SlideImage
-            img={`${process.env.NEXT_PUBLIC_API}/blog/image/${router.query.id}`}
-          />
-        )}
+
         <div className='col-md-4'>
           <div>
             <div className='form-group pb-2'>

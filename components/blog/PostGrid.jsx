@@ -32,9 +32,8 @@ const PostGrid = ({ posts }) => {
             <figure>
               <Link href='/blogs/[id]' as={`/blogs/${post._id}`}>
                 <img
-                  src={`${process.env.API}/blog/image/${post._id}`}
+                  src={`${process.env.NEXT_PUBLIC_API}/blog/image/${post._id}`}
                   alt={post.title}
-                  unsized={true}
                 />
               </Link>
             </figure>

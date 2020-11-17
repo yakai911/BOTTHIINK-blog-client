@@ -9,7 +9,7 @@ const BlogPost = ({ post, tagsOnTop }) => {
   const windowWidth = size.width;
 
   const imageBackground = {
-    backgroundImage: `url('${process.env.API}/blog/image/${post._id}')`,
+    backgroundImage: `url('${process.env.NEXT_PUBLIC_API}/blog/image/${post._id}')`,
     cursor: "pointer",
   };
 
