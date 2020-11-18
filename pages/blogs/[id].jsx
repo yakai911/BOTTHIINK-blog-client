@@ -27,9 +27,11 @@ const SingleBlog = ({ blog, query }) => {
     loadRelated();
   }, []);
 
-  const head = () => {
+  const head = () => (
     <Head>
-      <title>{blog.mtitle}</title>
+      <title>
+        {blog.title} | {APP_NAME}
+      </title>
       <meta name='description' content={blog.description} />
       <link rel='canonical' href={`${DOMAIN}/blogs/${query._id}`} />
       <meta property='og:title' content={`${blog.title}| ${APP_NAME}`} />
@@ -47,8 +49,8 @@ const SingleBlog = ({ blog, query }) => {
         ccontent={`${process.env.NEXT_PUBLIC_API}/blog/image/${blog._id}`}
       />
       <meta property='og:image:type' content='image/jpg' />
-    </Head>;
-  };
+    </Head>
+  );
 
   const relatedConfig = {
     0: {
@@ -66,47 +68,50 @@ const SingleBlog = ({ blog, query }) => {
   };
 
   return (
-    <main>
-      <SlideImage
-        img={`${process.env.NEXT_PUBLIC_API}/blog/image/${blog._id}`}
-        alt={blog.title}
-        className='banner'
-      />
-      <article className='pt-5'>
-        <section>
-          <h1 className='text-center'>{blog.title}</h1>
-          <p className='text-center'>
-            <span className='author-text'>
-              By : {"  "}
-              <Link href='/blog/' className='a-blue'>
-                {blog.author.name}
-              </Link>
-            </span>
-            <span className='description-text'>
-              {" "}
-              | {moment(blog.createdAt).format("MMMM,DD,YYYY")}
-            </span>
-          </p>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              margin: "20px 0",
-            }}>
-            <TagRow tags={blog.tags} />
+    <>
+      {head()}
+      <main>
+        <SlideImage
+          img={`${process.env.NEXT_PUBLIC_API}/blog/image/${blog._id}`}
+          alt={blog.title}
+          className='banner'
+        />
+        <article className='pt-5'>
+          <section>
+            <h1 className='text-center'>{blog.title}</h1>
+            <p className='text-center'>
+              <span className='author-text'>
+                By : {"  "}
+                <Link href='/blog/' className='a-blue'>
+                  {blog.author.name}
+                </Link>
+              </span>
+              <span className='description-text'>
+                {" "}
+                | {moment(blog.createdAt).format("MMMM,DD,YYYY")}
+              </span>
+            </p>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                margin: "20px 0",
+              }}>
+              <TagRow tags={blog.tags} />
+            </div>
+          </section>
+        </article>
+        <article>
+          <div className='article-container'>
+            <section>{renderHTML(blog.body)}</section>
           </div>
-        </section>
-      </article>
-      <article>
-        <div className='article-container'>
-          <section>{renderHTML(blog.body)}</section>
+        </article>
+        <div className='container'>
+          <h4 className='text-center pt-5  h3'>相关推荐</h4>
+          <div className='row'>{showRelatedBlog()}</div>
         </div>
-      </article>
-      <div className='container'>
-        <h4 className='text-center pt-5  h3'>相关推荐</h4>
-        <div className='row'>{showRelatedBlog()}</div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 };
 

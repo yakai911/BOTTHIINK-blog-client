@@ -8,6 +8,8 @@
 @import "postGrid";
 @import "article";
 @import "_home";
+@import "search";
+@import "header";
 
 html,
 body {
@@ -64,13 +66,6 @@ a {
     rgba(0, 0, 0, 0.8) 99%,
     rgba(0, 0, 0, 0.8) 100%
   );
-}
-
-.navbar-toggler {
-  color: black !important;
-}
-.navbar-toggler-icon {
-  color: black !important;
 }
 
 .index-container {

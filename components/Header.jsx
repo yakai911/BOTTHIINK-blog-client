@@ -1,28 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import MyIcon from "../components/MyIcon";
 import NProgress from "nprogress";
 import { signout, isAuth } from "../actions/auth";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "reactstrap";
+import Search from "./blog/Search";
 import { useRouter } from "next/router";
+import { MenuOutlined } from "@ant-design/icons";
+import { Avatar } from "antd";
 
 //使用nprogress
 
 const Header = (props) => {
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
+  const [menuActive, setMenuActive] = useState(false);
+
+  const menuRef = useRef(null);
+
+  const handleClickOutside = (e) => {
+    if (menuRef.current && !menuRef.current.contains(e.target)) {
+      setMenuActive(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, [menuRef, menuActive]);
 
   useEffect(() => {
     const handleRouteChangeStart = (url) => NProgress.start();
@@ -41,70 +46,64 @@ const Header = (props) => {
   }, []);
 
   return (
-    <>
-      <Navbar expand='md' className='bg-white px-4 py-2'>
-        <div className='navbar-brand'>
-          <Link href='/'>BOT THINK</Link>
-          <MyIcon />
-        </div>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className='ml-auto mr-2' navbar>
-            <NavItem>
-              <Link href='/'>
-                <span className='nav-link' style={{ cursor: "pointer" }}>
-                  首页
-                </span>
-              </Link>
-            </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                分类
-              </DropdownToggle>
-              <DropdownMenu right>
-                <Link href='/blogs/'>
-                  <DropdownItem>全部 </DropdownItem>
-                </Link>
-                <Link href='/tags/novel'>
-                  <DropdownItem>小说</DropdownItem>
-                </Link>
-                <Link href='/tags/poetry'>
-                  <DropdownItem>诗歌</DropdownItem>
-                </Link>
-                <Link href='/tags/original'>
-                  <DropdownItem>原创</DropdownItem>
-                </Link>{" "}
-                <Link href='/tags/else'>
-                  <DropdownItem>其他</DropdownItem>
-                </Link>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+    <nav className='site-navigation'>
+      <div className='menu-title'>
+        <Link href='/'>BOT THINK</Link>
+        <MyIcon />
+      </div>
+      <div
+        className={`menu-content-container ${menuActive && "active"}`}
+        onMouseLeave={() => setMenuActive(false)}
+        ref={menuRef}>
+        <ul>
+          <li>
+            <Link href='/'>首页</Link>
+          </li>
+          <li>
+            <Link href='/blogs/'>全部</Link>
+          </li>
+          <li>
+            <Link href='/tags/novel'>小说</Link>
+          </li>
+          <li>
+            <Link href='/tags/poetry'>诗歌</Link>
+          </li>
+          <li>
+            <Link href='/tags/original'>原创</Link>
+          </li>
+          <li>
+            <Link href='/tags/else'>其他</Link>
+          </li>
+        </ul>
+        <Search />
 
-            {isAuth() ? (
-              <NavItem>
-                <NavLink
-                  onClick={() => signout(() => router.replace("/signin"))}>
-                  退出登录
-                </NavLink>
-              </NavItem>
-            ) : (
-              <>
-                <NavItem>
-                  <Link href='/signin'>
-                    <NavLink>登录</NavLink>
-                  </Link>
-                </NavItem>
-                <NavItem>
-                  <Link href='/signup'>
-                    <NavLink>注册</NavLink>
-                  </Link>
-                </NavItem>
-              </>
-            )}
-          </Nav>
-        </Collapse>
-      </Navbar>
-    </>
+        {isAuth() ? (
+          <ul className='log-ul'>
+            <li>
+              <a onClick={() => signout(() => router.replace("/signin"))}>
+                退出登录
+              </a>
+            </li>{" "}
+          </ul>
+        ) : (
+          <ul className='log-ul'>
+            <li>
+              <Link href='/signin'>登录</Link>
+            </li>
+            <li>
+              <Link href='/signup'>注册</Link>
+            </li>
+          </ul>
+        )}
+
+        <span className='menu-avtar-container'>
+          <Avatar size={38} />
+          <span className='menu-avtar-name'>hapmoniym</span>
+        </span>
+      </div>
+
+      <MenuOutlined onClick={() => setMenuActive(!menuActive)} />
+    </nav>
   );
 };
 

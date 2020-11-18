@@ -59,12 +59,16 @@ const Index = ({ router, recentPost }) => {
       gridArea: "2/2/3/4",
       height: "300px",
     },
+    4: {
+      gridArea: "3/1/4/4",
+      height: "400px",
+    },
   };
 
   mergeStyles(trending, trendingConfig);
   mergeStyles(featured, featuredConfig);
 
-  const head = () => {
+  const head = () => (
     <Head>
       <title>Home | {APP_NAME}</title>
       <meta
@@ -93,8 +97,9 @@ const Index = ({ router, recentPost }) => {
         content={`${DOMAIN}/static/images/seoblog.jpg`}
       />
       <meta property='og:image:type' content='image/jpg' />
-    </Head>;
-  };
+    </Head>
+  );
+
   return (
     <>
       {head()}
