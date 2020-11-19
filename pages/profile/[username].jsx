@@ -56,6 +56,14 @@ const UserProfile = ({ user, blogs, query }) => {
                   加入时间{moment(user.createdAt).fromNow()}
                 </p>
               </div>
+              <div className='col-md-4'>
+                <img
+                  src={`${process.env.NEXT_PUBLIC_API}/user/photo/${user.username}`}
+                  alt='user profile'
+                  className='img img-fluid img-thumbnail mb-3'
+                  style={{ maxWidth: "100%", maxHeight: "100px" }}
+                />
+              </div>
             </div>
           </div>
         </div>

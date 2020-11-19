@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { getCookie, isAuth } from "../../actions/auth";
+import { getCookie, isAuth, updateUser } from "../../actions/auth";
 import { getProfile, update } from "../../actions/user";
 
 const ProfileUpdate = () => {
@@ -9,6 +9,7 @@ const ProfileUpdate = () => {
     username: "",
     name: "",
     email: "",
+    about: "",
     password: "",
     error: false,
     success: false,
@@ -64,7 +65,7 @@ const ProfileUpdate = () => {
     });
   };
 
-  const handleSUbmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setValues({ ...values, loading: true });
     update(token, userData).then((data) => {
@@ -76,22 +77,24 @@ const ProfileUpdate = () => {
           loading: false,
         });
       } else {
-        setValues({
-          ...values,
-          username: data.username,
-          name: data.name,
-          email: data.email,
-          about: data.about,
-          password: "",
-          success: true,
-          loading: false,
+        updateUser(data, () => {
+          setValues({
+            ...values,
+            username: data.username,
+            name: data.name,
+            email: data.email,
+            about: data.about,
+            password: "",
+            success: true,
+            loading: false,
+          });
         });
       }
     });
   };
 
   const profileUpdateForm = () => (
-    <form onSubmit={handleSUbmit}>
+    <form onSubmit={handleSubmit}>
       <div className='form-group'>
         <label className='btn btn-outline-info'>
           用户头像
@@ -99,6 +102,7 @@ const ProfileUpdate = () => {
             type='file'
             onChange={handleChange("photo")}
             accept='image/*'
+            hidden
           />
         </label>
       </div>
@@ -155,12 +159,48 @@ const ProfileUpdate = () => {
     </form>
   );
 
+  const showError = () => (
+    <div
+      className='alert-alert-danger'
+      style={{ display: error ? "" : "none" }}>
+      {error}
+    </div>
+  );
+
+  const showSuccess = () => (
+    <div
+      className='alert alert-success'
+      style={{ display: success ? "" : "none" }}>
+      档案更新成功
+    </div>
+  );
+
+  const showLoading = () => (
+    <div
+      className='alert alert-info'
+      style={{ display: loading ? "" : "none" }}>
+      loading...
+    </div>
+  );
+
   return (
     <>
       <div className='container'>
         <div className='row'>
-          <div className='col-md-4'>image</div>
-          <div className='col-md-8'>{profileUpdateForm()}</div>
+          <div className='col-md-4'>
+            <img
+              src={`${process.env.NEXT_PUBLIC_API}/user/photo/${username}`}
+              alt='user profile'
+              className='img img-fluid img-thumbnail mb-3'
+              style={{ maxHeight: "auto", maxWidth: "100%" }}
+            />
+          </div>
+          <div className='col-md-8 mb-5'>
+            {showSuccess()}
+            {showError()}
+            {showLoading()}
+            {profileUpdateForm()}
+          </div>
         </div>
       </div>
     </>
