@@ -18,13 +18,10 @@ const UserProfile = ({ user, blogs, query }) => {
       <meta property='og:url' content={`${DOMAIN}/profile/${query.username}`} />
       <meta property='og:site_name' content={`${APP_NAME}`} />
 
-      <meta
-        property='og:image'
-        content={`${DOMAIN}/static/images/seoblog.jpg`}
-      />
+      <meta property='og:image' content={`${DOMAIN}/public/pic3.jpg`} />
       <meta
         property='og:image:secure_url'
-        content={`${DOMAIN}/static/images/seoblog.jpg`}
+        content={`${DOMAIN}/public/pic3.jpg`}
       />
       <meta property='og:image:type' content='image/jpg' />
     </Head>
@@ -48,21 +45,22 @@ const UserProfile = ({ user, blogs, query }) => {
           <div className='col-md-12'>
             <div className='card'>
               <div className='card-body'>
-                <h5>{user.name}</h5>
-                <Link href={`${user.profile}`}>
-                  <a>查看用户信息</a>
-                </Link>
-                <p className='text-muted'>
-                  加入时间{moment(user.createdAt).fromNow()}
-                </p>
-              </div>
-              <div className='col-md-4'>
-                <img
-                  src={`${process.env.NEXT_PUBLIC_API}/user/photo/${user.username}`}
-                  alt='user profile'
-                  className='img img-fluid img-thumbnail mb-3'
-                  style={{ maxWidth: "100%", maxHeight: "100px" }}
-                />
+                <div className='row'>
+                  <div className='col-md-8'>
+                    <h5>{user.name}</h5>
+                    <p className='text-muted'>
+                      加入时间{moment(user.createdAt).fromNow()}
+                    </p>
+                  </div>
+                  <div className='col-md-4'>
+                    <img
+                      src={`${process.env.NEXT_PUBLIC_API}/user/photo/${user.username}`}
+                      alt='user profile'
+                      style={{ maxHeight: "100px", maxWidth: "100%" }}
+                      className='img img-fluid img-thumbnail mb-3'
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -93,7 +91,7 @@ const UserProfile = ({ user, blogs, query }) => {
               联系{user.name}
             </h5>
             <br />
-            <p>来自</p>
+            <p>提交信息</p>
           </div>
         </div>
       </div>
