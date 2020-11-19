@@ -82,7 +82,9 @@ const SingleBlog = ({ blog, query }) => {
             <p className='text-center'>
               <span className='author-text'>
                 By : {"  "}
-                <Link href='/blog/' className='a-blue'>
+                <Link
+                  href={`/profile/${blog.author.username}`}
+                  className='a-blue'>
                   {blog.author.name}
                 </Link>
               </span>
