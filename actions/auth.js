@@ -1,5 +1,19 @@
 import fetch from "isomorphic-fetch";
 import cookie from "js-cookie";
+import Router from "next/dist/next-server/lib/router/router";
+
+export const handleResponse = (response) => {
+  if (response.status === 401) {
+    signout(() => {
+      Router.push({
+        pathname: "/signin",
+        query: {
+          message: "您的访问权限已过期，请重新登录",
+        },
+      });
+    });
+  }
+};
 
 export const signup = (user) => {
   return fetch(`${process.env.NEXT_PUBLIC_API}/signup`, {

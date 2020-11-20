@@ -13,7 +13,7 @@ const ReactQuill = dynamic(() => import("react-quill"), {
 import { QuillModules, QuillFormats } from "../../helper/quill";
 
 const BlogUpdate = ({ router }) => {
-  const Router = useRouter();
+  const myRouter = useRouter();
   const [body, setBody] = useState("");
 
   const [categories, setCategories] = useState([]);
@@ -175,7 +175,7 @@ const BlogUpdate = ({ router }) => {
   };
 
   const handleChange = (name) => (e) => {
-    // console.log(e.target.value);
+    console.log(e.target.value);
     const value = name === "image" ? e.target.files[0] : e.target.value;
     formData.set(name, value);
     setValues({ ...values, [name]: value, formData, error: "" });
@@ -198,9 +198,9 @@ const BlogUpdate = ({ router }) => {
           sucess: `您的文章《${data.title}》已成功更新`,
         });
         if (isAuth() && isAuth().role === 1) {
-          Router.replace(`/admin`);
+          myRouter.replace(`/admin`);
         } else if (isAuth() && isAuth().role === 0) {
-          Router.replace(`/user`);
+          myRouter.replace(`/user`);
         }
       }
     });

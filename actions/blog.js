@@ -1,6 +1,6 @@
 import fetch from "isomorphic-fetch";
 import queryString from "query-string";
-import { isAuth } from "./auth";
+import { isAuth, handleResponse } from "./auth";
 
 export const createBlog = (blog, token) => {
   let createBlogEndpoint;
@@ -19,6 +19,7 @@ export const createBlog = (blog, token) => {
     body: blog,
   })
     .then((response) => {
+      handleResponse(response);
       return response.json();
     })
     .catch((err) => console.log(err));
@@ -58,7 +59,7 @@ export const listBlogsWithCategoriesAndTags = (skip, limit) => {
     .catch((err) => console.log(err));
 };
 
-export const singleBlog = (id) => {
+export const singleBlog = (id = undefined) => {
   return fetch(`${process.env.NEXT_PUBLIC_API}/blog/${id}`, {
     method: "GET",
   })
@@ -106,6 +107,7 @@ export const removeBlog = (id, token) => {
     },
   })
     .then((response) => {
+      handleResponse(response);
       return response.json();
     })
     .catch((err) => console.log(err));
@@ -130,6 +132,7 @@ export const updateBlog = (blog, token, id) => {
     body: blog,
   })
     .then((res) => {
+      handleResponse(res);
       return res.json();
     })
     .catch((err) => console.log(err));

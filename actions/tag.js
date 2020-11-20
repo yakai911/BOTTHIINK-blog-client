@@ -1,4 +1,5 @@
 import fetch from "isomorphic-fetch";
+import { handleResponse } from "./auth";
 
 //create tags
 export const createTag = (tag, token) => {
@@ -12,6 +13,7 @@ export const createTag = (tag, token) => {
     body: JSON.stringify(tag),
   })
     .then((response) => {
+      handleResponse(response);
       return response.json();
     })
     .catch((err) => console.log(err));
@@ -46,6 +48,7 @@ export const removeTag = (slug, token) => {
     },
   })
     .then((response) => {
+      handleResponse(response);
       return response.json();
     })
     .catch((err) => console.log(err));

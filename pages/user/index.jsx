@@ -12,15 +12,19 @@ const UserIndex = () => {
           <div>
             <ul>
               <li>
-                <a href='/user/crud/blog'>创建博客</a>
-              </li>
-              <li>
-                <Link href='/user/crud/blogs'>
-                  <a href=''>更新/删除博客</a>
+                <Link href='/user/crud/blog'>
+                  <a>创建博客</a>
                 </Link>
               </li>
               <li>
-                <a href='/user/update'>Update profile</a>
+                <Link href='/user/crud/blogs'>
+                  <a>更新/删除博客</a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/user/update'>
+                  <a>Update profile</a>
+                </Link>
               </li>
             </ul>
           </div>

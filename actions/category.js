@@ -1,4 +1,5 @@
 import fetch from "isomorphic-fetch";
+import { handleResponse } from "./auth";
 
 //创建类别，注意必须是英语的类别
 export const createCategory = (category, token) => {
@@ -12,6 +13,7 @@ export const createCategory = (category, token) => {
     body: JSON.stringify(category),
   })
     .then((response) => {
+      handleResponse(response);
       return response.json();
     })
     .catch((err) => console.log(err));
@@ -48,6 +50,7 @@ export const removeCategory = (slug, token) => {
     },
   })
     .then((response) => {
+      handleResponse(response);
       return response.json();
     })
     .catch((err) => console.log(err));

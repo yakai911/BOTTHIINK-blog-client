@@ -5,7 +5,7 @@ import { getCookie, isAuth } from "../../actions/auth";
 import { list, removeBlog } from "../../actions/blog";
 import moment from "moment";
 
-const BlogRead = () => {
+const BlogRead = ({ username }) => {
   const [blogs, setBlogs] = useState([]);
   const [message, setMessage] = useState("");
   const token = getCookie("token");
@@ -15,7 +15,7 @@ const BlogRead = () => {
   }, []);
 
   const loadBlogs = () => {
-    list().then((data) => {
+    list(username).then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {
@@ -43,10 +43,16 @@ const BlogRead = () => {
   };
 
   const showUpdateButton = (blog) => {
-    if (isAuth() && isAuth().role === 1) {
+    if (isAuth() && isAuth().role === 0) {
+      return (
+        <Link href={`/user/crud/${blog._id}`}>
+          <a className='btn btn-sm btn-warning ml-2'>更新</a>
+        </Link>
+      );
+    } else if (isAuth() && isAuth().role === 1) {
       return (
         <Link href={`/admin/crud/${blog._id}`}>
-          <a className='btn btn-sm btn-warning ml-3'>更新</a>
+          <a className='btn btn-sm btn-warning ml-2'>更新</a>
         </Link>
       );
     }
