@@ -1,5 +1,7 @@
 version: 2.1
-jobs:
+orbs:
+  node: circleci/node@12.18.3
+workflows:
   build:
     docker:
       - image: node:12.18.3
@@ -24,6 +26,8 @@ jobs:
           key: v1-dependencies-{{checksum "package.json"}}
 
       #run tests!
-      - run: yarn test
-
       - run: yarn build
+
+      - run: yarn start
+
+      - run: yarn netlify:deploy
