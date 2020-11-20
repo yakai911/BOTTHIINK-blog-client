@@ -1,4 +1,4 @@
-import Admin from "../../../components/Admin";
+import Admin from "../../../components/auth/Admin";
 import Link from "next/link";
 import Category from "../../../components/crud/Category";
 import Tag from "../../../components/crud/Tag";
