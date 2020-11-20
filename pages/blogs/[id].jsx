@@ -8,6 +8,7 @@ import SlideImage from "../../components/SlideImage";
 import { APP_NAME, DOMAIN } from "../../config";
 import { singleBlog, listRelated } from "../../actions/blog";
 import { mergeStyles } from "../../helper/mergeStyles";
+import DisqusThread from "../../components/DisqusThread";
 
 const SingleBlog = ({ blog, query }) => {
   const [related, setRelated] = useState([]);
@@ -21,6 +22,18 @@ const SingleBlog = ({ blog, query }) => {
         setRelated(data);
       }
     });
+  };
+
+  const showComents = () => {
+    return (
+      <div>
+        <DisqusThread
+          id={blog.id}
+          title={blog.title}
+          path={`blog/${blog._id}`}
+        />
+      </div>
+    );
   };
 
   useEffect(() => {
@@ -108,6 +121,9 @@ const SingleBlog = ({ blog, query }) => {
             <section>{renderHTML(blog.body)}</section>
           </div>
         </article>
+        <div className='contaienr'>
+          <div className='row'>{showComents()}</div>
+        </div>
         <div className='container'>
           <h4 className='text-center pt-5  h3'>相关推荐</h4>
           <div className='row'>{showRelatedBlog()}</div>
