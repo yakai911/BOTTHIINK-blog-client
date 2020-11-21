@@ -7,6 +7,7 @@ import Search from "./blog/Search";
 import { useRouter } from "next/router";
 import { MenuOutlined } from "@ant-design/icons";
 import { Avatar } from "antd";
+import { APP_NAME } from "../config";
 
 //使用nprogress
 
@@ -48,7 +49,7 @@ const Header = (props) => {
   return (
     <nav className='site-navigation'>
       <div className='menu-title'>
-        <Link href='/'>BOT THINK</Link>
+        <Link href='/'>{APP_NAME}</Link>
         <MyIcon />
       </div>
       <div
