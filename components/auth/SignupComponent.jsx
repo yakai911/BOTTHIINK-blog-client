@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { signup, isAuth } from "../../actions/auth";
+import { signup, isAuth, preSignup } from "../../actions/auth";
+import Link from "next/link";
 
 const SignupComponent = () => {
   const [values, setValues] = useState({
@@ -22,7 +23,8 @@ const SignupComponent = () => {
     e.preventDefault();
     setValues({ ...values, loading: true, error: false });
     const user = { name, email, password };
-    signup(user).then((data) => {
+
+    preSignup(user).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error, loading: false });
       } else {
@@ -112,6 +114,17 @@ const SignupComponent = () => {
       {showLoading()}
       {showMessage()}
       {showForm && signupForm()}
+      <Link href='/auth/password/forgot'>
+        <span
+          className='mb-5'
+          style={{
+            textDecoration: "underline",
+            cursor: "pointer",
+            color: "#0879bf !important",
+          }}>
+          忘记密码
+        </span>
+      </Link>
     </>
   );
 };

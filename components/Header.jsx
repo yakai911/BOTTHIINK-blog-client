@@ -103,7 +103,7 @@ const Header = (props) => {
         </span>
       </div>
 
-      <MenuOutlined onClick={() => setMenuActive(!menuActive)} />
+      <MenuOutlined size={30} onClick={() => setMenuActive(!menuActive)} />
     </nav>
   );
 };

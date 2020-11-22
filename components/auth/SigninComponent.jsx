@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { signin, authenticate, isAuth } from "../../actions/auth";
+import Link from "next/link";
 
 const SigninComponent = () => {
   const router = useRouter();
@@ -9,11 +10,12 @@ const SigninComponent = () => {
     email: "",
     password: "",
     loading: false,
+    message: "",
     error: "",
     showForm: true,
   });
 
-  const { email, password, error, loading, showForm } = values;
+  const { email, password, error, loading, message, showForm } = values;
 
   useEffect(() => {
     isAuth() && router.push("/");
@@ -38,7 +40,11 @@ const SigninComponent = () => {
         //save user info to localstorage
         //authenticate user
         authenticate(data, () => {
-          router.push("/");
+          if (isAuth() && isAuth().role === 1) {
+            router.push(`/admin`);
+          } else {
+            router.push("/user");
+          }
         });
       }
     });
@@ -94,6 +100,17 @@ const SigninComponent = () => {
       {showError()}
       {showLoading()}
       {showForm && signinForm()}
+      <Link href='/auth/password/forgot'>
+        <span
+          className='mb-5'
+          style={{
+            textDecoration: "underline",
+            cursor: "pointer",
+            color: "#0879bf !important",
+          }}>
+          忘记密码
+        </span>
+      </Link>
     </>
   );
 };

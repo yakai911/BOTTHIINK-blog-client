@@ -124,7 +124,7 @@ const Index = ({ router, recentPost }) => {
         </section>
 
         <section className='container'>
-          <div className='row'>
+          <div className='row pb-5'>
             <h1>Trending</h1>
             <BlogCategory posts={trending} columns={2} />
           </div>
