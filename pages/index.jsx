@@ -1,6 +1,6 @@
 import Carousel from "../components/Carousel";
 import { useState, useEffect } from "react";
-import { PostGrid, BlogPost, BlogCategory } from "../components/blog";
+import { PostGrid, BlogCategory } from "../components/blog";
 import { withRouter } from "next/router";
 import Head from "next/head";
 import { singleCategory } from "../actions/category";

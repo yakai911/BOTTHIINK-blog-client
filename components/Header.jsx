@@ -1,19 +1,20 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { Avatar } from "antd";
 import MyIcon from "../components/MyIcon";
 import NProgress from "nprogress";
 import { signout, isAuth } from "../actions/auth";
 import Search from "./blog/Search";
 import { useRouter } from "next/router";
 import { MenuOutlined } from "@ant-design/icons";
-import { Avatar } from "antd";
 import { APP_NAME } from "../config";
 
 //使用nprogress
 
-const Header = (props) => {
+const Header = () => {
   const router = useRouter();
   const [menuActive, setMenuActive] = useState(false);
+  const [userData, setUserData] = useState({});
 
   const menuRef = useRef(null);
 
@@ -44,6 +45,12 @@ const Header = (props) => {
       router.events.off("routeChangeComplete", handleRouteChangeComplete);
       router.events.off("routeChangeError", handleRouteChangeError);
     };
+  }, []);
+
+  useEffect(() => {
+    if (isAuth()) {
+      setUserData(isAuth());
+    }
   }, []);
 
   return (
@@ -98,8 +105,17 @@ const Header = (props) => {
         )}
 
         <span className='menu-avtar-container'>
-          <Avatar size={38} />
-          <span className='menu-avtar-name'>hapmoniym</span>
+          {userData.username && (
+            <Link
+              href={`profile/[username]`}
+              as={`/profile/${userData.username}`}>
+              <Avatar
+                size={38}
+                src={`${process.env.NEXT_PUBLIC_API}/user/photo/${userData.username}`}
+              />
+            </Link>
+          )}
+          {isAuth() && <span className='menu-avtar-name'>{userData.name}</span>}
         </span>
       </div>
 
