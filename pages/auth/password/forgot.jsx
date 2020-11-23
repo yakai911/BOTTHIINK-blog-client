@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { forgotPassword } from "../../../actions/auth";
+import MyBrand from "../../../components/MyBrand";
 
 const ForgotPassword = () => {
   const [values, setValues] = useState({
@@ -38,30 +39,36 @@ const ForgotPassword = () => {
     message ? <div className='alert alert-success'>{message}</div> : "";
 
   const passwordForgotForm = () => (
-    <form onSubmit={handleSubmit}>
-      <div className='form-group pt-5'>
+    <form onSubmit={handleSubmit} className='form-login'>
+      <div className='form-group'>
         <input
           type='email'
           onChange={handleChange("email")}
-          className='form-control'
+          className='form-input form-control'
           value={email}
-          placeholder='Type your email'
+          placeholder=' 请输入账号邮箱'
           required
         />
       </div>
       <div>
-        <button className='btn btn-primary'>Send password reset link</button>
+        <button className='form-btn'>发送验证地址</button>
       </div>
     </form>
   );
 
   return (
-    <div className='container'>
-      <h2>Forgot password</h2>
-      <hr />
-      {showError()}
-      {showMessage()}
-      {showForm && passwordForgotForm()}
+    <div className='sign'>
+      <div className='sign-container bg-white my-4 p-5'>
+        <div className='mb-4'>
+          <MyBrand />
+        </div>
+        <h3 className='text-center' style={{ color: "#444" }}>
+          忘记密码
+        </h3>
+        {showError()}
+        {showMessage()}
+        {showForm && passwordForgotForm()}
+      </div>
     </div>
   );
 };

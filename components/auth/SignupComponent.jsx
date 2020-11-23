@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { signup, isAuth, preSignup } from "../../actions/auth";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const SignupComponent = () => {
+  const router = useRouter();
   const [values, setValues] = useState({
     name: "",
     email: "",

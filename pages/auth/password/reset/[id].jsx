@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { withRouter } from "next/router";
 import { resetPassword } from "../../../../actions/auth";
+import MyBrand from "../../../../components/MyBrand";
 
 const ResetPassword = ({ router }) => {
   const [values, setValues] = useState({
@@ -39,21 +40,21 @@ const ResetPassword = ({ router }) => {
   };
 
   const passwordResetForm = () => (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='form-login'>
       <div className='form-group pt-5'>
         <input
           type='password'
           onChange={(e) =>
             setValues({ ...values, newPassword: e.target.value })
           }
-          className='form-control'
+          className='form-input'
           value={newPassword}
-          placeholder='Type new password'
+          placeholder=' 请输入新的密码'
           required
         />
       </div>
       <div>
-        <button className='btn btn-primary'>修改密码</button>
+        <button className='form-btn'>修改密码</button>
       </div>
     </form>
   );
@@ -64,12 +65,18 @@ const ResetPassword = ({ router }) => {
     message ? <div className='alert alert-success'>{message}</div> : "";
 
   return (
-    <div className='container'>
-      <h2>Reset password</h2>
-      <hr />
-      {showError()}
-      {showMessage()}
-      {passwordResetForm()}
+    <div className='sign'>
+      <div className='sign-container bg-white my-4 p-5'>
+        <div className='mb-4'>
+          <MyBrand />
+        </div>
+        <h3 className='text-center' style={{ color: "#444" }}>
+          重新设置密码
+        </h3>
+        {showError()}
+        {showMessage()}
+        {showForm && passwordResetForm()}
+      </div>
     </div>
   );
 };
