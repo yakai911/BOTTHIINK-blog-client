@@ -7,7 +7,7 @@ const SlideImage = ({ img }) => {
         height: "500px",
         width: "100%",
         background: `url('${img}') no-repeat`,
-        backgroundSize: " cover",
+        backgroundSize: "cover",
         backgroundPosition: "center center",
       }}></div>
   );

@@ -106,12 +106,18 @@ const Header = () => {
 
         <span className='menu-avtar-container'>
           {userData.username && (
-            <Link
-              href={`profile/[username]`}
-              as={`/profile/${userData.username}`}>
+            <Link href={isAuth() && isAuth().role === 1 ? `/admin/` : `/user/`}>
               <Avatar
                 size={38}
                 src={`${process.env.NEXT_PUBLIC_API}/user/photo/${userData.username}`}
+                onError={(e) => {
+                  if (e) {
+                    setSrc(
+                      "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                    );
+                  }
+                }}
+                alt='User'
               />
             </Link>
           )}

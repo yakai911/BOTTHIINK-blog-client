@@ -78,6 +78,7 @@ const Search = () => {
           value={search}
           className='search-input'
           onChange={handleChange}
+          placeholder=' 搜索文章...'
         />
       </div>
       <div>

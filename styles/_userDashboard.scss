@@ -1,0 +1,70 @@
+.user-dashboard {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.userInfo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 25vw;
+  height: 100vh;
+  padding-top: 180px;
+  padding-bottom: 300px;
+  background-color: #151515;
+  color: white;
+
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    font-size: 25px;
+    align-items: center;
+
+    & div {
+      display: flex;
+      margin-bottom: 30px;
+      flex-direction: column;
+    }
+
+    .userInfo-text {
+      text-align: start;
+      font-size: 18px;
+      color: $text-light;
+      margin-top: 10px;
+    }
+  }
+
+  & ul {
+    flex: 1;
+    width: 100%;
+    margin-top: 150px;
+
+    & li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 220px 30px 100px;
+      list-style: none;
+      font-size: 22px;
+      margin-bottom: 20px;
+
+      span {
+        cursor: pointer;
+        letter-spacing: 3px;
+      }
+    }
+  }
+}
+
+.dashboard-right-container {
+  padding: 100px;
+  flex: 1;
+
+  & .right-container {
+    background-color: white;
+    height: 600px;
+  }
+}
