@@ -1,24 +1,22 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { withRouter } from "next/router";
-import { userPublicProfile } from "../../actions/user";
 import Avatar from "./Avatar";
 import { isAuth } from "../../actions/auth";
 import { FormOutlined, HomeOutlined, EditOutlined } from "@ant-design/icons";
 import moment from "moment";
+import { useSelector, useDispatch } from "react-redux";
+import { loadUser, loadUserProfile } from "../../redux/actions";
 
-const UserDashboard = () => {
-  const [user, setUser] = useState({});
-  const [userProfile, setUserProfile] = useState([]);
+const UserDashboard = (router) => {
+  const user = useSelector((state) => state.user.user);
+  const userProfile = useSelector((state) => state.userProfile.userProfile);
+  const dispatch = useDispatch();
 
-  // useEffect(async () => {
-  //   if (isAuth()) {
-  //     const userData = await isAuth();
-  //     setUser(userData);
-  //     const ProfileData = await userPublicProfile(user.username);
-  //     setUserProfile(ProfileData);
-  //   }
-  // }, []);
+  useEffect(async () => {
+    dispatch(loadUser());
+    dispatch(loadUserProfile(user.username));
+  }, [router, dispatch]);
 
   return (
     <div className='user-dashboard'>
@@ -34,11 +32,15 @@ const UserDashboard = () => {
             <span className='userInfo-text'>{user.email}</span>
             {userProfile && (
               <span className='userInfo-text'>
+                Published {userProfile.blogs.length} blogs on <b>BOT THK</b>
+              </span>
+            )}
+            {userProfile && (
+              <span className='userInfo-text'>
                 Joined <b>BOT THK</b>{" "}
                 {moment(userProfile.user.createdAt).fromNow()}
               </span>
             )}
-            {userProfile.blogs.length}
           </div>
         </div>
 
@@ -76,11 +78,10 @@ const UserDashboard = () => {
       <div className='dashboard-right-container'>
         <div className='right-container'>
           <h2>Hi,{user.name}</h2>
-          {JSON.stringify(userProfile.user.createdAt)}
         </div>
       </div>
     </div>
   );
 };
 
-export default UserDashboard;
+export default withRouter(UserDashboard);

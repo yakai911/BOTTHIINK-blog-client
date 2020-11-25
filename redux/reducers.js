@@ -1,32 +1,40 @@
-import { combineReducers } from "redux";
-import * as types from "./types";
-import { isAuth } from "../actions/auth";
-import { userPublicProfile } from "../actions/user";
+import { bindActionCreators, combineReducers } from "redux";
+import { LOAD_USER_PROFILE, LOAD_USER } from "./types";
 
-// INITIAL USERPROFILE STATE
-const initialUserState = {};
-// USERPROFILE REDUCER
-const userProfileReducer = (state = initialUserState, { type }) => {
+const initialUser = {
+  user: {},
+};
+
+const userReducer = (state = initialUser, { type, user }) => {
   switch (type) {
-    case types.LOAD_USER:
-      return { user: "hapmoniym" };
+    case LOAD_USER:
+      return {
+        ...state,
+        user: user,
+      };
 
     default:
       return state;
   }
 };
 
-// INITIAL USER_BLOGS STATE
-const initUserBlogsState = {};
+const initialUserProfile = {
+  userProfile: {
+    user: {},
+    blogs: [],
+  },
+};
 
-// TIMER REDUCER
-const userBlogsReducer = (state = initUserBlogsState, { type, username }) => {
+const userProfileReducer = (
+  state = initialUserProfile,
+  { type, userProfile }
+) => {
   switch (type) {
-    case types.LOAD_USER_BLOGS:
+    case LOAD_USER_PROFILE:
       return {
-        blogs: {
-          title: 1,
-        },
+        ...state,
+        user: userProfile.user,
+        blogs: userProfile.blogs,
       };
     default:
       return state;
@@ -35,8 +43,8 @@ const userBlogsReducer = (state = initUserBlogsState, { type, username }) => {
 
 // COMBINED REDUCERS
 const reducers = {
+  user: userReducer,
   userProfile: userProfileReducer,
-  userBlogs: userBlogsReducer,
 };
 
 export default combineReducers(reducers);
