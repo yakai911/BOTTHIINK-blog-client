@@ -1,4 +1,5 @@
 .dashboard-right-container {
+  height: 100vh;
   background: linear-gradient(89.72deg, #f0f4f9 -4.95%, #eaebf3 578.66%);
   display: flex;
   padding: 65px;
@@ -13,8 +14,8 @@
     // box-shadow: 6px 6px 16px rgba(0, 0, 0, 0.4),
     //   -6px -6px 26px rgba(255, 255, 255, 0.8);
     // border-radius: 120px;
-    margin-bottom: 50px;
-    margin-top: 60px;
+    margin-bottom: 40px;
+    margin-top: 50px;
     padding: 20px;
     display: flex;
     flex-direction: row;
@@ -97,6 +98,7 @@
 @media screen and (max-width: 900px) {
   .dashboard-right-container {
     width: 100vw;
+    height: max-content;
     padding: 20px;
     justify-content: center;
     align-items: center;
