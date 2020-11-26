@@ -65,7 +65,7 @@ const PostGrid = ({ posts }) => {
         showSizeChanger
         onShowSizeChange={setPageSize}
         pageSize={pageSize}
-        total={posts.lenght}
+        total={posts.length}
         defaultCurrent={current}
         onChange={setCurrent}
       />

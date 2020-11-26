@@ -1,4 +1,4 @@
-import { bindActionCreators, combineReducers } from "redux";
+import { combineReducers } from "redux";
 import { LOAD_USER_PROFILE, LOAD_USER } from "./types";
 
 const initialUser = {
