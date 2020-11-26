@@ -9,13 +9,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { loadUser, loadUserProfile } from "../../redux/actions";
 
 const UserDashboard = (router) => {
-  const user = useSelector((state) => state.user.user);
-  const userProfile = useSelector((state) => state.userProfile.userProfile);
+  const user = useSelector((state) => state.user);
+  const userProfile = useSelector((state) => state.userProfile);
   const dispatch = useDispatch();
 
   useEffect(async () => {
     dispatch(loadUser());
-    dispatch(loadUserProfile(user.username));
+    dispatch(loadUserProfile());
   }, [router, dispatch]);
 
   return (

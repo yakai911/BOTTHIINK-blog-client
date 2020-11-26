@@ -3,18 +3,18 @@ import { isAuth } from "../actions/auth";
 import { userPublicProfile } from "../actions/user";
 
 export const loadUser = () => async (dispatch) => {
-  console.log("fetching...");
   const user = await isAuth();
   dispatch({
     type: LOAD_USER,
-    user: user,
+    payload: user,
   });
 };
 
-export const loadUserProfile = (username) => async (dispatch) => {
+export const loadUserProfile = () => async (dispatch) => {
+  const username = await isAuth().username;
   const userProfile = await userPublicProfile(username);
   dispatch({
     type: LOAD_USER_PROFILE,
-    userProfile,
+    payload: { user: userProfile.user, blogs: userProfile.blogs },
   });
 };

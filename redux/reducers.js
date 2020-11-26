@@ -2,15 +2,23 @@ import { bindActionCreators, combineReducers } from "redux";
 import { LOAD_USER_PROFILE, LOAD_USER } from "./types";
 
 const initialUser = {
-  user: {},
+  _id: "",
+  username: "",
+  name: "",
+  email: "",
+  role: "",
 };
 
-const userReducer = (state = initialUser, { type, user }) => {
+const userReducer = (state = initialUser, { type, payload }) => {
   switch (type) {
     case LOAD_USER:
       return {
         ...state,
-        user: user,
+        _id: payload._id,
+        username: payload.username,
+        name: payload.name,
+        email: payload.email,
+        role: payload.role,
       };
 
     default:
@@ -19,22 +27,17 @@ const userReducer = (state = initialUser, { type, user }) => {
 };
 
 const initialUserProfile = {
-  userProfile: {
-    user: {},
-    blogs: [],
-  },
+  user: {},
+  blogs: [],
 };
 
-const userProfileReducer = (
-  state = initialUserProfile,
-  { type, userProfile }
-) => {
+const userProfileReducer = (state = initialUserProfile, { type, payload }) => {
   switch (type) {
     case LOAD_USER_PROFILE:
       return {
         ...state,
-        user: userProfile.user,
-        blogs: userProfile.blogs,
+        user: payload.user,
+        blogs: payload.blogs,
       };
     default:
       return state;
