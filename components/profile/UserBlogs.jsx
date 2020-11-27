@@ -25,10 +25,10 @@ const UserBlogs = ({ blogs, user }) => {
           <h2>{user.name}</h2>
           {blogs.length > 0 ? (
             <h5 className='userInfo-text'>
-              在 BTOT-THK 一共发布了 {blogs.length} 篇文章
+              在 BOT THK 一共发布了 {blogs.length} 篇文章
             </h5>
           ) : (
-            <h5 className='userInfo-text'>您还没有发布过文章</h5>
+            <h5 className='userInfo-text'>还没有在 BOT　THK　发布过文章</h5>
           )}
         </div>
         <div className='btn-contaienr'>
@@ -47,7 +47,7 @@ const UserBlogs = ({ blogs, user }) => {
         {blogs.length > 0 ? (
           paginatedBlogs.map((b, i) => (
             <a href={`/admin/crud/${b._id}`}>
-              <div className='blog-card'>
+              <div className='blog-card' key={i}>
                 <h4>{b.title}</h4>
                 <span className='desc-text'>
                   By: {user.name} | {moment(b.createdAt).format("MMM.DD-YYYY")}

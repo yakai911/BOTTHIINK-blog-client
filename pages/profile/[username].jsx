@@ -1,8 +1,13 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useState, useMemo } from "react";
 import { userPublicProfile } from "../../actions/user";
 import { DOMAIN, APP_NAME } from "../../config";
 import moment from "moment";
+import Avatar from "../../components/profile/Avatar";
+import MyBrand from "../../components/MyBrand";
+import { Pagination } from "antd";
+import "antd/dist/antd.css";
 
 const UserProfile = ({ user, blogs, query }) => {
   const head = () => (
@@ -27,72 +32,79 @@ const UserProfile = ({ user, blogs, query }) => {
     </Head>
   );
 
-  const showUserBlogs = () => {
-    return blogs.map((blog, i) => (
-      <div className='mt-4 mb-4' key={i}>
-        <Link href={`/blogs/${blog._id}`}>
-          <a className='lead'>{blog.title}</a>
-        </Link>
-      </div>
-    ));
-  };
+  const [pageSize, setPageSize] = useState(6);
+  const [current, setCurrent] = useState(1);
+
+  const paginatedBlogs = useMemo(() => {
+    const lastIndex = pageSize * current;
+    const firstIndex = lastIndex - pageSize;
+
+    return blogs.slice(firstIndex, lastIndex);
+  }, [current, pageSize, blogs]);
 
   return (
     <>
       {head()}
-      <div className='container'>
-        <div className='row'>
-          <div className='col-md-12'>
-            <div className='card'>
-              <div className='card-body'>
-                <div className='row'>
-                  <div className='col-md-8'>
-                    <h5>{user.name}</h5>
-                    <p className='text-muted'>
-                      加入时间{moment(user.createdAt).fromNow()}
-                    </p>
-                  </div>
-                  <div className='col-md-4'>
-                    <img
-                      src={`${process.env.NEXT_PUBLIC_API}/user/photo/${user.username}`}
-                      alt='user profile'
-                      style={{ maxHeight: "100px", maxWidth: "100%" }}
-                      className='img img-fluid img-thumbnail mb-3'
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div className='profile-container'>
+        <div className='profile-user'>
+          <div className='avatar-container'>
+            <a href={`/users/update`}>
+              <Avatar
+                size={100}
+                radius={100}
+                src={`${process.env.NEXT_PUBLIC_API}/user/photo/${user.username}`}
+              />
+            </a>
+          </div>
+          <div className='profile-info'>
+            <h3>{user.name}</h3>
+            <p>
+              Joined <b>BOT THK</b> {moment(user.createdAt).fromNow()}
+            </p>
           </div>
         </div>
-      </div>
 
-      <br />
-
-      <div className='container pb-5'>
-        <div className='row'>
-          <div className='col-md-6'>
-            <div className='card'>
-              <div className='card-body'>
-                <h5 className='card-title bg-primary p-4 text-white'>
-                  {user.name}最近发布的文章
-                </h5>
-                {showUserBlogs()}
-              </div>
+        <div className='profile-blogs'>
+          <div className='blogs-info'>
+            <div className='brand-container'>
+              <MyBrand />
             </div>
+            <h4 className='blogs-number'>
+              {user.name}共发布了{blogs.length}篇文章
+            </h4>
+          </div>
+          <div className='blogs-container'>
+            {blogs.length > 0 ? (
+              paginatedBlogs.map((b, i) => (
+                <a href={`/blogs/${b._id}`}>
+                  <div className='blog-card' key={i}>
+                    <h5>{b.title}</h5>
+                    <span className='desc-text'>
+                      By: {user.name} |{" "}
+                      {moment(b.createdAt).format("MMM.DD-YYYY")}
+                    </span>
+                    <div>
+                      <p>{b.description.replace(/<[^>]+>/g, "")}</p>
+                    </div>
+                  </div>
+                </a>
+              ))
+            ) : (
+              <h5 className='userInfo-text'>还没有发布过文章</h5>
+            )}
           </div>
         </div>
-      </div>
 
-      <div className='col-md-6'>
-        <div className='card'>
-          <div className='card-body'>
-            <h5 className='card-title bg-primary p-4 text-light'>
-              联系{user.name}
-            </h5>
-            <br />
-            <p>提交信息</p>
-          </div>
+        <div className='pagination-container'>
+          <Pagination
+            simple
+            showSizeChanger
+            onShowSizeChange={setPageSize}
+            pageSize={pageSize}
+            total={blogs.length}
+            defaultCurrent={current}
+            onChange={setCurrent}
+          />
         </div>
       </div>
     </>
