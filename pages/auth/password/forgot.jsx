@@ -58,8 +58,8 @@ const ForgotPassword = () => {
 
   return (
     <div className='sign'>
-      <div className='sign-container bg-white my-4 p-5'>
-        <div className='mb-4'>
+      <div className='sign-container  my-4 p-5'>
+        <div className='brand-container mb-4'>
           <MyBrand />
         </div>
         <h3 className='text-center' style={{ color: "#444" }}>

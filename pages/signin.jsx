@@ -1,10 +1,14 @@
 import SigninComponent from "../components/auth/SigninComponent";
 import Link from "next/link";
+import MyBrand from "../components/MyBrand";
 
 const Signin = () => {
   return (
     <div className='sign'>
       <div className='sign-container'>
+        <div className='brand-container'>
+          <MyBrand />
+        </div>
         <h2 className='text-center my-4'>登录</h2>
         <p className='text-center'>
           还没有账号？点击

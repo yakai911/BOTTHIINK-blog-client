@@ -1,5 +1,5 @@
 .sign {
-  height: 90vh;
+  height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -12,10 +12,24 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 40vw;
-  background-color: white;
+  width: 30vw;
+  box-shadow: -3px -3px 7px #ffffff, 3px 3px 7px rgba(136, 165, 191, 0.48);
+  // inset -3px -3px 7px #ffffff, inset 3px 3px 7px rgba(136, 165, 191, 0.48);
+  border-radius: 25px;
   padding-top: 3rem;
   padding-top: 3rem;
+
+  .brand-container {
+    border-radius: 80px;
+    width: 250px;
+    height: 80px;
+    padding-top: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: -3px -3px 7px #ffffff, 3px 3px 7px rgba(136, 165, 191, 0.48),
+      inset -3px -3px 7px #ffffff, inset 3px 3px 7px rgba(136, 165, 191, 0.48);
+  }
 }
 
 .form-login {
@@ -52,6 +66,13 @@
 @media screen and (max-width: 900px) {
   .sign-container {
     width: 90vw;
+    // box-shadow: -3px -3px 7px #ffffff, 3px 3px 7px rgba(136, 165, 191, 0.48),
+    box-shadow: inset -3px -3px 7px #ffffff,
+      inset 3px 3px 7px rgba(136, 165, 191, 0.48);
+
+    .brand-container {
+      display: none;
+    }
 
     .form-input {
       width: 80vw;

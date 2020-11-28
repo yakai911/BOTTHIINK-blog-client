@@ -4,13 +4,13 @@ const Avatar = ({ src, size, radius = "50" }) => {
   return (
     <div
       style={{
-        background: src ? `url('${src}') ` : "#161A1F",
+        backgroundImage: src ? `url('${src}') ` : "",
         width: `${size}px`,
         height: `${size}px`,
         borderRadius: `${radius}px`,
-        backgroundSize: "cover",
+        backgroundSize: `${size}px ${size}px`,
         backgroundPosition: "center center",
-        backgroundRepeat: "no-repeat",
+        // backgroundRepeat: "no-repeat",
         cursor: "pointer",
       }}></div>
   );

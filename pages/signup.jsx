@@ -1,9 +1,13 @@
 import SignupComponent from "../components/auth/SignupComponent";
+import MyBrand from "../components/MyBrand";
 
 const Signup = () => {
   return (
     <div className='sign'>
-      <div className='sign-container bg-white my-4 p-3'>
+      <div className='sign-container  my-4 p-3'>
+        <div className='brand-container my-4'>
+          <MyBrand />
+        </div>
         <h2 className='text-center my-4'>新用户注册</h2>
         <SignupComponent />
       </div>
