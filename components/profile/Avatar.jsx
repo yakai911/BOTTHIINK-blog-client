@@ -8,10 +8,10 @@ const Avatar = ({ src, size, radius = "50" }) => {
         width: `${size}px`,
         height: `${size}px`,
         borderRadius: `${radius}px`,
-        border: "1px gray solid",
         backgroundSize: "cover",
         backgroundPosition: "center center",
         backgroundRepeat: "no-repeat",
+        cursor: "pointer",
       }}></div>
   );
 };

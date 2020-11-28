@@ -4,10 +4,8 @@ import ProfileUpdate from "../../components/auth/ProfileUpdate";
 const UserProfileUpdate = () => {
   return (
     <Private>
-      <div>
-        <div className='profile-update'>
-          <ProfileUpdate />
-        </div>
+      <div className='profile-update'>
+        <ProfileUpdate />
       </div>
     </Private>
   );

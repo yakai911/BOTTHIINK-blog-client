@@ -1,0 +1,140 @@
+.profile-update {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: $background;
+  height: 100%;
+  padding: 90px 100px 30px 100px;
+
+  .update-container {
+    width: 70%;
+    padding: 50px 50px 30px 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .avatar-update {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      & .form-group {
+        margin-right: 150px;
+        margin-top: 50px;
+
+        .btn {
+          background-color: $background;
+          color: #171c21 50.9%;
+          display: flex;
+          align-items: center;
+          font-size: 18px;
+          font-weight: 900px;
+          letter-spacing: 0.5px;
+          box-shadow: -3px -3px 7px #ffffff,
+            3px 3px 7px rgba(136, 165, 191, 0.48);
+        }
+      }
+    }
+
+    .avatar-container {
+      margin-right: 150px;
+      border-radius: 180px;
+      width: 180px;
+      height: 180px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: -3px -3px 7px #ffffff, 3px 3px 7px rgba(136, 165, 191, 0.48),
+        inset -3px -3px 7px #ffffff, inset 3px 3px 7px rgba(136, 165, 191, 0.48);
+    }
+  }
+}
+
+.update-form {
+  border-radius: 25px;
+  padding: 70px;
+  box-shadow: -3px -3px 7px #ffffff, 3px 3px 7px rgba(136, 165, 191, 0.48);
+
+  & textarea {
+    resize: none;
+    height: 150px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .profile-update {
+    .update-container {
+      display: flex;
+      width: 100%;
+      height: max-content;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+
+      .avatar-update {
+        margin: 0;
+        padding: 0;
+
+        .avatar-container {
+          margin: 0;
+          padding: 0;
+          width: 150px;
+          height: 150px;
+        }
+
+        .form-group {
+          margin: 25px 0;
+
+          & .btn {
+            font-size: 18px !important;
+
+            svg {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .update-form {
+    width: 320px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 15px;
+    margin: 30px 0;
+
+    .brand-container {
+      margin: 10px 0 30px 0;
+    }
+
+    .user-form {
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .form-group {
+        width: 250px;
+      }
+
+      .form-input,
+      .about-input {
+        width: 100%;
+        font-size: 15px;
+        padding: 6px;
+      }
+
+      .form-btn {
+        width: 100%;
+      }
+    }
+  }
+}

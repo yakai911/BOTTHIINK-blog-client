@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Mybrand from "../MyBrand";
+import Avatar from "../profile/Avatar";
 import { getCookie, isAuth, updateUser } from "../../actions/auth";
 import { getProfile, update } from "../../actions/user";
+import { UploadOutlined } from "@ant-design/icons";
 
 const ProfileUpdate = () => {
   const [values, setValues] = useState({
@@ -96,64 +99,53 @@ const ProfileUpdate = () => {
   };
 
   const profileUpdateForm = () => (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='user-form'>
       <div className='form-group'>
-        <label className='btn btn-outline-info'>
-          用户头像
-          <input
-            type='file'
-            onChange={handleChange("photo")}
-            accept='image/*'
-            hidden
-          />
-        </label>
-      </div>
-      <div className='form-group'>
-        <label className='text-muted'>用户ID</label>
+        <label className='sr-ony form-label'>用户ID</label>
         <input
           type='text'
           onChange={handleChange("username")}
           value={username}
-          className='form-control'
+          className='form-control form-input'
         />
       </div>
       <div className='form-group'>
-        <label className='text-muted'>用户名</label>
+        <label className='sr-ony form-label'>用户名</label>
         <input
           type='text'
           onChange={handleChange("name")}
           value={name}
-          className='form-control'
+          className='form-control form-input'
         />
       </div>
       <div className='form-group'>
-        <label className='text-muted'>Email</label>
+        <label className='sr-ony form-label'>Email</label>
         <input
           type='email'
           onChange={handleChange("email")}
           value={email}
-          className='form-control'
+          className='form-control form-input'
         />
       </div>
       <div className='form-group'>
-        <label className='text-muted'>关于</label>
+        <label className='sr-ony form-label'>About</label>
         <textarea
           type='text'
           onChange={handleChange("about")}
           value={about}
-          className='form-control'
+          className='form-control about-input'
         />
       </div>
       <div className='form-group'>
-        <label className='text-muted'>密码</label>
+        <label className='sr-ony form-label'>密码</label>
         <input
           type='password'
           onChange={handleChange("password")}
           value={password}
-          className='form-control'
+          className='form-control form-input'
         />
       </div>
-      <div>
+      <div className='form-group'>
         <button type='submit' className='form-btn'>
           提交
         </button>
@@ -187,22 +179,38 @@ const ProfileUpdate = () => {
 
   return (
     <>
-      <div className='container'>
-        <div className='row'>
-          <div className='col-md-4'>
-            <img
+      <div className='update-container'>
+        <div className='avatar-update'>
+          <div className='avatar-container'>
+            <Avatar
               src={`${process.env.NEXT_PUBLIC_API}/user/photo/${username}`}
-              alt='user profile'
-              className='img img-fluid img-thumbnail mb-3'
-              style={{ maxHeight: "auto", maxWidth: "100%" }}
+              size={150}
+              radius={150}
             />
           </div>
-          <div className='col-md-8 mb-5'>
-            {showSuccess()}
-            {showError()}
-            {showLoading()}
-            {profileUpdateForm()}
+          <div className='form-group'>
+            <label className='btn'>
+              <UploadOutlined
+                style={{ fontSize: "25px", marginRight: "5px" }}
+              />{" "}
+              更换头像
+              <input
+                type='file'
+                onChange={handleChange("photo")}
+                accept='image/*'
+                hidden
+              />
+            </label>
           </div>
+        </div>
+        <div className='update-form'>
+          {showSuccess()}
+          {showError()}
+          {showLoading()}
+          <div className='brand-container'>
+            <Mybrand />
+          </div>
+          {profileUpdateForm()}
         </div>
       </div>
     </>
