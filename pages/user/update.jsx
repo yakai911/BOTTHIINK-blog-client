@@ -5,7 +5,7 @@ const UserProfileUpdate = () => {
   return (
     <Private>
       <div>
-        <div>
+        <div className='profile-update'>
           <ProfileUpdate />
         </div>
       </div>

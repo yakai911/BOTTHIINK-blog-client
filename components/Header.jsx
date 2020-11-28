@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Avatar } from "antd";
 import MyIcon from "../components/MyIcon";
 import NProgress from "nprogress";
 import { signout, isAuth } from "../actions/auth";
@@ -8,6 +7,7 @@ import Search from "./blog/Search";
 import { useRouter } from "next/router";
 import { MenuOutlined } from "@ant-design/icons";
 import { APP_NAME } from "../config";
+import Avatar from "../components/profile/Avatar";
 
 //使用nprogress
 
@@ -104,25 +104,19 @@ const Header = () => {
           </ul>
         )}
 
-        <span className='menu-avtar-container'>
+        <div className='menu-avtar-container'>
           {userData.username && (
             <Link href={isAuth() && isAuth().role === 1 ? `/admin/` : `/user/`}>
-              <Avatar
-                size={38}
-                src={`${process.env.NEXT_PUBLIC_API}/user/photo/${userData.username}`}
-                onError={(e) => {
-                  if (e) {
-                    setSrc(
-                      "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                    );
-                  }
-                }}
-                alt='User'
-              />
+              <div className='my-avatar'>
+                <Avatar
+                  size={38}
+                  src={`${process.env.NEXT_PUBLIC_API}/user/photo/${userData.username}`}
+                />
+              </div>
             </Link>
           )}
-          {isAuth() && <span className='menu-avtar-name'>{userData.name}</span>}
-        </span>
+          {isAuth() && <p className='menu-avtar-name'>{userData.name}</p>}
+        </div>
       </div>
 
       <MenuOutlined size={30} onClick={() => setMenuActive(!menuActive)} />

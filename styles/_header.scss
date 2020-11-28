@@ -36,14 +36,21 @@
     align-items: center;
     padding-right: 40px;
 
-    .ant-avatar {
-      margin-left: 20px;
-      background: $background;
-      border: $border 1px solid;
-    }
-    .menu-avtar-name {
-      font-size: 18px;
-      margin-left: 15px;
+    .menu-avtar-container {
+      display: flex;
+      flex-direction: row;
+      // justify-content: center;
+      align-items: center;
+      .my-avatar {
+        margin-left: 20px;
+        // background: $background;
+        // border: $border 1px solid;
+      }
+      .menu-avtar-name {
+        margin: 0;
+        font-size: 18px;
+        margin-left: 15px;
+      }
     }
   }
 
@@ -111,6 +118,7 @@
         height: 60px;
         display: flex;
         align-items: center;
+        padding-left: 20px;
       }
 
       ul {
@@ -127,6 +135,7 @@
 
       .menu-avtar-container {
         padding-top: 20px;
+        // justify-content: start;
       }
 
       &.active {

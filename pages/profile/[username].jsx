@@ -48,7 +48,7 @@ const UserProfile = ({ user, blogs, query }) => {
       <div className='profile-container'>
         <div className='profile-user'>
           <div className='avatar-container'>
-            <a href={`/users/update`}>
+            <a href={`/user/update`}>
               <Avatar
                 size={100}
                 radius={100}
@@ -58,9 +58,12 @@ const UserProfile = ({ user, blogs, query }) => {
           </div>
           <div className='profile-info'>
             <h3>{user.name}</h3>
-            <p>
-              Joined <b>BOT THK</b> {moment(user.createdAt).fromNow()}
-            </p>
+            {user.about && (
+              <p className='profile-about'>
+                <b>{user.about}</b>
+              </p>
+            )}
+            <p>Joined {moment(user.createdAt).fromNow()}</p>
           </div>
         </div>
 
@@ -74,24 +77,22 @@ const UserProfile = ({ user, blogs, query }) => {
             </h4>
           </div>
           <div className='blogs-container'>
-            {blogs.length > 0 ? (
-              paginatedBlogs.map((b, i) => (
-                <a href={`/blogs/${b._id}`}>
-                  <div className='blog-card' key={i}>
-                    <h5>{b.title}</h5>
-                    <span className='desc-text'>
-                      By: {user.name} |{" "}
-                      {moment(b.createdAt).format("MMM.DD-YYYY")}
-                    </span>
-                    <div>
-                      <p>{b.description.replace(/<[^>]+>/g, "")}</p>
+            {blogs.length > 0
+              ? paginatedBlogs.map((b, i) => (
+                  <a href={`/blogs/${b._id}`}>
+                    <div className='blog-card' key={i}>
+                      <h5>{b.title}</h5>
+                      <span className='desc-text'>
+                        By: {user.name} |{" "}
+                        {moment(b.createdAt).format("MMM.DD-YYYY")}
+                      </span>
+                      <div>
+                        <p>{b.description.replace(/<[^>]+>/g, "")}</p>
+                      </div>
                     </div>
-                  </div>
-                </a>
-              ))
-            ) : (
-              <h5 className='userInfo-text'>还没有发布过文章</h5>
-            )}
+                  </a>
+                ))
+              : ""}
           </div>
         </div>
 

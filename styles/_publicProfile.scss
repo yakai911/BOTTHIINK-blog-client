@@ -8,7 +8,7 @@
   justify-content: center;
 
   .profile-user {
-    height: 400px;
+    height: 430px;
     padding-top: 35px;
     padding-bottom: 35px;
     display: flex;
@@ -31,10 +31,15 @@
       font-weight: 800;
     }
 
+    .profile-about {
+      color: #d6e1ef;
+      font-weight: 200;
+    }
+
     p {
-      font-size: 20px;
+      text-align: center;
+      font-size: 18px;
       letter-spacing: 0.5px;
-      font-weight: 500;
       color: #7889a2;
     }
 
@@ -53,6 +58,7 @@
 }
 
 .profile-blogs {
+  min-height: 400px;
   margin-top: 50px;
   display: flex;
   flex-direction: column;
@@ -134,7 +140,7 @@
   .profile-container {
     .profile-user {
       padding: 25px 0;
-      height: 330px;
+      height: 400px;
 
       & .avatar-container {
         width: 120px;
@@ -144,6 +150,7 @@
       }
 
       & .profile-info {
+        padding: 0 20px;
         h3 {
           font-weight: 600;
         }
@@ -155,6 +162,7 @@
   }
 
   .profile-blogs {
+    min-height: 260px;
     .blogs-info {
       display: none;
     }

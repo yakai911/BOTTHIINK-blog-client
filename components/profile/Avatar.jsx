@@ -4,7 +4,7 @@ const Avatar = ({ src, size, radius = "50" }) => {
   return (
     <div
       style={{
-        background: src ? `url('${src}') ` : "#ccc",
+        background: src ? `url('${src}') ` : "#161A1F",
         width: `${size}px`,
         height: `${size}px`,
         borderRadius: `${radius}px`,

@@ -28,7 +28,7 @@ const UserBlogs = ({ blogs, user }) => {
               在 BOT THK 一共发布了 {blogs.length} 篇文章
             </h5>
           ) : (
-            <h5 className='userInfo-text'>还没有在 BOT　THK　发布过文章</h5>
+            <h5 className='userInfo-text'>还没有在 BOT THK 发布过文章</h5>
           )}
         </div>
         <div className='btn-contaienr'>
@@ -44,23 +44,22 @@ const UserBlogs = ({ blogs, user }) => {
       </div>
 
       <div className='blog-card-container'>
-        {blogs.length > 0 ? (
-          paginatedBlogs.map((b, i) => (
-            <a href={`/admin/crud/${b._id}`}>
-              <div className='blog-card' key={i}>
-                <h4>{b.title}</h4>
-                <span className='desc-text'>
-                  By: {user.name} | {moment(b.createdAt).format("MMM.DD-YYYY")}
-                </span>
-                <div>
-                  <p>{b.description.replace(/<[^>]+>/g, "")}</p>
+        {blogs.length > 0
+          ? paginatedBlogs.map((b, i) => (
+              <a href={`/admin/crud/${b._id}`}>
+                <div className='blog-card' key={i}>
+                  <h4>{b.title}</h4>
+                  <span className='desc-text'>
+                    By: {user.name} |{" "}
+                    {moment(b.createdAt).format("MMM.DD-YYYY")}
+                  </span>
+                  <div>
+                    <p>{b.description.replace(/<[^>]+>/g, "")}</p>
+                  </div>
                 </div>
-              </div>
-            </a>
-          ))
-        ) : (
-          <h5 className='userInfo-text'>还没有发布过文章</h5>
-        )}
+              </a>
+            ))
+          : ""}
       </div>
 
       <div className='pagination-container'>

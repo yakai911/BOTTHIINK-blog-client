@@ -8,8 +8,8 @@ function MyApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
   return (
     <>
-      <Header />
       <Provider store={store}>
+        <Header />
         <Component {...pageProps} />
       </Provider>
     </>

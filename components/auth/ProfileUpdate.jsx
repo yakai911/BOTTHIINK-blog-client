@@ -49,10 +49,12 @@ const ProfileUpdate = () => {
   };
 
   useEffect(() => {
+    isAuth();
     init();
   }, []);
 
   const handleChange = (name) => (e) => {
+    console.log(e.target.value);
     const value = name === "photo" ? e.target.files[0] : e.target.value;
     let userFormData = new FormData();
     userFormData.set(name, value);
@@ -71,7 +73,7 @@ const ProfileUpdate = () => {
     update(token, userData).then((data) => {
       if (data.error) {
         setValues({
-          ...value,
+          ...values,
           error: data.error,
           success: false,
           loading: false,
