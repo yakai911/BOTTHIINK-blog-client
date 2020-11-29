@@ -1,8 +1,8 @@
 .dashboard-right-container {
-  height: 100vh;
+  height: 100%;
   background: linear-gradient(89.72deg, #f0f4f9 -4.95%, #eaebf3 578.66%);
   display: flex;
-  padding: 65px;
+  padding: 65px 0 20px 0px;
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
@@ -11,8 +11,7 @@
   & .header-container {
     height: 180px;
     width: 1250px;
-    margin-bottom: 40px;
-    margin-top: 50px;
+    margin-top: 40px;
     padding: 20px;
     display: flex;
     flex-direction: row;
@@ -70,7 +69,6 @@
   grid-gap: 35px;
   height: 650px;
   padding: 35px;
-  overflow: hidden;
 
   & .blog-card {
     height: 220px;
