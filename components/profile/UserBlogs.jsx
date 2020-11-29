@@ -48,7 +48,7 @@ const UserBlogs = ({ blogs, user }) => {
           ? paginatedBlogs.map((b, i) => (
               <a href={`/admin/crud/${b._id}`}>
                 <div className='blog-card' key={i}>
-                  <h4>{b.title}</h4>
+                  <h5>{b.title}</h5>
                   <span className='desc-text'>
                     By: {user.name} |{" "}
                     {moment(b.createdAt).format("MMM.DD-YYYY")}
@@ -61,7 +61,6 @@ const UserBlogs = ({ blogs, user }) => {
             ))
           : ""}
       </div>
-
       <div className='pagination-container'>
         <Pagination
           simple

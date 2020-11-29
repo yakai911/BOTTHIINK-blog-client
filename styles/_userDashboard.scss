@@ -9,8 +9,8 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 25vw;
-  height: 100vh;
+  width: 25%;
+  height: 100%;
   padding-top: 180px;
   padding-bottom: 300px;
   background: linear-gradient(
@@ -24,7 +24,6 @@
   .userInfo {
     display: flex;
     flex-direction: column;
-    margin-bottom: 30px;
     font-size: 25px;
     align-items: center;
     justify-content: center;
@@ -61,7 +60,7 @@
     width: 100%;
     margin: 0;
     padding: 0;
-    margin-top: 120px;
+    margin-top: 70px;
     display: flex;
     flex-direction: column;
     justify-content: center;
