@@ -10,6 +10,7 @@ const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
 });
 import { QuillModules, QuillFormats } from "../../helper/quill";
+import { UploadOutline, UploadOutlined } from "@ant-design/icons";
 
 const CreateBlog = ({ router }) => {
   const token = getCookie("token");
@@ -196,13 +197,13 @@ const CreateBlog = ({ router }) => {
   const createBLogForm = () => {
     return (
       <form onSubmit={publishBlog}>
-        <div className='input-group input-group-sm mb-3'>
-          <div className='input-group-text title text-muted'>标题</div>
+        <div className='input-container'>
           <input
             type='text'
             className='form-control'
             value={title}
             onChange={handleChange("title")}
+            placeholder='Post title'
           />
         </div>
         <div className='form-group'>
@@ -210,7 +211,7 @@ const CreateBlog = ({ router }) => {
             modules={QuillModules}
             formats={QuillFormats}
             value={body}
-            placeholder='输入内容...'
+            placeholder='开始创作...'
             onChange={handleBody}
           />
         </div>
@@ -224,46 +225,44 @@ const CreateBlog = ({ router }) => {
   };
 
   return (
-    <div className='container-fluid'>
-      <div className='row'>
-        <div className='pt-3'>
-          {error && showError()}
-          {success && showSuccess()}
+    <div className='blog-creator-container'>
+      <div className='blog-form'>
+        {error && showError()}
+        {success && showSuccess()}
+        <div className='blog-form-container'>{createBLogForm()}</div>
+      </div>
+      <div className='right-container'>
+        <div className='upload-pic'>
+          <div>
+            <h5>
+              配图 <small className='text-muted'>{`(<1MB)`}</small>
+            </h5>
+            <hr />
+            <label className='upload-btn'>
+              <UploadOutlined />
+              上传图片
+              <input
+                type='file'
+                onChange={handleChange("image")}
+                accept='image/*'
+                hidden
+              />
+            </label>
+          </div>
         </div>
-        <div className='col-md-8'>{createBLogForm()}</div>
-
-        <div className='col-md-4'>
-          <div>
-            <div className='form-group pb-2'>
-              <h5>配图</h5>
-              <hr />
-              <small className='text-muted mr-3 md-3'>配图不可大于1Mb</small>
-              <br />
-              <label className='btn btn-outline-dark'>
-                上传图片
-                <input
-                  type='file'
-                  onChange={handleChange("image")}
-                  accept='image/*'
-                  hidden
-                />
-              </label>
-            </div>
-          </div>
-          <div>
-            <h5>分类</h5>
-            <hr />
-            <ul style={{ maxHeight: "200px", overflowY: "scroll" }}>
-              {showCategories()}
-            </ul>
-          </div>
-          <div>
-            <h5>标签</h5>
-            <hr />
-            <ul style={{ maxHeight: "200px", overflowY: "scroll" }}>
-              {showTags()}
-            </ul>
-          </div>
+        <div>
+          <h5>
+            分类 <small className='text-muted'>{`(必选)`}</small>
+          </h5>
+          <hr />
+          <ul>{showCategories()}</ul>
+        </div>
+        <div>
+          <h5>
+            标签 <small className='text-muted'>{`(必选)`}</small>
+          </h5>
+          <hr />
+          <ul>{showTags()}</ul>
         </div>
       </div>
     </div>
