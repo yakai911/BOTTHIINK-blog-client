@@ -46,7 +46,12 @@ const UserBlogs = ({ blogs, user }) => {
       <div className='blog-card-container'>
         {blogs.length > 0
           ? paginatedBlogs.map((b, i) => (
-              <a href={`/admin/crud/${b._id}`}>
+              <a
+                href={
+                  user && user.role === 1
+                    ? `/admin/crud/${b._id}`
+                    : `/user/crud/${b._id}`
+                }>
                 <div className='blog-card' key={i}>
                   <h5>{b.title}</h5>
                   <span className='desc-text'>

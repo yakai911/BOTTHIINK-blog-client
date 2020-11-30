@@ -7,15 +7,8 @@ const Blog = () => {
   const username = isAuth() && isAuth().username;
   return (
     <Private>
-      <div className='container'>
-        <div className='row'>
-          <div className='col-md-12 pt-5 pb-5'>
-            <h2>Manage blogs</h2>
-          </div>
-          <div className='col-md-12'>
-            <BlogRead username={username} />
-          </div>
-        </div>
+      <div className='manageBlog-container'>
+        <BlogRead username={username} />
       </div>
     </Private>
   );

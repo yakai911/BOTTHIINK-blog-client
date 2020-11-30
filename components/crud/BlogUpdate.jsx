@@ -10,6 +10,7 @@ import SlideImage from "../../components/SlideImage";
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
 });
+import { UploadOutlined } from "@ant-design/icons";
 import { QuillModules, QuillFormats } from "../../helper/quill";
 
 const BlogUpdate = ({ router }) => {
@@ -225,13 +226,13 @@ const BlogUpdate = ({ router }) => {
   const updateBlogForm = () => {
     return (
       <form onSubmit={editBlog}>
-        <div className='input-group input-group-sm mb-3'>
-          <div className='input-group-text title text-muted'>标题</div>
+        <div className='input-container'>
           <input
             type='text'
             className='form-control'
             value={title}
             onChange={handleChange("title")}
+            placeholder='Post title'
           />
         </div>
         <div className='form-group'>
@@ -239,7 +240,7 @@ const BlogUpdate = ({ router }) => {
             modules={QuillModules}
             formats={QuillFormats}
             value={body}
-            placeholder='输入内容...'
+            placeholder='开始创作...'
             onChange={handleBody}
           />
         </div>
@@ -253,51 +254,58 @@ const BlogUpdate = ({ router }) => {
   };
 
   return (
-    <div className='container-fluid'>
-      {body && (
+    <div className='blog-update-container'>
+      {/* {body && (
         <SlideImage
           img={`${process.env.NEXT_PUBLIC_API}/blog/image/${router.query.id}`}
         />
-      )}
-      <div className='row'>
-        <div className='pt-3'>
-          {error && showError()}
-          {success && showSuccess()}
+      )} */}
+      <div className='blogUpdate-form'>
+        {body && (
+          <div>
+            <img
+              src={`${process.env.NEXT_PUBLIC_API}/blog/image/${router.query.id}`}
+              alt=''
+              style={{ width: "100%", marginBottom: "20px" }}
+            />
+          </div>
+        )}
+        {error && showError()}
+        {success && showSuccess()}
+        <div className='blog-form-container'>{updateBlogForm()}</div>
+      </div>
+      <div className='right-container'>
+        <div className='upload-pic'>
+          <div>
+            <h5>
+              配图 <small className='text-muted'>{`(<1MB)`}</small>
+            </h5>
+            <hr />
+            <label className='upload-btn'>
+              <UploadOutlined />
+              更换图片
+              <input
+                type='file'
+                onChange={handleChange("image")}
+                accept='image/*'
+                hidden
+              />
+            </label>
+          </div>
         </div>
-        <div className='col-md-8'>{updateBlogForm()}</div>
-
-        <div className='col-md-4'>
-          <div>
-            <div className='form-group pb-2'>
-              <h5>配图</h5>
-              <hr />
-              <small className='text-muted mr-3'>配图不可大于1Mb</small>
-              <br />
-              <label className='btn btn-outline-dark'>
-                上传图片
-                <input
-                  type='file'
-                  onChange={handleChange("image")}
-                  accept='image/*'
-                  hidden
-                />
-              </label>
-            </div>
-          </div>
-          <div>
-            <h5>分类</h5>
-            <hr />
-            <ul style={{ maxHeight: "200px", overflowY: "scroll" }}>
-              {showCategories()}
-            </ul>
-          </div>
-          <div>
-            <h5>标签</h5>
-            <hr />
-            <ul style={{ maxHeight: "200px", overflowY: "scroll" }}>
-              {showTags()}
-            </ul>
-          </div>
+        <div>
+          <h5>
+            分类 <small className='text-muted'>{`(必选)`}</small>
+          </h5>
+          <hr />
+          <ul>{showCategories()}</ul>
+        </div>
+        <div>
+          <h5>
+            标签 <small className='text-muted'>{`(必选)`}</small>
+          </h5>
+          <hr />
+          <ul>{showTags()}</ul>
         </div>
       </div>
     </div>

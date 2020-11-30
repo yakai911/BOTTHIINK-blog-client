@@ -10,7 +10,7 @@ const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
 });
 import { QuillModules, QuillFormats } from "../../helper/quill";
-import { UploadOutline, UploadOutlined } from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
 
 const CreateBlog = ({ router }) => {
   const token = getCookie("token");
