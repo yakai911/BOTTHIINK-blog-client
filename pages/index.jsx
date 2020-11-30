@@ -27,7 +27,7 @@ const Index = ({ router, recentPost }) => {
       if (frea.error) {
         console.log(frea.error);
       } else {
-        setFeatured(frea.blogs);
+        setFeatured(frea.blogs.slice(0, 5));
       }
     });
   };
@@ -49,20 +49,28 @@ const Index = ({ router, recentPost }) => {
 
   const featuredConfig = {
     0: {
-      gridArea: "1/1/2/3",
-      height: "300px",
+      gridArea: "2/3/5/5",
+      height: "635px",
     },
     1: {
+      gridArea: "1/1/2/5",
+      height: "300px",
+    },
+
+    2: {
       height: "300px",
     },
     3: {
-      gridArea: "2/2/3/4",
       height: "300px",
     },
     4: {
-      gridArea: "3/1/4/4",
-      height: "400px",
+      gridArea: "3/1/4/3",
+      height: "300px",
     },
+    // 5: {
+    //   gridArea: "3/3/4/5",
+    //   height: "300px",
+    // },
   };
 
   mergeStyles(trending, trendingConfig);
@@ -105,15 +113,16 @@ const Index = ({ router, recentPost }) => {
       {head()}
       <main>
         <Carousel items={recentPost} />
-        <section className='container' style={{ backgroundColor: " #f8f9fa" }}>
+        <section className='container'>
           <div className='row'>
             <h1>Featured</h1>
             <section className='featured-posts-container'>
-              <BlogCategory posts={featured} columns={3} tagsOnTop={true} />
+              <BlogCategory posts={featured} columns={4} tagsOnTop={true} />
               {/* <BlogPost post={lastFeatured} tagsOnTop={true} />  */}
             </section>
           </div>
         </section>
+
         <section className='bg-white'>
           <section className='container'>
             <div className='row'>

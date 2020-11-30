@@ -30,8 +30,8 @@ const Blogs = ({ posts, categories, tags, totalBlogs, blogSkip, router }) => {
   return (
     <>
       {head()}
-      <main className='home' style={{ backgroundColor: " #f8f9fa" }}>
-        <section className='bg-white'>
+      <main className='home'>
+        <section className=''>
           <section className='container'>
             <div className='row'>
               <h1 className='mt-5'>All Blogs</h1>

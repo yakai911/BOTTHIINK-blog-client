@@ -40,7 +40,6 @@
 
     a {
       color: rgb(15, 136, 206);
-      padding: 0 5px;
     }
 
     .description-text {
@@ -48,5 +47,13 @@
       font-weight: 400;
       color: #555;
     }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .description-text {
+    font-size: 16px;
+    font-weight: 400;
+    color: #555;
   }
 }

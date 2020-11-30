@@ -32,9 +32,9 @@ const BlogsWithTag = ({ tag, blogs, query }) => {
   return (
     <>
       {head()}
-      <main className='home p-5' style={{ backgroundColor: " #f8f9fa" }}>
-        <section className='container bg-white p-3'>
-          <h1 className='mx-5'>{tag.name.toUpperCase()}</h1>
+      <main className='home p-5'>
+        <section className='container p-3'>
+          <h1 className='mt-5 mb-4 mx-5'>{tag.name.toUpperCase()}</h1>
           <div className='row '>
             <PostGrid posts={blogs} />
           </div>

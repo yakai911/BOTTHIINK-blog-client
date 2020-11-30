@@ -4,6 +4,7 @@ import { TagRow } from "./index";
 import Link from "next/link";
 import moment from "moment";
 import "antd/dist/antd.css";
+import PostImg from "./PostImg";
 
 const PostGrid = ({ posts }) => {
   const [pageSize, setPageSize] = useState(9);
@@ -16,13 +17,13 @@ const PostGrid = ({ posts }) => {
     return posts.slice(firstIndex, lastIndex);
   }, [current, pageSize, posts]);
 
-  useEffect(() => {
-    window.scroll({
-      top: 800,
-      left: 0,
-      behavior: "smooth",
-    });
-  });
+  // useEffect(() => {
+  //   window.scroll({
+  //     top: 800,
+  //     left: 0,
+  //     behavior: "smooth",
+  //   });
+  // });
 
   return (
     <section className='grid-pagination-container'>
@@ -31,9 +32,30 @@ const PostGrid = ({ posts }) => {
           <div className='post-container' key={index}>
             <figure>
               <Link href='/blogs/[id]' as={`/blogs/${post._id}`}>
-                <img
+                {/* {`${process.env.NEXT_PUBLIC_API}/blog/image/${post._id}` !==
+                `${process.env.NEXT_PUBLIC_API}/blog/image/undefined` ? (
+                  <img
+                    src={`${process.env.NEXT_PUBLIC_API}/blog/image/${post._id}`}
+                    alt={post.title}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      background: $background,
+                      height: "100%",
+                      width: "100%",
+                      margin: "0 auto",
+                      maxHeight: "300px",
+                      boxShadow: `box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.6),
+                      -6px -6px 26px rgba(255, 255, 255, 0.8)`,
+                    }}
+                  />
+                )} */}
+                <PostImg
+                  width={"100%"}
+                  height={"300px"}
                   src={`${process.env.NEXT_PUBLIC_API}/blog/image/${post._id}`}
-                  alt={post.title}
+                  radius={5}
                 />
               </Link>
             </figure>
@@ -42,9 +64,11 @@ const PostGrid = ({ posts }) => {
             <p className='author-text'>
               <span>
                 By:
-                <Link href={post.author.profile}>{post.author.name}</Link>
+                <Link href={post.author.profile}>
+                  {" " + post.author.name + "  "}
+                </Link>
               </span>
-              <span>-{moment(post.createdAt).format("MMM,DD,YYYY")}</span>
+              <span>-{moment(post.createdAt).format("MMMM,DD,YYYY")}</span>
             </p>
             <div className='description-text'>
               {post.description.replace(/<[^>]+>/g, "")}
