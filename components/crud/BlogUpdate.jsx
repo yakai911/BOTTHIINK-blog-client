@@ -6,7 +6,6 @@ import { getCookie, isAuth } from "../../actions/auth";
 import { listCategories } from "../../actions/category";
 import { listTags } from "../../actions/tag";
 import { singleBlog, updateBlog } from "../../actions/blog";
-import SlideImage from "../../components/SlideImage";
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
 });
@@ -255,11 +254,6 @@ const BlogUpdate = ({ router }) => {
 
   return (
     <div className='blog-update-container'>
-      {/* {body && (
-        <SlideImage
-          img={`${process.env.NEXT_PUBLIC_API}/blog/image/${router.query.id}`}
-        />
-      )} */}
       <div className='blogUpdate-form'>
         {body && (
           <div>

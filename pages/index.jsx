@@ -16,7 +16,6 @@ const Index = ({ router, recentPost }) => {
       if (tren.error) {
         console.log(tren.error);
       } else {
-        console.log(tren.blogs);
         setTrending(tren.blogs);
       }
     });
@@ -112,7 +111,7 @@ const Index = ({ router, recentPost }) => {
     <>
       {head()}
       <main>
-        <Carousel items={recentPost} />
+        <Carousel />
         <section className='container'>
           <div className='row'>
             <a href='/categories/featured'>

@@ -2,9 +2,14 @@
   padding: 65px;
   .category-blogs-container {
     padding: 65px;
+    height: max-content;
 
     & .masonry {
-      height: 500px;
+      height: max-content;
+
+      .post {
+        height: 275px;
+      }
     }
   }
 }

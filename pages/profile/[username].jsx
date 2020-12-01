@@ -79,8 +79,8 @@ const UserProfile = ({ user, blogs, query }) => {
           <div className='blogs-container'>
             {blogs.length > 0
               ? paginatedBlogs.map((b, i) => (
-                  <a href={`/blogs/${b._id}`}>
-                    <div className='blog-card' key={i}>
+                  <a href={`/blogs/${b._id}`} key={i}>
+                    <div className='blog-card'>
                       <h5>{b.title}</h5>
                       <span className='desc-text'>
                         By: {user.name} |{" "}

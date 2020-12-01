@@ -1,5 +1,4 @@
 const SlideImage = ({ img }) => {
-  console.log(img);
   return (
     <div
       className='banner'

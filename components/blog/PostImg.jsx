@@ -12,7 +12,6 @@ const PostImg = ({ src, width, height, radius = "50" }) => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
-        cursor: "pointer",
         boxShadow: `6px 6px 10px rgba(0, 0, 0, 0.6),
         -6px -6px 26px rgba(255, 255, 255, 0.8)`,
       }}></div>

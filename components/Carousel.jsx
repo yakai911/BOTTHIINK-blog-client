@@ -8,7 +8,31 @@ import {
 } from "reactstrap";
 import SlideImage from "./SlideImage";
 
-const CarouselComponent = ({ items }) => {
+const items = [
+  {
+    src:
+      "https://res.cloudinary.com/hapmoniym/image/upload/v1601987038/img/pic3_f65bzg.jpg",
+    title: "Reacent Post",
+    description: "",
+    link: "/categories/recent-post",
+  },
+  {
+    src:
+      "https://res.cloudinary.com/hapmoniym/image/upload/v1606821627/img/featured_pw1bzg.png",
+    title: "Featured",
+    description: "",
+    link: "/categories/featured",
+  },
+  {
+    src:
+      "https://res.cloudinary.com/hapmoniym/image/upload/v1606821628/img/trending_ykv0lv.png",
+    title: "Trending",
+    description: "",
+    link: "/categories/trending",
+  },
+];
+
+const CarouselComponent = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
 
@@ -29,18 +53,20 @@ const CarouselComponent = ({ items }) => {
     setActiveIndex(newIndex);
   };
 
-  const slides = items.map((item) => {
+  const slides = items.map((item, index) => {
     return (
       <CarouselItem
         className='custom-tag'
         tag='div'
-        key={item._id}
+        key={index}
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}>
-        <SlideImage img={`${process.env.API}/blog/image/${item._id}`} />
+        <a href={item.link}>
+          <SlideImage img={item.src} />
+        </a>
         <CarouselCaption
           className='text-white'
-          captionText={item.description.replace(/<[^>]+>/g, "")}
+          captionText={item.description}
           captionHeader={item.title}
         />
       </CarouselItem>
