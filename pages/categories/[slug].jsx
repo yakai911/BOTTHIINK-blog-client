@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { singleCategory } from "../../actions/category";
 import { APP_NAME, DOMAIN } from "../../config";
-import { BlogCategory, BlogPost } from "../../components/blog";
+import { BlogCategory } from "../../components/blog";
 import { mergeStyles } from "../../helper/mergeStyles";
 
 const Category = ({ category, blogs, query }) => {
@@ -9,21 +9,8 @@ const Category = ({ category, blogs, query }) => {
     0: {
       gridArea: "1/1/2/2",
     },
-    1: {
-      height: "400px",
-    },
-    2: {
-      height: "400px",
-    },
-    3: {
-      height: "400px",
-    },
-    4: {
-      height: "400px",
-    },
   };
 
-  const lastCategoryBlog = blogs.pop();
   mergeStyles(blogs, normalConfig);
 
   const head = () => (
@@ -54,17 +41,10 @@ const Category = ({ category, blogs, query }) => {
   return (
     <>
       {head()}
-      <main className='home p-5' style={{ backgroundColor: " #f8f9fa" }}>
-        <section className='container bg-white p-3'>
-          <h1 className='m-5'>{category.name}</h1>
-          <section className='latest-posts-container'>
-            <BlogPost post={lastCategoryBlog} />
-          </section>
-          <div className='row '>
-            <section className='featured-posts-container'>
-              <BlogCategory posts={blogs} columns={2} tagsOnTop={true} />
-            </section>
-          </div>
+      <main className='category-blogs'>
+        <section className='category-blogs-container'>
+          <h1 className=''>{category.name}</h1>
+          <BlogCategory posts={blogs} columns={3} tagsOnTop={true} />
         </section>
       </main>
     </>

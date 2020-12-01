@@ -1,0 +1,39 @@
+.tagBlogs {
+  padding: 65px;
+
+  .tagBlogs-container {
+    margin: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    & h1 {
+      margin-bottom: 50px;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .tagBlogs {
+    padding: 0;
+    .tagBlogs-container {
+      & h1 {
+        margin-top: 50px;
+      }
+
+      & .tag-blog-cards {
+        display: flex;
+        flex-direction: column;
+        & .grid-pagination-container {
+          .post-grid {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+}

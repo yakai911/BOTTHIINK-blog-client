@@ -54,7 +54,7 @@ const Index = ({ router, recentPost }) => {
     },
     1: {
       gridArea: "1/1/2/5",
-      height: "300px",
+      height: "400px",
     },
 
     2: {
@@ -115,10 +115,11 @@ const Index = ({ router, recentPost }) => {
         <Carousel items={recentPost} />
         <section className='container'>
           <div className='row'>
-            <h1>Featured</h1>
+            <a href='/categories/featured'>
+              <h1>Featured</h1>
+            </a>
             <section className='featured-posts-container'>
               <BlogCategory posts={featured} columns={4} tagsOnTop={true} />
-              {/* <BlogPost post={lastFeatured} tagsOnTop={true} />  */}
             </section>
           </div>
         </section>
@@ -126,7 +127,10 @@ const Index = ({ router, recentPost }) => {
         <section className='bg-white'>
           <section className='container'>
             <div className='row'>
-              <h1 className='mt-5'>Reacent Post</h1>
+              {" "}
+              <a href='/categories/recent-post'>
+                <h1 className='mt-5'>Reacent Post</h1>
+              </a>
               <PostGrid posts={recentPost} />
             </div>
           </section>
@@ -134,7 +138,9 @@ const Index = ({ router, recentPost }) => {
 
         <section className='container'>
           <div className='row pb-5'>
-            <h1>Trending</h1>
+            <a href='/categories/trending'>
+              <h1>Trending</h1>
+            </a>
             <BlogCategory posts={trending} columns={2} tagsOnTop={true} />
           </div>
         </section>

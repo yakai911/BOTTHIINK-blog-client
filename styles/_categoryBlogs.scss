@@ -1,0 +1,24 @@
+.category-blogs {
+  padding: 65px;
+  .category-blogs-container {
+    padding: 65px;
+
+    & .masonry {
+      height: 500px;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .category-blogs {
+    padding: 65px 20px;
+    .category-blogs-container {
+      padding: 10px;
+      height: max-content;
+
+      .masonry {
+        height: 100%;
+      }
+    }
+  }
+}

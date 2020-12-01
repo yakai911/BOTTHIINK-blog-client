@@ -8,7 +8,7 @@ const Avatar = ({ src, size, radius = "50" }) => {
         width: `${size}px`,
         height: `${size}px`,
         borderRadius: `${radius}px`,
-        backgroundSize: `${size}px ${size}px`,
+        backgroundSize: "cover",
         backgroundPosition: "center center",
         // backgroundRepeat: "no-repeat",
         cursor: "pointer",

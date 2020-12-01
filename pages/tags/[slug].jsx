@@ -32,10 +32,10 @@ const BlogsWithTag = ({ tag, blogs, query }) => {
   return (
     <>
       {head()}
-      <main className='home p-5'>
-        <section className='container p-3'>
-          <h1 className='mt-5 mb-4 mx-5'>{tag.name.toUpperCase()}</h1>
-          <div className='row '>
+      <main className='tagBlogs'>
+        <section className='tagBlogs-container'>
+          <h1 className=''>{tag.name.toUpperCase()}</h1>
+          <div className='tag-blog-cards'>
             <PostGrid posts={blogs} />
           </div>
         </section>

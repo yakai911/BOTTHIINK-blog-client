@@ -89,10 +89,14 @@ const BlogRead = ({ username }) => {
 
   return (
     <>
-      <div className='manage-blogs'>
-        {message && <div className='alert alert-warning'>{message}</div>}
-        <div className='blogs-container'>{showAllBlogs()}</div>
-      </div>
+      {blogs.length > 0 ? (
+        <div className='manage-blogs'>
+          {message && <div className='alert alert-warning'>{message}</div>}
+          <div className='blogs-container'>{showAllBlogs()}</div>
+        </div>
+      ) : (
+        <h2>还没有发布过文章，返回上一页</h2>
+      )}
     </>
   );
 };
