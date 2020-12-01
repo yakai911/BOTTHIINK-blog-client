@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SearchOutlined } from "@ant-design/icons";
 import { useState, useRef, useEffect } from "react";
 import { listSearch } from "../../actions/blog";
 
@@ -52,7 +53,7 @@ const Search = () => {
   const searchedBlogs = (results = []) => {
     return (
       <div className='drop'>
-        {message && <p className='p-2 text-muted font-italic'>{message}</p>}
+        {message && <p>{message}</p>}
 
         {results.map((blog, i) => {
           return (
@@ -61,7 +62,7 @@ const Search = () => {
               className='drop-items'
               style={{ display: { searched } ? "" : none }}>
               <Link href={`/blogs/${blog._id}`}>
-                <a className='text-primary'>{blog.title}</a>
+                <a className='title-text'>{blog.title}</a>
               </Link>
             </div>
           );
@@ -85,6 +86,7 @@ const Search = () => {
         <button type='submit' className='search-btn'>
           搜索
         </button>
+        <SearchOutlined />
       </div>
     </form>
   );

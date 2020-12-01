@@ -55,10 +55,10 @@ const Header = () => {
 
   return (
     <nav className='site-navigation'>
-      <div className='menu-title'>
+      <span className='menu-title'>
         <Link href='/'>{APP_NAME}</Link>
         <MyIcon />
-      </div>
+      </span>
       <div
         className={`menu-content-container ${menuActive && "active"}`}
         onMouseLeave={() => setMenuActive(false)}

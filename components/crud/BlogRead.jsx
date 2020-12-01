@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { getCookie, isAuth } from "../../actions/auth";
 import { list, removeBlog } from "../../actions/blog";
 import moment from "moment";
@@ -46,7 +46,10 @@ const BlogRead = ({ username }) => {
     if (isAuth() && isAuth().role === 0) {
       return (
         <Link href={`/user/crud/${blog._id}`}>
-          <a className='update-btn'>更新</a>
+          <a className='update-btn'>
+            <EditOutlined />
+            更新
+          </a>
         </Link>
       );
     } else if (isAuth() && isAuth().role === 1) {
@@ -95,7 +98,14 @@ const BlogRead = ({ username }) => {
           <div className='blogs-container'>{showAllBlogs()}</div>
         </div>
       ) : (
-        <h2>还没有发布过文章，返回上一页</h2>
+        <Link href={isAuth() && isAuth().role === 1 ? "admin" : "/user"}>
+          <h3 style={{ marginTop: "50px", cursor: "pointer" }}>
+            还没有发布过文章，
+            <a href={isAuth() && isAuth().role === 1 ? "admin" : "/user"}>
+              返回上一页
+            </a>
+          </h3>
+        </Link>
       )}
     </>
   );
