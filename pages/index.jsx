@@ -38,11 +38,7 @@ const Index = ({ router, recentPost }) => {
 
   const trendingConfig = {
     0: {
-      height: "300px",
-      gridArea: "1/1/2/2",
-    },
-    1: {
-      height: "300px",
+      gridArea: "1/2/3/3",
     },
   };
 
@@ -66,10 +62,6 @@ const Index = ({ router, recentPost }) => {
       gridArea: "3/1/4/3",
       height: "300px",
     },
-    // 5: {
-    //   gridArea: "3/3/4/5",
-    //   height: "300px",
-    // },
   };
 
   mergeStyles(trending, trendingConfig);
@@ -110,23 +102,20 @@ const Index = ({ router, recentPost }) => {
   return (
     <>
       {head()}
-      <main>
+      <main className='home'>
         <Carousel />
         <section className='container'>
           <div className='row'>
             <a href='/categories/featured'>
               <h1>Featured</h1>
             </a>
-            <section className='featured-posts-container'>
-              <BlogCategory posts={featured} columns={4} tagsOnTop={true} />
-            </section>
+            <BlogCategory posts={featured} columns={4} tagsOnTop={true} />
           </div>
         </section>
 
         <section className='bg-white'>
           <section className='container'>
             <div className='row'>
-              {" "}
               <a href='/categories/recent-post'>
                 <h1 className='mt-5'>Reacent Post</h1>
               </a>
@@ -136,11 +125,11 @@ const Index = ({ router, recentPost }) => {
         </section>
 
         <section className='container'>
-          <div className='row pb-5'>
+          <div className='row'>
             <a href='/categories/trending'>
               <h1>Trending</h1>
             </a>
-            <BlogCategory posts={trending} columns={2} tagsOnTop={true} />
+            <BlogCategory posts={trending} columns={3} tagsOnTop={true} />
           </div>
         </section>
       </main>

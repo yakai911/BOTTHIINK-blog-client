@@ -6,7 +6,6 @@ export const QuillModules = {
     [{ list: "ordered" }, { list: "bullet" }],
     ["link", "image"],
     ["clean"],
-    ["code-block"],
   ],
 };
 
@@ -23,5 +22,4 @@ export const QuillFormats = [
   "bullet",
   "link",
   "image",
-  "code-block",
 ];

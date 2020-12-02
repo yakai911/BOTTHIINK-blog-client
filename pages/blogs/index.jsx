@@ -1,11 +1,10 @@
-import { BlogCategory, BlogPost, PostGrid } from "../../components/blog";
+import { PostGrid } from "../../components/blog";
 import { withRouter } from "next/router";
 import Head from "next/head";
-import { useState, useEffect } from "react";
+
 import { APP_NAME, DOMAIN } from "../../config";
-import { mergeStyles } from "../../helper/mergeStyles";
+
 import { listBlogsWithCategoriesAndTags } from "../../actions/blog";
-import { singleCategory } from "../../actions/category";
 
 const Blogs = ({ posts, categories, tags, totalBlogs, blogSkip, router }) => {
   const head = () => (
@@ -30,14 +29,12 @@ const Blogs = ({ posts, categories, tags, totalBlogs, blogSkip, router }) => {
   return (
     <>
       {head()}
-      <main className='home'>
-        <section className=''>
-          <section className='container'>
-            <div className='row'>
-              <h1 className='mt-5'>All Blogs</h1>
-              <PostGrid posts={posts} />
-            </div>
-          </section>
+      <main className='tagBlogs'>
+        <section className='tagBlogs-container'>
+          <h1>All Blogs</h1>
+          <div className='tag-blog-cards'>
+            <PostGrid posts={posts} />
+          </div>
         </section>
       </main>
     </>

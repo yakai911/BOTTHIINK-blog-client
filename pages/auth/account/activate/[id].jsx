@@ -55,11 +55,11 @@ const ActivateAccount = ({ router }) => {
           {error && error}
         </div>
         {success ? (
+          <h3>Hi, {name}!你的账号已激活！Let's Jam！</h3>
+        ) : (
           <h3 className='pb-4 text-center'>
             你好, {name}！准备好激活你的账号了吗？
           </h3>
-        ) : (
-          <h3>Hi, {name}!你的账号已激活！Let's Jam！</h3>
         )}
         {showButton && (
           <button className='form-btn' onClick={clickSubmit}>

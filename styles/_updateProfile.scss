@@ -33,6 +33,12 @@
           letter-spacing: 0.5px;
           box-shadow: -3px -3px 7px #ffffff,
             3px 3px 7px rgba(136, 165, 191, 0.48);
+
+          &:hover,
+          &:active {
+            box-shadow: inset -3px -3px 7px #ffffff,
+              inset 3px 3px 7px rgba(136, 165, 191, 0.48);
+          }
         }
       }
     }

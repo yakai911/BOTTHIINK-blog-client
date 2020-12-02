@@ -1,7 +1,17 @@
 .grid-pagination-container {
-  .ant-pagination {
-    text-align: center;
-    padding-bottom: 50px;
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 45px;
+    padding: 10px;
+    box-shadow: -3px -3px 7px #ffffff, 3px 3px 7px rgba(136, 165, 191, 0.48);
+    border-radius: 50px;
+    margin: 30px auto;
+    .ant-pagination {
+      text-align: center;
+    }
   }
 }
 
@@ -14,7 +24,7 @@
 
   figure {
     height: 100%;
-    max-height: 320px;
+    max-height: 360px;
   }
 
   img {
@@ -34,12 +44,17 @@
     display: flex;
     flex-direction: column;
 
+    h2 {
+      font-size: 1.5em;
+    }
+
     .author-text {
       color: $text-light;
     }
 
     a {
-      color: rgb(15, 136, 206);
+      font-weight: 500;
+      color: rgb(15, 136, 206) !important;
     }
 
     .description-text {
@@ -51,6 +66,17 @@
 }
 
 @media screen and (max-width: 900px) {
+  .grid-pagination-container {
+    .post-grid.container {
+      padding: 0;
+    }
+    .post-grid {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
   .description-text {
     font-size: 16px;
     font-weight: 400;

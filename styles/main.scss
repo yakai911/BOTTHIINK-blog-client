@@ -1,13 +1,12 @@
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import "variables";
+@import "index";
 @import "editor";
-@import "_sign";
-@import "_blogPost";
-@import "_tagRow";
-@import "_blogCategory";
+@import "sign";
+@import "blogPost";
+@import "tagRow";
+@import "blogCategory";
 @import "postGrid";
 @import "article";
-@import "_home";
 @import "search";
 @import "header";
 @import "userDashboard";
@@ -19,12 +18,13 @@
 @import "tagBlogs";
 @import "categoryBlogs";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap");
+@import url("https://bot-thk.vercel.app/css2?family=Noto+Sans+SC&display=swap");
 
 html,
 body {
   box-sizing: border-box;
   font-family: "Noto Sans SC", sans-serif;
-  font-weight: 500;
+  font-weight: 400;
   margin: 0;
   height: 100%;
   width: 100%;
@@ -39,6 +39,10 @@ body {
 #nprogress .bar {
   height: 4px !important;
   background-color: #1bb2f9 !important;
+}
+
+h1 {
+  font-size: 2rem;
 }
 
 a {
@@ -75,8 +79,4 @@ a {
     rgba(0, 0, 0, 0.8) 99%,
     rgba(0, 0, 0, 0.8) 100%
   );
-}
-
-.index-container {
-  background-color: $background;
 }

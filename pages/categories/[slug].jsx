@@ -43,7 +43,7 @@ const Category = ({ category, blogs, query }) => {
       {head()}
       <main className='category-blogs'>
         <section className='category-blogs-container'>
-          <h1 className=''>{category.name}</h1>
+          <h1>{category.name}</h1>
           <BlogCategory posts={blogs} columns={3} tagsOnTop={true} />
         </section>
       </main>

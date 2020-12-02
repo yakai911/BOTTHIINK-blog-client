@@ -83,16 +83,16 @@ const SingleBlog = ({ blog, query }) => {
   return (
     <>
       {head()}
-      <main>
+      <main className='blog-article'>
         <SlideImage
           img={`${process.env.NEXT_PUBLIC_API}/blog/image/${blog._id}`}
           alt={blog.title}
           className='banner'
         />
-        <article className='pt-5'>
-          <section>
-            <h1 className='text-center'>{blog.title}</h1>
-            <p className='text-center'>
+        <article className='article-header-container'>
+          <section className='article-header'>
+            <h1>{blog.title}</h1>
+            <p>
               <span className='author-text'>
                 By : {"  "}
                 <Link
@@ -106,27 +106,21 @@ const SingleBlog = ({ blog, query }) => {
                 | {moment(blog.createdAt).format("MMMM,DD,YYYY")}
               </span>
             </p>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                margin: "20px 0",
-              }}>
-              <TagRow tags={blog.tags} />
-            </div>
+            <TagRow tags={blog.tags} />
           </section>
         </article>
-        <article>
-          <div className='article-container'>
-            <section>{renderHTML(blog.body)}</section>
-          </div>
+
+        <article className='article-content'>
+          <section>{renderHTML(blog.body)}</section>
         </article>
-        <div className='contaienr'>
-          <div className='row'>{showComents()}</div>
+
+        <div className='contaienr' style={{ padding: "35px" }}>
+          {showComents()}
         </div>
-        <div className='container pb-5'>
-          <h4 className='text-center pt-5  h3'>相关推荐</h4>
-          <div className='row'>{showRelatedBlog()}</div>
+
+        <div className='container'>
+          <h4 className='text-center'>相关推荐</h4>
+          <div className='related-blogs'>{showRelatedBlog()}</div>
         </div>
       </main>
     </>

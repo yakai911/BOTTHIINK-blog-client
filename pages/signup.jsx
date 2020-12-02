@@ -4,7 +4,7 @@ import MyBrand from "../components/MyBrand";
 const Signup = () => {
   return (
     <div className='sign'>
-      <div className='sign-container  my-4 p-3'>
+      <div className='sign-container'>
         <div className='brand-container my-4'>
           <MyBrand />
         </div>
