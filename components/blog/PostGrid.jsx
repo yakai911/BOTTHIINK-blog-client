@@ -6,6 +6,7 @@ import moment from "moment";
 import "antd/dist/antd.css";
 import PostImg from "./PostImg";
 import useWindowSize from "../../helper/useWindowSize";
+import Image from "next/image";
 
 const PostGrid = ({ posts }) => {
   const size = useWindowSize();
@@ -36,27 +37,23 @@ const PostGrid = ({ posts }) => {
           <div className='post-container' key={index}>
             <figure>
               <a href={`/blogs/${post._id}`}>
-                {/* {`${process.env.NEXT_PUBLIC_API}/blog/image/${post._id}` !==
-                `${process.env.NEXT_PUBLIC_API}/blog/image/undefined` ? (
-                  <img
-                    src={`${process.env.NEXT_PUBLIC_API}/blog/image/${post._id}`}
-                    alt={post.title}
-                  />
-                ) : (
-                  <div
-                    style={{
-                      background: $background,
-                      height: "100%",
-                      width: "100%",
-                      margin: "0 auto",
-                      maxHeight: "300px",
-                      boxShadow: `box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.6),
-                      -6px -6px 26px rgba(255, 255, 255, 0.8)`,
-                    }}
-                  />
-                )} */}
+                {/* <div
+                  style={{
+                    width: "100%",
+                    height: windowWidth > 900 ? "300px" : "285px",
+                  }}>
+                  <a href={`/blogs/${post._id}`}>
+                    <Image
+                      src={`${process.env.NEXT_PUBLIC_API}/blog/image/${post._id}`}
+                      layout='fill'
+                      objectFit='cover'
+                      width={windowWidth > 900 ? "350px" : "305px"}
+                      height={windowWidth > 900 ? "300px" : "285px"}
+                    />
+                  </a>
+                </div> */}
                 <PostImg
-                  width={"100%"}
+                  width={windowWidth > 900 ? "350px" : "305px"}
                   height={windowWidth > 900 ? "300px" : "285px"}
                   src={`${process.env.NEXT_PUBLIC_API}/blog/image/${post._id}`}
                   radius={5}
@@ -78,10 +75,7 @@ const PostGrid = ({ posts }) => {
               {post.description.replace(/<[^>]+>/g, "").slice(0, 57) + " ..."}
             </div>
             <p className='author-text'>
-              <Link
-                href='/blogs/[id]'
-                as={`/blogs/${post._id}`}
-                className='a-blue'>
+              <Link href={`/blogs/${post._id}`} className='a-blue'>
                 Read More...
               </Link>
             </p>

@@ -1,20 +1,32 @@
 import React from "react";
+import Image from "next/image";
 
-const PostImg = ({ src, width, height, radius = "50" }) => {
+const PostImg = ({ src, width, height, radius = "50", shadow = true }) => {
   return (
     <div
       style={{
-        background:
-          src.slice(-10, 1) !== "/undefined" ? `url('${src}')` : "#e6f7ff",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "#e6f7ff",
         width: `${width}`,
         height: `${height}`,
         borderRadius: `${radius}px`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center center",
-        boxShadow: `6px 6px 10px rgba(0, 0, 0, 0.6),
+        boxShadow:
+          shadow &&
+          `6px 6px 10px rgba(0, 0, 0, 0.6),
         -6px -6px 26px rgba(255, 255, 255, 0.8)`,
-      }}></div>
+      }}>
+      <Image
+        src={src}
+        quality={100}
+        width={width}
+        height={height}
+        layout='responsive'
+        objectFit='cover'
+        alt='background image'
+      />
+    </div>
   );
 };
 

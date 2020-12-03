@@ -6,33 +6,40 @@ import {
   CarouselIndicators,
   CarouselCaption,
 } from "reactstrap";
-import SlideImage from "./SlideImage";
+import useWindowSize from "../helper/useWindowSize";
+import Image from "next/image";
 
 const items = [
   {
-    src:
-      "https://res.cloudinary.com/hapmoniym/image/upload/v1601987038/img/pic3_f65bzg.jpg",
+    src: "/images/recent.jpg",
     title: "Reacent Post",
     description: "",
     link: "/categories/recent-post",
+    width: 2048,
+    height: 1701,
   },
   {
-    src:
-      "https://res.cloudinary.com/hapmoniym/image/upload/v1606821627/img/featured_pw1bzg.png",
+    src: "/images/featured.png",
     title: "Featured",
     description: "",
     link: "/categories/featured",
+    width: 1920,
+    height: 1657,
   },
   {
-    src:
-      "https://res.cloudinary.com/hapmoniym/image/upload/v1606821628/img/trending_ykv0lv.png",
+    src: "/categories/trending.png",
     title: "Trending",
     description: "",
     link: "/categories/trending",
+    width: 1920,
+    height: 1299,
   },
 ];
 
 const CarouselComponent = () => {
+  const size = useWindowSize();
+  const windowWidth = size.width;
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
 
@@ -62,7 +69,23 @@ const CarouselComponent = () => {
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}>
         <a href={item.link}>
-          <SlideImage img={item.src} />
+          <div
+            style={{
+              height: windowWidth > 900 ? "500px" : "300px",
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}>
+            <Image
+              src={item.src}
+              layout='fill'
+              alt='banner'
+              quality={100}
+              width={item.width}
+              height={item.height}
+            />
+          </div>
         </a>
         <CarouselCaption
           className='text-white'

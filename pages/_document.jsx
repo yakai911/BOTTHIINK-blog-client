@@ -9,6 +9,12 @@ class MyDocument extends Document {
           <meta content='width=device-width,initial-scale=1.0' />
           <link rel='preconnect' href='https://fonts.gstatic.com' />
           <link
+            rel='preload'
+            href='/fonts/Noto_Sans_SC.woff2'
+            as='font'
+            crossOrigin='anonymous'
+          />
+          <link
             href='https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&display=swap'
             rel='stylesheet'
           />
