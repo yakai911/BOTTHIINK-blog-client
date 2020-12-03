@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { useRouter, withRouter } from "next/router";
@@ -192,6 +191,7 @@ const BlogUpdate = ({ router }) => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
+        console.log(router.query.id);
         setValues({
           ...values,
           title: "",

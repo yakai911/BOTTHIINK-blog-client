@@ -47,12 +47,13 @@ const UserBlogs = ({ blogs, user }) => {
         {blogs.length > 0
           ? paginatedBlogs.map((b, i) => (
               <a
+                key={i}
                 href={
                   user && user.role === 1
                     ? `/admin/crud/${b._id}`
                     : `/user/crud/${b._id}`
                 }>
-                <div className='blog-card' key={i}>
+                <div className='blog-card'>
                   <h5>{b.title}</h5>
                   <span className='desc-text'>
                     By: {user.name} |{" "}

@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import { withRouter } from "next/router";
 import dynamic from "next/dynamic";
-import { getCookie, isAuth } from "../../actions/auth";
+import { getCookie } from "../../actions/auth";
 import { listCategories } from "../../actions/category";
 import { listTags } from "../../actions/tag";
 import { createBlog } from "../../actions/blog";
@@ -43,14 +42,7 @@ const CreateBlog = ({ router }) => {
     hidePublishButton: false,
   });
 
-  const {
-    error,
-    sizeError,
-    success,
-    formData,
-    title,
-    hidePublishButton,
-  } = values;
+  const { error, success, formData, title } = values;
 
   useEffect(() => {
     setValues({ ...values, formData: new FormData() });

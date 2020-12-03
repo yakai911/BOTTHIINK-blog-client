@@ -127,7 +127,6 @@ export const updateBlog = (blog, token, id) => {
     method: "PUT",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     body: blog,

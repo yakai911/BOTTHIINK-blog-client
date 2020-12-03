@@ -27,7 +27,7 @@ const items = [
     height: 1657,
   },
   {
-    src: "/categories/trending.png",
+    src: "/images/trending.png",
     title: "Trending",
     description: "",
     link: "/categories/trending",
