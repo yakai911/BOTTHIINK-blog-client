@@ -117,7 +117,7 @@ export const removeBlog = (id, token) => {
 export const updateBlog = (blog, token, id) => {
   let updateBlogEndpoint;
 
-  if (isAuth() && isAuth.role === 1) {
+  if (isAuth() && isAuth().role === 1) {
     updateBlogEndpoint = `${process.env.NEXT_PUBLIC_API}/blog/${id}`;
   } else if (isAuth() && isAuth().role === 0) {
     updateBlogEndpoint = `${process.env.NEXT_PUBLIC_API}/user/blog/${id}`;

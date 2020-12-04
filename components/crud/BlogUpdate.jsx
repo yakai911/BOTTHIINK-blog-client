@@ -187,11 +187,11 @@ const BlogUpdate = ({ router }) => {
 
   const editBlog = (e) => {
     e.preventDefault();
+    console.log(router.query.id);
     updateBlog(formData, token, router.query.id).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
-        console.log(router.query.id);
         setValues({
           ...values,
           title: "",

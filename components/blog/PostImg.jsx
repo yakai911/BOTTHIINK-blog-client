@@ -8,7 +8,7 @@ const PostImg = ({ src, width, height, radius = "50", shadow = true }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#e6f7ff",
+        background: src ? `url('${src}')` : "#e6f7ff",
         width: `${width}`,
         height: `${height}`,
         borderRadius: `${radius}px`,
@@ -16,8 +16,11 @@ const PostImg = ({ src, width, height, radius = "50", shadow = true }) => {
           shadow &&
           `6px 6px 10px rgba(0, 0, 0, 0.6),
         -6px -6px 26px rgba(255, 255, 255, 0.8)`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center center",
       }}>
-      <Image
+      {/* <Image
         src={src}
         quality={100}
         width={width}
@@ -25,7 +28,7 @@ const PostImg = ({ src, width, height, radius = "50", shadow = true }) => {
         layout='responsive'
         objectFit='cover'
         alt='background image'
-      />
+      /> */}
     </div>
   );
 };
