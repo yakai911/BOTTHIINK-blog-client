@@ -53,8 +53,8 @@ const PostGrid = ({ posts }) => {
                   </a>
                 </div> */}
                 <PostImg
-                  width={windowWidth > 900 ? "350px" : "305px"}
-                  height={windowWidth > 900 ? "300px" : "285px"}
+                  width={windowWidth > 900 ? "350px" : "290px"}
+                  height={windowWidth > 900 ? "300px" : "290px"}
                   src={`${process.env.NEXT_PUBLIC_API}/blog/image/${post._id}`}
                   radius={5}
                 />
