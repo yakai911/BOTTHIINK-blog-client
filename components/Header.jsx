@@ -17,9 +17,19 @@ const Header = () => {
   const [userData, setUserData] = useState({});
 
   const menuRef = useRef(null);
+  const btnRef = useRef(null);
+
+  const handleMenuClick = (e) => {
+    e.preventDefault();
+    setMenuActive(!menuActive);
+  };
 
   const handleClickOutside = (e) => {
-    if (menuRef.current && !menuRef.current.contains(e.target)) {
+    if (
+      menuRef.current &&
+      !menuRef.current.contains(e.target) &&
+      !btnRef.current.contains(e.target)
+    ) {
       setMenuActive(false);
     }
   };
@@ -57,7 +67,9 @@ const Header = () => {
     <nav className='site-navigation'>
       <span className='menu-title'>
         <Link href='/'>{APP_NAME}</Link>
-        <MyIcon />
+        <a href='/'>
+          <MyIcon />
+        </a>
       </span>
       <div
         className={`menu-content-container ${menuActive && "active"}`}
@@ -119,7 +131,7 @@ const Header = () => {
         </div>
       </div>
 
-      <MenuOutlined size={30} onClick={() => setMenuActive(!menuActive)} />
+      <MenuOutlined onClick={handleMenuClick} ref={btnRef} />
     </nav>
   );
 };

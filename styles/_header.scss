@@ -21,12 +21,16 @@
     font-weight: 500;
     width: 170px;
     border-radius: 25px;
+
+    & a {
+      text-decoration: none;
+    }
   }
 
   .anticon,
   .anticon-menu {
     font-size: 30px !important;
-    width: 65px;
+    width: 50px;
     align-items: center;
     cursor: pointer;
     display: none;
@@ -96,6 +100,10 @@
 
 @media screen and (max-width: 900px) {
   .site-navigation {
+    & svg {
+      width: 25px;
+      height: 25px;
+    }
     .menu-content-container {
       width: 300px;
       height: calc(100% - 65px);
@@ -167,6 +175,20 @@
           padding: 0;
         }
       }
+    }
+  }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1450px) {
+  .site-navigation {
+    .menu-title {
+      & a {
+        display: none;
+      }
+    }
+
+    & .search {
+      display: none;
     }
   }
 }
