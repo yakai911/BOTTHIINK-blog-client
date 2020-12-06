@@ -72,7 +72,9 @@ const PostGrid = ({ posts }) => {
               <span>-{moment(post.createdAt).format("MMMM,DD,YYYY")}</span>
             </p>
             <div className='description-text'>
-              {post.description.replace(/<[^>]+>/g, "").slice(0, 57) + " ..."}
+              {post.description.replace(/<[^>]+>/g, "").length > 60
+                ? post.description.replace(/[^>]+>/g, "").slice(0, 57) + " ..."
+                : post.description.replace(/<[^>]+>/g, "")}
             </div>
             <p className='author-text'>
               <Link href={`/blogs/${post._id}`} className='a-blue'>
