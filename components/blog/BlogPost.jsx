@@ -2,7 +2,7 @@ import React from "react";
 import useWindowSize from "../../helper/useWindowSize";
 import { TagRow } from "./index";
 import Link from "next/link";
-import moment from "moment";
+import { DateTime } from "luxon";
 
 const BlogPost = ({ post, tagsOnTop }) => {
   const size = useWindowSize();
@@ -30,7 +30,9 @@ const BlogPost = ({ post, tagsOnTop }) => {
           <div>
             <h2 className='image-title'>{post.title}</h2>
             <span className='image-date'>
-              {moment(post.createdAt).format("MMMM,DD,YYYY")}
+              {DateTime.fromISO(post.createdAt)
+                .setLocale()
+                .toFormat("MMMM,dd,yyyy")}
             </span>
           </div>
         </div>

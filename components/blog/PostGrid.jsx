@@ -7,6 +7,7 @@ import "antd/dist/antd.css";
 import PostImg from "./PostImg";
 import useWindowSize from "../../helper/useWindowSize";
 import Image from "next/image";
+import { DateTime } from "luxon";
 
 const PostGrid = ({ posts }) => {
   const size = useWindowSize();
@@ -69,11 +70,16 @@ const PostGrid = ({ posts }) => {
                   {" " + post.author.name + "  "}
                 </Link>
               </span>
-              <span>-{moment(post.createdAt).format("MMMM,DD,YYYY")}</span>
+              <span>
+                -
+                {DateTime.fromISO(post.createdAt)
+                  .setLocale()
+                  .toFormat("MMMM,dd,yyyy")}
+              </span>
             </p>
             <div className='description-text'>
-              {post.description.replace(/<[^>]+>/g, "").length > 60
-                ? post.description.replace(/[^>]+>/g, "").slice(0, 57) + " ..."
+              {post.description.replace(/<[^>]+>/g, "").length >= 60
+                ? post.description.replace(/<[^>]+>/g, "").slice(0, 57) + " ..."
                 : post.description.replace(/<[^>]+>/g, "")}
             </div>
             <p className='author-text'>

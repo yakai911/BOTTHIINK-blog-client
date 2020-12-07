@@ -1,9 +1,8 @@
 import Head from "next/head";
-import Link from "next/link";
 import { useState, useMemo } from "react";
 import { userPublicProfile } from "../../actions/user";
 import { DOMAIN, APP_NAME } from "../../config";
-import moment from "moment";
+import { DateTime } from "luxon";
 import Avatar from "../../components/profile/Avatar";
 import MyBrand from "../../components/MyBrand";
 import { Pagination } from "antd";
@@ -63,7 +62,10 @@ const UserProfile = ({ user, blogs, query }) => {
                 <b>{user.about}</b>
               </p>
             )}
-            <p>Joined {moment(user.createdAt).fromNow()}</p>
+            <p>
+              Joined{" "}
+              {DateTime.fromISO(user.createdAt).setLocale("en").toRelative()}
+            </p>
           </div>
         </div>
 
@@ -84,7 +86,9 @@ const UserProfile = ({ user, blogs, query }) => {
                       <h5>{b.title}</h5>
                       <span className='desc-text'>
                         By: {user.name} |{" "}
-                        {moment(b.createdAt).format("MMM.DD-YYYY")}
+                        {DateTime.fromISO(b.createdAt)
+                          .setLocale()
+                          .toFormat("MMM,dd,yyyy")}
                       </span>
                       <div>
                         <p>{b.description.replace(/<[^>]+>/g, "")}</p>

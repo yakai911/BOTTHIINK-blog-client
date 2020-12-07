@@ -4,7 +4,7 @@ import { withRouter } from "next/router";
 import Avatar from "./Avatar";
 import { isAuth } from "../../actions/auth";
 import { FormOutlined, HomeOutlined, EditOutlined } from "@ant-design/icons";
-import moment from "moment";
+import { DateTime } from "luxon";
 import { useSelector, useDispatch } from "react-redux";
 import { loadUser, loadUserProfile } from "../../redux/actions";
 import UserBlogs from "./UserBlogs";
@@ -38,7 +38,9 @@ const UserDashboard = (router) => {
             {userProfile && (
               <span className='userInfo-text'>
                 Joined <b>BOT THK</b>{" "}
-                {moment(userProfile.user.createdAt).fromNow()}
+                {DateTime.fromISO(userProfile.user.createdAt)
+                  .setLocale("en")
+                  .toRelative()}
               </span>
             )}
           </div>
