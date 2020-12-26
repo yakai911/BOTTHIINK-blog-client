@@ -117,7 +117,7 @@ const Header = () => {
         )}
 
         <div className='menu-avtar-container'>
-          {userData.username && (
+          {isAuth() && (
             <Link href={isAuth() && isAuth().role === 1 ? `/admin/` : `/user/`}>
               <div className='my-avatar'>
                 <Avatar

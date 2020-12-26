@@ -16,7 +16,7 @@ const Index = ({ router, recentPost }) => {
       if (tren.error) {
         console.log(tren.error);
       } else {
-        setTrending(tren.blogs);
+        setTrending(tren.blogs.slice(0, 5));
       }
     });
   };

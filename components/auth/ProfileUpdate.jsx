@@ -96,6 +96,12 @@ const ProfileUpdate = () => {
         });
       }
     });
+    setTimeout(() => {
+      setValues({
+        ...values,
+        success: false,
+      });
+    }, 1000);
   };
 
   const profileUpdateForm = () => (
