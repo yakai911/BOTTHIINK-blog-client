@@ -2,17 +2,17 @@ import { useState } from "react";
 import { withRouter } from "next/router";
 import { resetPassword } from "../../../../actions/auth";
 import MyBrand from "../../../../components/MyBrand";
+import classNames from "classnames";
 
 const ResetPassword = ({ router }) => {
   const [values, setValues] = useState({
-    name: "",
     newPassword: "",
     error: "",
     message: "",
     showForm: true,
   });
 
-  const { showForm, name, newPassword, error, message } = values;
+  const { showForm, newPassword, error, message } = values;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,7 +47,10 @@ const ResetPassword = ({ router }) => {
           onChange={(e) =>
             setValues({ ...values, newPassword: e.target.value })
           }
-          className='form-input'
+          className={classNames("form-input", {
+            error: error,
+            isInvalid: error,
+          })}
           value={newPassword}
           placeholder='请输入新的密码'
           required
@@ -57,28 +60,32 @@ const ResetPassword = ({ router }) => {
     </form>
   );
 
-  const showError = () =>
-    error ? <div className='alert alert-danger'>{error}</div> : "";
+  const showError = () => (error ? <h1 className='error'>{error}</h1> : "");
   const showMessage = () =>
-    message ? <div className='alert alert-success'>{message}</div> : "";
+    message ? (
+      <div
+        style={{
+          width: "70%",
+          margin: "20px auto",
+          wordBreak: "break-all",
+        }}>
+        <h3>{message}</h3>
+      </div>
+    ) : (
+      ""
+    );
 
   return (
     <div className='sign'>
-      <div className='sign-container my-4 p-5'>
-        <div className='brand-container mb-4'>
+      <div className='sign-container'>
+        <div className='brand-container'>
           <MyBrand width={45} height={45} />
         </div>
-        <span
-          style={{
-            textDecoration: "underline",
-            cursor: "pointer",
-            color: "#0879bf !important",
-            margin: "10px 0 25px",
-          }}>
+        <h2 className='sign-title' style={{ margin: "50px auto" }}>
           重新设置密码
-        </span>
-        {showError()}
-        {showMessage()}
+        </h2>
+        {error && showError()}
+        {message && showMessage()}
         {showForm && passwordResetForm()}
       </div>
     </div>

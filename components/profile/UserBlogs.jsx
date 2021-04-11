@@ -19,7 +19,7 @@ const UserBlogs = ({ blogs, user }) => {
     <div className='dashboard-right-container'>
       <div className='header-container'>
         <div className='brand-container'>
-          <MyBrand />
+          <MyBrand width={45} height={45} />
         </div>
         <div className='info-container'>
           <h2>{user.name}</h2>

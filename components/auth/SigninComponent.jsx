@@ -11,12 +11,11 @@ const SigninComponent = () => {
     email: "",
     password: "",
     loading: false,
-    message: "",
     error: "",
     showForm: true,
   });
 
-  const { email, password, error, loading, message, showForm } = values;
+  const { email, password, error, loading, showForm } = values;
 
   useEffect(() => {
     isAuth() && router.push("/");
@@ -25,34 +24,64 @@ const SigninComponent = () => {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setValues({ ...values, [name]: value });
+    setValues({ ...values, [name]: value, error: "" });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setValues({ ...values, loading: true, error: "" });
-    const user = { email, password };
+    if (values.email.trim() === "") {
+      setValues({
+        ...values,
+        loading: false,
+        error: "邮箱地址不得为空，请重新输入",
+      });
+    } else if (values.password.trim() === "") {
+      setValues({
+        ...values,
+        loading: false,
+        error: "密码不得为空，请重新输入",
+      });
+    } else {
+      setValues({ ...values, loading: true, error: "" });
+      const user = { email, password };
 
-    signin(user).then((data) => {
-      if (data.error) {
-        setValues({ ...values, error: data.error, loading: false });
-      } else {
-        //save user token to cookie
-        //save user info to localstorage
-        //authenticate user
-        authenticate(data, () => {
-          if (isAuth() && isAuth().role === 1) {
-            router.push(`/admin`);
-          } else {
-            router.push("/user");
-          }
-        });
-      }
-    });
+      signin(user).then((data) => {
+        if (data.error) {
+          setValues({ ...values, error: data.error, loading: false });
+        } else {
+          //save user token to cookie
+          //save user info to localstorage
+          //authenticate user
+          authenticate(data, () => {
+            if (isAuth() && isAuth().role === 1) {
+              router.push(`/admin`);
+            } else {
+              router.push("/user");
+            }
+          });
+        }
+      });
+    }
   };
 
-  const showError = () =>
-    error ? <div className='alert alert-danger'>{error}</div> : "";
+  let errorType = {
+    email: false,
+    password: false,
+  };
+
+  if (error)
+    errorType.email =
+      error !== "" &&
+      (error === "邮箱地址不得为空，请重新输入" ||
+        error === "请输入有效的邮箱地址" ||
+        error === "此邮箱账户的尚未注册，请先注册");
+
+  if (error)
+    errorType.password =
+      error !== "" &&
+      (error === "密码不得为空，请重新输入" ||
+        error === "您的邮箱和密码不匹配，请重新输入" ||
+        error === "密码长度不得小于6个字符");
 
   const showLoading = () =>
     loading ? <div className='alert alert-info'>正在加载...</div> : "";
@@ -61,10 +90,17 @@ const SigninComponent = () => {
     return (
       <form onSubmit={handleSubmit} className='sign-form'>
         <div className='form-group'>
-          <label htmlFor='inputEmail'>邮箱</label>
+          <label
+            htmlFor='inputEmail'
+            className={classNames({ error: errorType.email })}>
+            {(errorType.email && error) || "邮箱"}
+          </label>
           <input
             id='inputEmail'
-            className='form-input'
+            className={classNames("form-input", {
+              isInvalid: errorType.email,
+              error: errorType.email,
+            })}
             type='email'
             name='email'
             value={email}
@@ -73,10 +109,17 @@ const SigninComponent = () => {
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='inputEmail'>密码</label>
+          <label
+            htmlFor='inputEmail'
+            className={classNames({ error: errorType.password })}>
+            {(errorType.password && error) || "密码"}
+          </label>
           <input
             type='password'
-            className='form-input'
+            className={classNames("form-input", {
+              isInvalid: errorType.password,
+              error: errorType.password,
+            })}
             name='password'
             value={password}
             onChange={handleChange}
@@ -92,8 +135,7 @@ const SigninComponent = () => {
 
   return (
     <>
-      {showError()}
-      {showLoading()}
+      {loading && showLoading()}
       {showForm && signinForm()}
       <Link href='/auth/password/forgot'>
         <span
