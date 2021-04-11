@@ -7,10 +7,10 @@ const Signin = () => {
     <div className='sign'>
       <div className='sign-container'>
         <div className='brand-container'>
-          <MyBrand />
+          <MyBrand width={45} height={45} />
         </div>
-        <h2 className='text-center my-4'>登录</h2>
-        <p className='text-center'>
+        <h2 className='sign-title'>登录账号</h2>
+        <p>
           还没有账号？点击
           <Link href='/signup'>
             <span

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { signup, isAuth, preSignup } from "../../actions/auth";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import classNames from "classnames";
 
 const SignupComponent = () => {
   const router = useRouter();
@@ -61,28 +62,24 @@ const SignupComponent = () => {
 
   const signupForm = () => {
     return (
-      <form onSubmit={handleSubmit} className='form-login'>
+      <form onSubmit={handleSubmit} className='sign-form'>
         <div className='form-group'>
-          <label htmlFor='inputUsername' className='sr-only form-label'>
-            用户名
-          </label>
+          <label htmlFor='inputUsername'>用户名</label>
           <input
             id='inputUsername'
             type='text'
             name='name'
-            className='form-control form-input'
+            className='form-input'
             value={name}
             onChange={handleChange}
             placeholder='请输入您的用户名'
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='inputEmail' className='sr-ony form-label'>
-            邮箱
-          </label>
+          <label htmlFor='inputEmail'>邮箱</label>
           <input
             id='inputEmail'
-            className='form-control form-input'
+            className='form-input'
             type='email'
             name='email'
             value={email}
@@ -90,22 +87,18 @@ const SignupComponent = () => {
             placeholder='请输入您的邮箱'
           />
         </div>
-        <div className='form-group mb-4'>
-          <label htmlFor='inputEmail' className='sr-ony form-label'>
-            密码
-          </label>
+        <div className='form-group'>
+          <label htmlFor='inputEmail'>密码</label>
           <input
             type='password'
-            className='form-control form-input'
+            className='form-input'
             name='password'
             value={password}
             onChange={handleChange}
             placeholder='请输入您的密码'
           />
         </div>
-        <div>
-          <button className='form-btn'>注册</button>
-        </div>
+        <button className='form-btn'>注册</button>
       </form>
     );
   };
@@ -118,11 +111,11 @@ const SignupComponent = () => {
       {showForm && signupForm()}
       <Link href='/auth/password/forgot'>
         <span
-          className='mb-5'
           style={{
             textDecoration: "underline",
             cursor: "pointer",
             color: "#0879bf !important",
+            margin: "5px 0 20px",
           }}>
           忘记密码
         </span>

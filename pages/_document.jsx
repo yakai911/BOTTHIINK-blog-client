@@ -8,10 +8,7 @@ class MyDocument extends Document {
         <Head>
           <meta charSet='UTF-8' />
           <meta content='width=device-width,initial-scale=1.0' />
-          <link
-            rel='stylesheet'
-            href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css'
-          />
+          <link rel='preload' href='/fonts/' />
           <link
             rel='stylesheet'
             href='https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css'

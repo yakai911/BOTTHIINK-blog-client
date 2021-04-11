@@ -36,23 +36,27 @@ const ForgotPassword = () => {
   const showError = () =>
     error ? <div className='alert alert-danger'>{error}</div> : "";
   const showMessage = () =>
-    message ? <div className='alert alert-success'>{message}</div> : "";
+    message ? (
+      <div style={{ width: "70%" }}>
+        <h3>{message}</h3>
+      </div>
+    ) : (
+      ""
+    );
 
   const passwordForgotForm = () => (
-    <form onSubmit={handleSubmit} className='form-login'>
+    <form onSubmit={handleSubmit} className='sign-form'>
       <div className='form-group'>
         <input
           type='email'
           onChange={handleChange("email")}
-          className='form-input form-control'
+          className='form-input'
           value={email}
           placeholder=' 请输入账号邮箱'
           required
         />
       </div>
-      <div>
-        <button className='form-btn'>发送验证地址</button>
-      </div>
+      <button className='form-btn'>发送验链接</button>
     </form>
   );
 
@@ -60,11 +64,11 @@ const ForgotPassword = () => {
     <div className='sign'>
       <div className='sign-container  my-4 p-5'>
         <div className='brand-container mb-4'>
-          <MyBrand />
+          <MyBrand width={45} height={45} />
         </div>
-        <h3 className='text-center' style={{ color: "#444" }}>
-          忘记密码
-        </h3>
+        <h2 className='sign-title' style={{ margin: "50px auto" }}>
+          忘记了密码？
+        </h2>
         {showError()}
         {showMessage()}
         {showForm && passwordForgotForm()}

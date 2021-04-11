@@ -49,7 +49,7 @@ const ActivateAccount = ({ router }) => {
 
   return (
     <div className='sign'>
-      <div className='sign-container p-5'>
+      <div className='sign-container'>
         <div className='container'>
           {showLoading()}
           {error && error}

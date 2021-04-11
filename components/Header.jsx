@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import MyIcon from "../components/MyIcon";
+import MyBrand from "../components/MyBrand";
 import NProgress from "nprogress";
 import { signout, isAuth } from "../actions/auth";
 import Search from "./blog/Search";
@@ -66,10 +66,16 @@ const Header = () => {
   return (
     <nav className='site-navigation'>
       <span className='menu-title'>
-        <Link href='/'>{APP_NAME}</Link>
-        <a href='/'>
-          <MyIcon />
+        {/* <Link href='/'>
+          <a style={{ fontWeight: 700, fontFamily: "-apple-system" }}>
+            BOT THK
+          </a>
+        </Link>
+        <a href='/' style={{ marginLeft: "5px" }}>
+          <MyIcon width={45} height={45} />
         </a>
+      */}
+        <MyBrand width={45} height={45} fontSize={"24px"} />
       </span>
       <div
         className={`menu-content-container ${menuActive && "active"}`}

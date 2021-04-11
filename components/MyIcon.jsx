@@ -1,13 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
 
-const MyIcon = () => {
+const MyIcon = ({ width, height }) => {
   return (
     <Link href='/'>
-      <img
-        src='/moshIcon.png'
-        alt='logo'
-        style={{ width: 50, height: 50, marginLeft: "15px" }}
-      />
+      <>
+        <Image src='/moshIcon.svg' alt='logo' width={width} height={height} />
+      </>
     </Link>
   );
 };

@@ -1,4 +1,3 @@
-import Carousel from "../components/Carousel";
 import { useState, useEffect } from "react";
 import { PostGrid, BlogCategory } from "../components/blog";
 import { withRouter } from "next/router";
@@ -103,7 +102,7 @@ const Index = ({ router, recentPost }) => {
     <>
       {head()}
       <main className='home'>
-        <Carousel />
+        {/* <Carousel /> */}
         <section className='container'>
           <div className='row'>
             <a href='/categories/featured'>

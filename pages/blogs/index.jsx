@@ -6,7 +6,7 @@ import { APP_NAME, DOMAIN } from "../../config";
 
 import { listBlogsWithCategoriesAndTags } from "../../actions/blog";
 
-const Blogs = ({ posts, categories, tags, totalBlogs, blogSkip, router }) => {
+const Blogs = ({ posts, router }) => {
   const head = () => (
     <Head>
       <title>All Blogs | {APP_NAME}</title>

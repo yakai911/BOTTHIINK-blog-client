@@ -40,8 +40,8 @@ const ResetPassword = ({ router }) => {
   };
 
   const passwordResetForm = () => (
-    <form onSubmit={handleSubmit} className='form-login'>
-      <div className='form-group pt-5'>
+    <form onSubmit={handleSubmit} className='sign-form'>
+      <div className='form-group'>
         <input
           type='password'
           onChange={(e) =>
@@ -49,13 +49,11 @@ const ResetPassword = ({ router }) => {
           }
           className='form-input'
           value={newPassword}
-          placeholder=' 请输入新的密码'
+          placeholder='请输入新的密码'
           required
         />
       </div>
-      <div>
-        <button className='form-btn'>修改密码</button>
-      </div>
+      <button className='form-btn'>修改密码</button>
     </form>
   );
 
@@ -68,11 +66,17 @@ const ResetPassword = ({ router }) => {
     <div className='sign'>
       <div className='sign-container my-4 p-5'>
         <div className='brand-container mb-4'>
-          <MyBrand />
+          <MyBrand width={45} height={45} />
         </div>
-        <h3 className='text-center' style={{ color: "#444" }}>
+        <span
+          style={{
+            textDecoration: "underline",
+            cursor: "pointer",
+            color: "#0879bf !important",
+            margin: "10px 0 25px",
+          }}>
           重新设置密码
-        </h3>
+        </span>
         {showError()}
         {showMessage()}
         {showForm && passwordResetForm()}
