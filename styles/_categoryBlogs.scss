@@ -1,14 +1,21 @@
 .category-blogs {
-  padding: 65px;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
   .category-blogs-container {
-    padding: 65px;
+    & h1 {
+      text-align: center;
+      font-size: 50px;
+    }
+    padding: 30px 65px;
     height: max-content;
 
     & .masonry {
       height: max-content;
+      gap: 50px;
 
       .post {
-        height: 275px;
+        height: 350px;
       }
     }
   }
@@ -16,13 +23,21 @@
 
 @media screen and (max-width: 900px) {
   .category-blogs {
-    padding: 65px 20px;
+    padding: 25px 20px;
     .category-blogs-container {
       padding: 10px;
       height: max-content;
 
+      & h1 {
+        font-size: 35px;
+      }
+
       .masonry {
         height: 100%;
+        gap: 20px;
+        .post {
+          height: 300px;
+        }
       }
     }
   }

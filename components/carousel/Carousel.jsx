@@ -1,5 +1,6 @@
 import { useState } from "react";
-import useWindowSize from "../../helper/useWindowSize";
+import { CarouselItem } from "./CarouselItem";
+import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 
 const items = [
   {
@@ -29,19 +30,18 @@ const items = [
 ];
 
 const CarouselComponent = () => {
-  const size = useWindowSize();
-  const windowWidth = size.width;
-
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
 
-  const next = () => {
+  const next = (e) => {
+    e.preventDefault();
     if (animating) return;
     const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
     setActiveIndex(nextIndex);
   };
 
-  const previous = () => {
+  const previous = (e) => {
+    e.preventDefault();
     if (animating) return;
     const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
     setActiveIndex(nextIndex);
@@ -52,29 +52,18 @@ const CarouselComponent = () => {
     setActiveIndex(newIndex);
   };
 
-  const slides = items.map((item, index) => {
-    return (
+  return (
+    <div className='carousel'>
+      <LeftOutlined onClick={previous} size={100} />
       <CarouselItem
-        item={item}
-        key={index}
+        item={items[activeIndex]}
+        items={items}
+        goToIndex={goToIndex}
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}
       />
-    );
-  });
 
-  return (
-    <div>
-      <div activeIndex={activeIndex} next={next} previous={previous}>
-        <div
-          items={items}
-          activeIndex={activeIndex}
-          onClickHandler={goToIndex}
-        />
-        {slides}
-        <i onClick={previous}>上一张</i>
-        <i onClick={next}>下一张</i>
-      </div>
+      <RightOutlined onClick={next} size={100} />
     </div>
   );
 };

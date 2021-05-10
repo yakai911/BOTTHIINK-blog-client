@@ -1,52 +1,43 @@
-export const CarouselItem = ({ item }) => {
-  <style>
-    {`.custom-tag {
-              max-width: 100%;
-              height: 500px;      
-              background-size: cover;
-              background-position: center center;
-            }
-            h3{
-              color:white;
-              fontWeight:bold;
-            }
-            .sr-only{
-              display:none;
-            }
+import useWindowSize from "../../helper/useWindowSize";
+import Image from "next/image";
+import classNames from "classnames";
 
-            @media screen and (max-width:900px){
-              .custom-tag{
-               height:300px;
-              }
-            }
-            `}
-  </style>;
+export const CarouselItem = ({ item, items, goToIndex }) => {
+  const size = useWindowSize();
+  const windowWidth = size.width;
+
   return (
-    <div className='custom-tag'>
+    <>
       <a href={item.link}>
         <div
           style={{
-            height: windowWidth > 900 ? "500px" : "300px",
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}>
+            height: windowWidth > 900 ? "600px" : "300px",
+            position: "relative",
+          }}
+          className='carousel-item'>
+          <h1>{item.title}</h1>
+          <ol className='indiactors-container'>
+            {items.map((_, index) => (
+              <li
+                className='carousel-indicators'
+                key={index}
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToIndex(index);
+                }}></li>
+            ))}
+          </ol>
           <Image
             src={item.src}
-            layout='fill'
             alt='banner'
-            quality={100}
+            loading='eager'
+            objectFit='contain'
             width={item.width}
             height={item.height}
+            className='slider-image'
           />
         </div>
       </a>
-      <h1
-        className='text-white'
-        captionText={item.description}
-        captionHeader={item.title}
-      />
-    </div>
+    </>
   );
 };

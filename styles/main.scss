@@ -17,6 +17,7 @@
 @import "manageBlogs";
 @import "tagBlogs";
 @import "categoryBlogs";
+@import "carousel.scss";
 @import "./NotoSans.scss";
 
 html,
@@ -47,10 +48,15 @@ h1 {
 h2 {
   font-family: "Noto Sans SC", sans-serif;
   font-weight: 400;
+  font-size: 32px;
 }
 
 h3 {
   font-weight: 700;
+}
+
+h5 {
+  font-size: 20px;
 }
 
 a {
@@ -88,6 +94,23 @@ a {
     transparent 18%,
     rgba(0, 0, 0, 0.8) 99%,
     rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+.overlay::after {
+  z-index: 1;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 18%,
+    rgba(0, 0, 0, 0) 99%,
+    rgba(0, 0, 0, 0) 100%
   );
 }
 

@@ -91,7 +91,6 @@ const CreateBlog = ({ router }) => {
   };
 
   const handleChange = (name) => (e) => {
-    console.log(e.target.value);
     const value = name === "image" ? e.target.files[0] : e.target.value;
     formData.set(name, value);
     setValues({ ...values, [name]: value, formData, error: "" });
@@ -142,13 +141,9 @@ const CreateBlog = ({ router }) => {
     return (
       categories &&
       categories.map((c, i) => (
-        <li key={i} className='list-unstyled'>
-          <input
-            type='checkbox'
-            className='mr-2'
-            onChange={handleToggle(c._id)}
-          />
-          <label className='form-check-label'>{c.name}</label>
+        <li key={i} className='checkbox-group'>
+          <input type='checkbox' onChange={handleToggle(c._id)} />
+          <label>{c.name}</label>
         </li>
       ))
     );
@@ -158,13 +153,9 @@ const CreateBlog = ({ router }) => {
     return (
       tags &&
       tags.map((t, i) => (
-        <li key={i} className='list-unstyled'>
-          <input
-            type='checkbox'
-            className='mr-2'
-            onChange={handleTagsToggle(t._id)}
-          />
-          <label className='form-check-label'>{t.name}</label>
+        <li key={i} className='checkbox-group'>
+          <input type='checkbox' onChange={handleTagsToggle(t._id)} />
+          <label>{t.name}</label>
         </li>
       ))
     );
@@ -179,11 +170,7 @@ const CreateBlog = ({ router }) => {
   );
 
   const showSuccess = () => (
-    <div
-      className='alert alert-success'
-      style={{ dispaly: success ? "" : "none" }}>
-      {success}
-    </div>
+    <div style={{ dispaly: success ? "" : "none" }}>{success}</div>
   );
 
   const createBLogForm = () => {
@@ -195,7 +182,7 @@ const CreateBlog = ({ router }) => {
             className='form-control'
             value={title}
             onChange={handleChange("title")}
-            placeholder='Post title'
+            placeholder='输入题目...'
           />
         </div>
         <div className='form-group'>

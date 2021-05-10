@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SearchOutlined } from "@ant-design/icons";
 import { useState, useRef, useEffect } from "react";
 import { listSearch } from "../../actions/blog";
+import classNames from "classnames";
 
 const Search = () => {
   const [values, setValues] = useState({
@@ -15,6 +16,7 @@ const Search = () => {
 
   const searchSubmit = (e) => {
     e.preventDefault();
+
     listSearch({ search }).then((data) => {
       setValues({
         ...values,
@@ -74,19 +76,15 @@ const Search = () => {
   const searchForm = () => (
     <form onSubmit={searchSubmit} className='search-form'>
       <div className='search-container'>
+        <SearchOutlined />
         <input
           type='text'
           value={search}
-          className='search-input'
+          className={classNames("search-input", {
+            "searched-container": searched,
+          })}
           onChange={handleChange}
-          placeholder=' 搜索文章...'
         />
-      </div>
-      <div>
-        <button type='submit' className='search-btn'>
-          搜索
-        </button>
-        <SearchOutlined />
       </div>
     </form>
   );

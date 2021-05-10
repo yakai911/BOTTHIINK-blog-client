@@ -1,7 +1,7 @@
 .user-dashboard {
   display: flex;
   flex-direction: row;
-  height: 100%;
+  height: calc(100% - 65px);
 }
 
 .userInfo-container {
@@ -11,7 +11,7 @@
   align-items: center;
   width: 25%;
   height: 100%;
-  padding-top: 180px;
+  padding-top: 85px;
   padding-bottom: 300px;
   background: linear-gradient(
     112.71deg,

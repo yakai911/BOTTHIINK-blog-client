@@ -72,7 +72,7 @@ const UserProfile = ({ user, blogs, query }) => {
         <div className='profile-blogs'>
           <div className='blogs-info'>
             <div className='brand-container'>
-              <MyBrand />
+              <MyBrand width={45} height={45} />
             </div>
             <h4 className='blogs-number'>
               {user.name}共发布了{blogs.length}篇文章

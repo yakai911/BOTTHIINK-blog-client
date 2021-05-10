@@ -1,6 +1,7 @@
 .masonry {
+  max-width: 1300px;
   display: grid;
-  grid-gap: 30px;
+  gap: 30px;
 }
 
 @media screen and (max-width: 900px) {

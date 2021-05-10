@@ -1,5 +1,5 @@
 .home {
-  padding: 2em 0;
+  padding: 0 0 3rem 0;
 
   h1 {
     width: 100%;
@@ -9,22 +9,25 @@
 
   .featured-posts-container {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .bg-white {
     background: white;
+    display: flex;
+    justify-content: center;
 
-    & .container {
-      & .row {
-        & .grid-pagination-container {
-          & .pagination-container {
-            background: white;
-            box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.48),
-              -3px -3px 7px rgba(255, 255, 255, 0.8);
+    & .recent-container {
+      & .grid-pagination-container {
+        & .pagination-container {
+          background: white;
+          box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.48),
+            -3px -3px 7px rgba(255, 255, 255, 0.8);
 
-            .ant-pagination {
-              background-color: white;
-            }
+          .ant-pagination {
+            background-color: white;
           }
         }
       }
@@ -33,26 +36,30 @@
 
   .trending-posts-container {
     display: flex;
+    justify-content: center;
   }
 }
 
 @media screen and (max-width: 900px) {
   .home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     h1 {
       margin-block-start: 1.5rem;
       margin-block-end: 1.5rem;
     }
-
-    .container {
-      .row {
-        margin: 30px 20px;
-        display: flex;
-        flex-direction: column;
-      }
-    }
   }
 
-  .featured-posts-container {
+  .featured-posts-container,
+  .trending-posts-container,
+  .recent-container {
     flex-direction: column;
+    align-items: center;
+    width: 305px;
+  }
+
+  .bg-white {
+    width: 100%;
   }
 }

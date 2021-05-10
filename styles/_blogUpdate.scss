@@ -7,6 +7,7 @@
 
   .blog-update-container {
     padding-top: 50px;
+    align-items: center;
     width: 60%;
     display: flex;
     flex-direction: row;
@@ -28,6 +29,7 @@
             margin-bottom: 20px;
 
             & input {
+              width: calc(100% - 15px);
               padding-left: 15px;
               height: 40px;
               border: none;
@@ -50,17 +52,32 @@
           }
 
           .ql-editor {
-            height: 400px !important;
+            height: 415px !important;
             background-color: white;
           }
 
           .btn-container {
-            margin-top: 20px;
+            margin-top: 55px;
             display: flex;
             justify-content: flex-end;
 
             & .form-btn {
               width: 120px;
+              background-color: black;
+              height: 3.1rem;
+              color: white;
+              font-weight: 900;
+              border-radius: 0;
+              border-width: 0;
+              padding: 0;
+              margin: 0 0 20px;
+              cursor: pointer;
+              transition: ease-in;
+              transition-duration: 200ms;
+
+              &:hover {
+                background-color: #0879bf;
+              }
             }
           }
         }
@@ -69,11 +86,23 @@
   }
 
   .right-container {
+    height: max-content;
     margin-left: 40px;
     padding: 20px;
 
     ul {
       padding: 0 5px;
+    }
+
+    .checkbox-group {
+      list-style: none;
+      input {
+        margin-right: 10px;
+      }
+      label {
+        font-size: 16px;
+        color: #212529;
+      }
     }
 
     .upload-pic {
@@ -111,6 +140,7 @@
 @media screen and (max-width: 900px) {
   .blogUpdate-container {
     width: 100%;
+    padding: 0 0 3rem;
     height: max-content;
     padding-top: 65px 0;
     justify-content: center;

@@ -2,6 +2,15 @@ import React from "react";
 import Image from "next/image";
 
 const PostImg = ({ src, width, height, radius = "50", shadow = true }) => {
+  const contentfulLoader = ({ src, quality, width }) => {
+    const params = [`w=${width}`];
+
+    if (quality) {
+      params.push(`q=${quality}`);
+    }
+
+    return `${src}?${params.join("&")}`;
+  };
   return (
     <div
       style={{
@@ -26,7 +35,7 @@ const PostImg = ({ src, width, height, radius = "50", shadow = true }) => {
         width={width}
         height={height}
         layout='responsive'
-        objectFit='cover'
+        objectFit='contain'
         alt='background image'
       /> */}
     </div>

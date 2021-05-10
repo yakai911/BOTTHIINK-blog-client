@@ -1,4 +1,9 @@
 .grid-pagination-container {
+  width: 1300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   .pagination-container {
     display: flex;
     justify-content: center;
@@ -16,15 +21,18 @@
 }
 
 .post-grid {
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
-  grid-gap: 30px;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(275px, 350px));
+  row-gap: 30px;
+  column-gap: 30px;
   grid-auto-rows: 1fr;
   padding-bottom: 50px;
 
   figure {
     height: 100%;
-    max-height: 360px;
+    max-height: 380px;
   }
 
   img {
@@ -58,6 +66,7 @@
     }
 
     .description-text {
+      width: 100%;
       font-size: 18px;
       font-weight: 400;
       color: #555;
@@ -67,10 +76,12 @@
 
 @media screen and (max-width: 900px) {
   .grid-pagination-container {
+    width: 100%;
     .post-grid.container {
       padding: 0;
     }
     .post-grid {
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;

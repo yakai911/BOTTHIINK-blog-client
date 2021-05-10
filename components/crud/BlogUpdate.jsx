@@ -143,7 +143,7 @@ const BlogUpdate = ({ router }) => {
     return (
       categories &&
       categories.map((c, i) => (
-        <li key={i} className='list-unstyled'>
+        <li key={i} className='checkbox-group'>
           <input
             type='checkbox'
             onChange={handleToggle(c._id)}
@@ -160,7 +160,7 @@ const BlogUpdate = ({ router }) => {
     return (
       tags &&
       tags.map((t, i) => (
-        <li key={i} className='list-unstyled'>
+        <li key={i} className='checkbox-group'>
           <input
             type='checkbox'
             onChange={handleTagsToggle(t._id)}

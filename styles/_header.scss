@@ -48,15 +48,35 @@
       flex-direction: row;
       // justify-content: center;
       align-items: center;
+
+      .avatar-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 120px;
+        height: 120px;
+        border-radius: 120px;
+        box-shadow: -3px -3px 5px rgba(195, 200, 205, 0.09), 3px 3px 5px #121417;
+        margin-bottom: 30px;
+      }
+
       .my-avatar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+
         margin-left: 20px;
         background: $background;
-        border: $border 1px solid;
+        border: #eff3f8 5px solid;
+        box-shadow: -2px -2px 3px #eff3f8, 2px 2px 3px rgba(136, 165, 191, 0.78);
         border-radius: 50px;
       }
       .menu-avtar-name {
         margin: 0;
         font-size: 18px;
+        font-weight: 500;
         margin-left: 15px;
       }
     }
@@ -108,7 +128,7 @@
       height: 25px;
     }
     .menu-content-container {
-      width: 200px;
+      width: 230px;
       height: calc(100% - 65px);
       background: white;
       position: fixed;
@@ -117,7 +137,7 @@
       transition: 300ms ease left;
       flex-direction: column-reverse;
       padding: 0;
-      padding-left: 30px;
+      padding-left: 10px;
 
       .ant-avatar {
         margin-left: 0;
@@ -132,7 +152,7 @@
         height: 60px;
         display: flex;
         align-items: center;
-        padding-left: 20px;
+        padding-left: 60px;
       }
 
       ul {
@@ -149,7 +169,6 @@
 
       .menu-avtar-container {
         padding-top: 20px;
-        // justify-content: start;
       }
 
       &.active {

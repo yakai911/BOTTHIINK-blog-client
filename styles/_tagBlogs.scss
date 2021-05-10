@@ -1,7 +1,10 @@
 .tagBlogs {
-  padding: 65px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 
   .tagBlogs-container {
+    width: 1290px;
     margin: 45px;
     display: flex;
     flex-direction: column;
@@ -10,6 +13,10 @@
 
     & h1 {
       margin-bottom: 50px;
+    }
+
+    & .tag-blog-cards {
+      width: 100%;
     }
   }
 }

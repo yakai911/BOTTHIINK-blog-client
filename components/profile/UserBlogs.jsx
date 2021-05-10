@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import moment from "moment";
+import { DateTime } from "luxon";
 import { Pagination } from "antd";
 import "antd/dist/antd.css";
 import MyBrand from "../MyBrand";
@@ -57,7 +57,10 @@ const UserBlogs = ({ blogs, user }) => {
                   <h5>{b.title}</h5>
                   <span className='desc-text'>
                     By: {user.name} |{" "}
-                    {moment(b.createdAt).format("MMM.DD-YYYY")}
+                    {/* {moment(b.createdAt).format("MMM.DD-YYYY")} */}
+                    {DateTime.fromISO(b.createdAt)
+                      .setLocale()
+                      .toFormat("MMM,dd,yyyy")}
                   </span>
                   <div>
                     <p>{b.description.replace(/<[^>]+>/g, "")}</p>

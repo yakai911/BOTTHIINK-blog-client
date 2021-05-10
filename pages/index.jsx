@@ -5,6 +5,8 @@ import Head from "next/head";
 import { singleCategory } from "../actions/category";
 import { mergeStyles } from "../helper/mergeStyles";
 import { APP_NAME, DOMAIN } from "../config";
+import Carousel from "../components/carousel/Carousel";
+import Link from "next/link";
 
 const Index = ({ router, recentPost }) => {
   const [trending, setTrending] = useState([]);
@@ -102,32 +104,30 @@ const Index = ({ router, recentPost }) => {
     <>
       {head()}
       <main className='home'>
-        {/* <Carousel /> */}
-        <section className='container'>
-          <div className='row'>
-            <a href='/categories/featured'>
+        <Carousel />
+        <section className='featured-posts-container'>
+          <div>
+            <Link href='/categories/featured'>
               <h1>Featured</h1>
-            </a>
+            </Link>
             <BlogCategory posts={featured} columns={4} tagsOnTop={true} />
           </div>
         </section>
 
         <section className='bg-white'>
-          <section className='container'>
-            <div className='row'>
-              <a href='/categories/recent-post'>
-                <h1 className='mt-5'>Reacent Post</h1>
-              </a>
-              <PostGrid posts={recentPost} />
-            </div>
-          </section>
+          <div className='recent-container'>
+            <Link href='/categories/recent-post'>
+              <h1>Reacent Post</h1>
+            </Link>
+            <PostGrid posts={recentPost} />
+          </div>
         </section>
 
-        <section className='container'>
-          <div className='row'>
-            <a href='/categories/trending'>
+        <section className='trending-posts-container'>
+          <div>
+            <Link href='/categories/trending'>
               <h1>Trending</h1>
-            </a>
+            </Link>
             <BlogCategory posts={trending} columns={3} tagsOnTop={true} />
           </div>
         </section>
