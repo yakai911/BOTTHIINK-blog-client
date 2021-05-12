@@ -64,14 +64,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 40px;
-        height: 40px;
-
         margin-left: 20px;
         background: $background;
         border: #eff3f8 5px solid;
         box-shadow: -2px -2px 3px #eff3f8, 2px 2px 3px rgba(136, 165, 191, 0.78);
-        border-radius: 50px;
+        border-radius: 50%;
       }
       .menu-avtar-name {
         margin: 0;

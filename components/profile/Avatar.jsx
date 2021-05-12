@@ -1,16 +1,17 @@
 import React from "react";
 
-const Avatar = ({ src, size, radius = "50" }) => {
+const Avatar = ({ src, size, radius }) => {
   return (
     <div
       style={{
         backgroundImage: src ? `url('${src}') ` : "",
         width: `${size}px`,
         height: `${size}px`,
-        borderRadius: `${radius}px`,
+        borderRadius: radius ? `${radius}px` : "50%",
         backgroundSize: "cover",
-        backgroundPosition: "center center",
-        // backgroundRepeat: "no-repeat",
+        backgroundPositionX: "center",
+        bcakgroundPositionY: "center",
+        backgroundRepeat: "no-repeat",
         cursor: "pointer",
       }}></div>
   );

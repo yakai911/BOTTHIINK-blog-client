@@ -68,6 +68,7 @@ const ResetPassword = ({ router }) => {
           width: "70%",
           margin: "20px auto",
           wordBreak: "break-all",
+          textAlign: "center",
         }}>
         <h3>{message}</h3>
       </div>

@@ -73,11 +73,11 @@ const ForgotPassword = () => {
             isInvalid: error,
           })}
           value={email}
-          placeholder=' 请输入账号邮箱'
+          placeholder='请输入账号邮箱'
           required
         />
       </div>
-      <button className='form-btn'>发送验链接</button>
+      <button className='form-btn'>发送验证链接</button>
     </form>
   );
 

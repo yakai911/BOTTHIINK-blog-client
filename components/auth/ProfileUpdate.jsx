@@ -1,7 +1,5 @@
-import Link from "next/link";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import Mybrand from "../MyBrand";
+import MyBrand from "../MyBrand";
 import Avatar from "../profile/Avatar";
 import { getCookie, isAuth, updateUser } from "../../actions/auth";
 import { getProfile, update } from "../../actions/user";
@@ -57,7 +55,6 @@ const ProfileUpdate = () => {
   }, []);
 
   const handleChange = (name) => (e) => {
-    console.log(e.target.value);
     const value = name === "photo" ? e.target.files[0] : e.target.value;
     let userFormData = new FormData();
     userFormData.set(name, value);
@@ -107,55 +104,45 @@ const ProfileUpdate = () => {
   const profileUpdateForm = () => (
     <form onSubmit={handleSubmit} className='user-form'>
       <div className='form-group'>
-        <label className='sr-ony form-label'>用户ID</label>
-        <input
-          type='text'
-          onChange={handleChange("username")}
-          value={username}
-          className='form-control form-input'
-        />
-      </div>
-      <div className='form-group'>
-        <label className='sr-ony form-label'>用户名</label>
+        <label>用户名</label>
         <input
           type='text'
           onChange={handleChange("name")}
           value={name}
-          className='form-control form-input'
+          className='form-input'
         />
       </div>
       <div className='form-group'>
-        <label className='sr-ony form-label'>Email</label>
+        <label>Email</label>
         <input
           type='email'
           onChange={handleChange("email")}
           value={email}
-          className='form-control form-input'
+          className=' form-input'
         />
       </div>
+
       <div className='form-group'>
-        <label className='sr-ony form-label'>About</label>
-        <textarea
-          type='text'
-          onChange={handleChange("about")}
-          value={about}
-          className='form-control about-input'
-        />
-      </div>
-      <div className='form-group'>
-        <label className='sr-ony form-label'>密码</label>
+        <label>密码</label>
         <input
           type='password'
           onChange={handleChange("password")}
           value={password}
-          className='form-control form-input'
+          className='form-input'
         />
       </div>
       <div className='form-group'>
-        <button type='submit' className='form-btn'>
-          提交
-        </button>
+        <label>About</label>
+        <textarea
+          type='text'
+          onChange={handleChange("about")}
+          value={about}
+          className=' about-input'
+        />
       </div>
+      <button type='submit' className='form-btn'>
+        提交
+      </button>
     </form>
   );
 
@@ -190,7 +177,8 @@ const ProfileUpdate = () => {
           <div className='avatar-container'>
             <Avatar
               src={`${process.env.NEXT_PUBLIC_API}/user/photo/${username}`}
-              size={150}
+              width={150}
+              height={150}
               radius={150}
             />
           </div>
@@ -209,13 +197,14 @@ const ProfileUpdate = () => {
             </label>
           </div>
         </div>
-        <div className='update-form'>
+        <div className='form-container'>
           {showSuccess()}
           {showError()}
           {showLoading()}
           <div className='brand-container'>
-            <Mybrand />
+            <MyBrand width={45} height={45} fontSize={"24px"} />
           </div>
+          <h2 className='sign-title'>修改个人信息</h2>
           {profileUpdateForm()}
         </div>
       </div>
