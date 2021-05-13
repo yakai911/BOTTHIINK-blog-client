@@ -6,7 +6,6 @@
   align-items: center;
 
   .blog-update-container {
-    padding-top: 50px;
     align-items: center;
     width: 60%;
     display: flex;
@@ -140,9 +139,9 @@
 @media screen and (max-width: 900px) {
   .blogUpdate-container {
     width: 100%;
-    padding: 0 0 3rem;
+    padding: 0;
     height: max-content;
-    padding-top: 65px 0;
+    padding-bottom: 30px;
     justify-content: center;
     align-items: center;
 
