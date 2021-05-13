@@ -45,17 +45,20 @@ const ProfileUpdate = () => {
           email: data.email,
           about: data.about,
         });
+        console.log(data.username);
+        console.log(`${process.env.NEXT_PUBLIC_API}/user/photo/${username}`);
       }
     });
   };
 
   useEffect(() => {
     isAuth();
-    init();
-  }, []);
+    if (isAuth) init();
+  }, [values.username]);
 
   const handleChange = (name) => (e) => {
     const value = name === "photo" ? e.target.files[0] : e.target.value;
+
     let userFormData = new FormData();
     userFormData.set(name, value);
     setValues({
@@ -65,6 +68,7 @@ const ProfileUpdate = () => {
       error: false,
       success: false,
     });
+    alert("图片已上传，点击提交保存更改");
   };
 
   const handleSubmit = (e) => {
@@ -91,14 +95,15 @@ const ProfileUpdate = () => {
             loading: false,
           });
         });
+
+        setTimeout(() => {
+          setValues({
+            ...values,
+            success: false,
+          });
+        }, 1000);
       }
     });
-    setTimeout(() => {
-      setValues({
-        ...values,
-        success: false,
-      });
-    }, 1000);
   };
 
   const profileUpdateForm = () => (
@@ -175,12 +180,13 @@ const ProfileUpdate = () => {
       <div className='update-container'>
         <div className='avatar-update'>
           <div className='avatar-container'>
-            <Avatar
-              src={`${process.env.NEXT_PUBLIC_API}/user/photo/${username}`}
-              width={150}
-              height={150}
-              radius={150}
-            />
+            {username.length > 0 && (
+              <Avatar
+                src={`${process.env.NEXT_PUBLIC_API}/user/photo/${username}`}
+                size={150}
+                radius={150}
+              />
+            )}
           </div>
           <div className='form-group'>
             <label className='btn'>

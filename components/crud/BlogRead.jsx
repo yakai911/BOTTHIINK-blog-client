@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { getCookie, isAuth } from "../../actions/auth";
 import { list, removeBlog } from "../../actions/blog";
-import moment from "moment";
+import { DateTime } from "luxon";
 
 const BlogRead = ({ username }) => {
   const [blogs, setBlogs] = useState([]);
@@ -31,6 +31,9 @@ const BlogRead = ({ username }) => {
       } else {
         setMessage(data.message);
         loadBlogs();
+        setTimeout(() => {
+          setMessage("");
+        }, 1000);
       }
     });
   };
@@ -55,10 +58,12 @@ const BlogRead = ({ username }) => {
     } else if (isAuth() && isAuth().role === 1) {
       return (
         <Link href={`/admin/crud/${blog._id}`}>
-          <a className='update-btn'>
-            <EditOutlined />
-            更新
-          </a>
+          <>
+            <button className='update-btn'>
+              <EditOutlined />
+              更新
+            </button>
+          </>
         </Link>
       );
     }
@@ -71,7 +76,8 @@ const BlogRead = ({ username }) => {
           <h5>{blog.title}</h5>
           <p className='description-text'>
             By: {blog.author.name} | Updated:
-            {"  " + moment(blog.updatedAt).fromNow()}
+            {"  " +
+              DateTime.fromISO(blog.updatedAt).setLocale("en").toRelative()}
           </p>
           <div>
             <p>
