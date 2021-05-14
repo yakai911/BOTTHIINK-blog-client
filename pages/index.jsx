@@ -6,6 +6,7 @@ import { singleCategory } from "../actions/category";
 import { mergeStyles } from "../helper/mergeStyles";
 import { APP_NAME, DOMAIN } from "../config";
 import Carousel from "../components/carousel/Carousel";
+import Footer from "../components/Footer";
 import Link from "next/link";
 
 const Index = ({ router, recentPost }) => {
@@ -132,6 +133,7 @@ const Index = ({ router, recentPost }) => {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 };

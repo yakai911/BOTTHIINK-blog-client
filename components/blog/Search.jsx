@@ -28,7 +28,6 @@ const Search = () => {
   };
 
   const handleChange = (e) => {
-    console.log(e.target.value);
     setValues({
       ...values,
       search: e.target.value,
@@ -64,7 +63,18 @@ const Search = () => {
               className='drop-items'
               style={{ display: { searched } ? "" : none }}>
               <Link href={`/blogs/${blog._id}`}>
-                <a className='title-text'>{blog.title}</a>
+                <a
+                  className='title-text'
+                  onClick={() => {
+                    setValues({
+                      ...values,
+                      search: "",
+                      results: [],
+                      searched: false,
+                    });
+                  }}>
+                  {blog.title}
+                </a>
               </Link>
             </div>
           );
@@ -75,14 +85,15 @@ const Search = () => {
 
   const searchForm = () => (
     <form onSubmit={searchSubmit} className='search-form'>
-      <div className='search-container'>
-        <SearchOutlined />
+      <div
+        className={classNames("search-container", {
+          searched: searched,
+        })}>
+        <SearchOutlined as='button' type='submit' onClick={searchSubmit} />
         <input
           type='text'
           value={search}
-          className={classNames("search-input", {
-            "searched-container": searched,
-          })}
+          className={"search-input"}
           onChange={handleChange}
         />
       </div>

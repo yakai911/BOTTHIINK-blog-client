@@ -49,6 +49,7 @@ const UserProfile = ({ user, blogs, query }) => {
           <div className='avatar-container'>
             <a href={`/user/update`}>
               <Avatar
+                title='编辑个人资料'
                 size={100}
                 radius={100}
                 src={`${process.env.NEXT_PUBLIC_API}/user/photo/${user.username}`}

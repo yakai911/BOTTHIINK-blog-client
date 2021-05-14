@@ -5,7 +5,7 @@ import NProgress from "nprogress";
 import { signout, isAuth } from "../actions/auth";
 import Search from "./blog/Search";
 import { useRouter } from "next/router";
-import { MenuOutlined } from "@ant-design/icons";
+import { MenuOutlined, SecurityScanTwoTone } from "@ant-design/icons";
 import { APP_NAME } from "../config";
 import Avatar from "../components/profile/Avatar";
 
@@ -15,6 +15,7 @@ const Header = () => {
   const router = useRouter();
   const [menuActive, setMenuActive] = useState(false);
   const [userData, setUserData] = useState({});
+  const [scrollDown, setScrollDown] = useState(false);
 
   const menuRef = useRef(null);
   const btnRef = useRef(null);
@@ -33,6 +34,33 @@ const Header = () => {
       setMenuActive(false);
     }
   };
+
+  const handleScrolling = () => {
+    let currScrollPos;
+    let preScrollPos =
+      document.body.scrollTop || document.documentElement.scrollTop;
+
+    window.addEventListener("scroll", () => {
+      currScrollPos =
+        document.body.scrollTop || document.documentElement.scrollTop;
+
+      if (currScrollPos - preScrollPos > 0) {
+        setScrollDown(true);
+      } else {
+        setScrollDown(false);
+      }
+      preScrollPos = currScrollPos;
+    });
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && typeof document !== "undefined") {
+      handleScrolling();
+    }
+    return () => {
+      window.removeEventListener("scroll", handleScrolling);
+    };
+  }, []);
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside, true);
@@ -64,7 +92,9 @@ const Header = () => {
   }, []);
 
   return (
-    <nav className='site-navigation'>
+    <nav
+      className='site-navigation'
+      style={scrollDown ? { opacity: "0" } : { opacity: "1" }}>
       <span className='menu-title'>
         {/* <Link href='/'>
           <a style={{ fontWeight: 700, fontFamily: "-apple-system" }}>
@@ -127,6 +157,7 @@ const Header = () => {
             <Link href={isAuth() && isAuth().role === 1 ? `/admin/` : `/user/`}>
               <div className='my-avatar'>
                 <Avatar
+                  title='个人主页'
                   size={38}
                   src={`${process.env.NEXT_PUBLIC_API}/user/photo/${userData.username}`}
                 />

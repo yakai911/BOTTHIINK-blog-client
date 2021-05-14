@@ -26,6 +26,7 @@ const UserDashboard = (router) => {
           <div className='avatar-container'>
             <a href={`/profile/${user.username}`}>
               <Avatar
+                title='查看所有'
                 size={100}
                 radius={100}
                 src={`${process.env.NEXT_PUBLIC_API}/user/photo/${user.username}`}
@@ -49,7 +50,7 @@ const UserDashboard = (router) => {
         <ul>
           <li>
             <Link href='/'>
-              <HomeOutlined />
+              <HomeOutlined title='返回首页' />
             </Link>
             <Link href='/'>
               <span className='span-text'>返回首页</span>
@@ -62,7 +63,7 @@ const UserDashboard = (router) => {
                   ? "/admin/crud/blog"
                   : "/user/crud/blog"
               }>
-              <FormOutlined />
+              <FormOutlined title='新建文章' />
             </Link>
             <Link
               href={
@@ -80,7 +81,7 @@ const UserDashboard = (router) => {
                   ? "/admin/crud/blogs"
                   : "/user/crud/blogs"
               }>
-              <EditOutlined />
+              <EditOutlined title='编辑文章' />
             </Link>
             <Link
               href={

@@ -1,8 +1,9 @@
 import React from "react";
 
-const Avatar = ({ src, size, radius }) => {
+const Avatar = ({ src, size, radius, title = "" }) => {
   return (
     <div
+      title={title}
       style={{
         backgroundImage: src ? `url('${src}') ` : "",
         width: `${size}px`,
