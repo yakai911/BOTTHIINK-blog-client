@@ -8,8 +8,17 @@ const Footer = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        height: "100px",
       }}>
-      <p>Copyright © 2021 BOT THK. All rights reserved.</p>
+      <p
+        style={{
+          fontWeight: "500",
+          marginBottom: "20px",
+          letterSpacing: "0.5px",
+          color: "#444",
+        }}>
+        Copyright © 2021 BOT THK. All rights reserved.
+      </p>
     </div>
   );
 };

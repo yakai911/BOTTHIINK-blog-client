@@ -1,11 +1,8 @@
 import React from "react";
 import Image from "next/image";
+import myLoader from "../../helper/myloader";
 
 const PostImg = ({ src, width, height, radius = "50", shadow = true }) => {
-  const myLoader = ({ src, width, quality }) => {
-    return `${process.env.NEXT_PUBLIC_API}${src}?w=${width}&q=${quality || 75}`;
-  };
-
   return (
     <div
       className='post-image-warper overlay'
@@ -32,6 +29,7 @@ const PostImg = ({ src, width, height, radius = "50", shadow = true }) => {
         layout='fill'
         objectFit='cover'
         alt='post image'
+        loading='lazy'
       />
     </div>
   );

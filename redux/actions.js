@@ -1,4 +1,4 @@
-import { LOAD_USER, LOAD_USER_PROFILE } from "./types";
+import { LOAD_USER, LOAD_USER_PROFILE, LOGOUT_USER } from "./types";
 import { isAuth } from "../actions/auth";
 import { userPublicProfile } from "../actions/user";
 
@@ -7,6 +7,13 @@ export const loadUser = () => async (dispatch) => {
   dispatch({
     type: LOAD_USER,
     payload: user,
+  });
+};
+
+export const logoutUser = () => async (dispatch) => {
+  dispatch({
+    type: LOGOUT_USER,
+    payload: null,
   });
 };
 

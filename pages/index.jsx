@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { PostGrid, BlogCategory } from "../components/blog";
 import { withRouter } from "next/router";
 import Head from "next/head";
@@ -9,38 +8,13 @@ import Carousel from "../components/carousel/Carousel";
 import Footer from "../components/Footer";
 import Link from "next/link";
 
-const Index = ({ router, recentPost }) => {
-  const [trending, setTrending] = useState([]);
-  const [featured, setFeatured] = useState([]);
-
-  const initTrending = () => {
-    singleCategory("trending").then((tren) => {
-      if (tren.error) {
-        console.log(tren.error);
-      } else {
-        setTrending(tren.blogs.slice(0, 5));
-      }
-    });
-  };
-
-  const initFeatured = () => {
-    singleCategory("featured").then((frea) => {
-      if (frea.error) {
-        console.log(frea.error);
-      } else {
-        setFeatured(frea.blogs.slice(0, 5));
-      }
-    });
-  };
-
-  useEffect(() => {
-    initFeatured();
-    initTrending();
-  }, [router]);
-
+const Index = ({ router, recentPost, trending, featured }) => {
   const trendingConfig = {
     0: {
       gridArea: "1/2/3/3",
+    },
+    3: {
+      height: "173px",
     },
   };
 
@@ -66,8 +40,8 @@ const Index = ({ router, recentPost }) => {
     },
   };
 
-  mergeStyles(trending, trendingConfig);
-  mergeStyles(featured, featuredConfig);
+  if (trending) mergeStyles(trending, trendingConfig);
+  if (featured) mergeStyles(featured, featuredConfig);
 
   const head = () => (
     <Head>
@@ -111,7 +85,11 @@ const Index = ({ router, recentPost }) => {
             <Link href='/categories/featured'>
               <h1>Featured</h1>
             </Link>
-            <BlogCategory posts={featured} columns={4} tagsOnTop={true} />
+            <BlogCategory
+              posts={featured.slice(0, 5)}
+              columns={4}
+              tagsOnTop={true}
+            />
           </div>
         </section>
 
@@ -129,7 +107,11 @@ const Index = ({ router, recentPost }) => {
             <Link href='/categories/trending'>
               <h1>Trending</h1>
             </Link>
-            <BlogCategory posts={trending} columns={3} tagsOnTop={true} />
+            <BlogCategory
+              posts={trending.slice(0, 5)}
+              columns={3}
+              tagsOnTop={true}
+            />
           </div>
         </section>
       </main>
@@ -138,14 +120,53 @@ const Index = ({ router, recentPost }) => {
   );
 };
 
-Index.getInitialProps = async (ctx) => {
-  return singleCategory("recent-post").then((data) => {
-    if (data.error) {
-      console.log(data.error);
-    } else {
-      return { recentPost: data.blogs };
-    }
+function initRecent() {
+  return new Promise((resolve, reject) => {
+    singleCategory("recent-post").then((data) => {
+      if (data.error) {
+        // console.log(data.error);
+        reject(data.error);
+      } else {
+        // return { recentPost: data.blogs };
+        resolve(data.blogs);
+      }
+    });
   });
-};
+}
+
+function initTrending() {
+  return new Promise((resolve, reject) => {
+    singleCategory("trending").then((data) => {
+      if (data.error) {
+        // console.log(data.error);
+        reject(data.error);
+      } else {
+        // return { recentPost: data.blogs };
+        resolve(data.blogs);
+      }
+    });
+  });
+}
+
+function initFeatured() {
+  return new Promise((resolve, reject) => {
+    singleCategory("featured").then((data) => {
+      if (data.error) {
+        // console.log(data.error);
+        reject(data.error);
+      } else {
+        // return { recentPost: data.blogs };
+        resolve(data.blogs);
+      }
+    });
+  });
+}
+
+export async function getStaticProps(context) {
+  const recentPost = await initRecent();
+  const trending = await initTrending();
+  const featured = await initFeatured();
+  return { props: { recentPost, trending, featured } };
+}
 
 export default withRouter(Index);

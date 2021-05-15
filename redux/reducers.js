@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { LOAD_USER_PROFILE, LOAD_USER } from "./types";
+import { LOAD_USER_PROFILE, LOAD_USER, LOGOUT_USER } from "./types";
 
 const initialUser = {
   _id: "",
@@ -20,6 +20,9 @@ const userReducer = (state = initialUser, { type, payload }) => {
         email: payload.email,
         role: payload.role,
       };
+
+    case LOGOUT_USER:
+      return { state: payload };
 
     default:
       return state;

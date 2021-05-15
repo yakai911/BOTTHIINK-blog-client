@@ -4,14 +4,11 @@ import Link from "next/link";
 import { DateTime } from "luxon";
 import Image from "next/image";
 import useWindowSize from "../../helper/useWindowSize";
+import myLoader from "../../helper/myloader";
 
 const BlogPost = ({ post, tagsOnTop }) => {
   const windowSize = useWindowSize();
   const windowWidth = windowSize.width;
-
-  const myLoader = ({ src, width, quality }) => {
-    return `${process.env.NEXT_PUBLIC_API}${src}?w=${width}&q=${quality || 75}`;
-  };
 
   const style = windowWidth > 900 ? { ...post.style } : {};
 

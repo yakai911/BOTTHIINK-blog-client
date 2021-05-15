@@ -13,7 +13,7 @@ import Avatar from "../components/profile/Avatar";
 const Header = () => {
   const router = useRouter();
   const [menuActive, setMenuActive] = useState(false);
-  const [userData, setUserData] = useState({});
+
   const [scrollDown, setScrollDown] = useState(false);
 
   const menuRef = useRef(null);
@@ -85,15 +85,17 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    if (isAuth()) {
-      setUserData(isAuth());
-    }
+    isAuth();
   }, []);
 
   return (
     <nav
       className='site-navigation'
-      style={scrollDown ? { opacity: "0" } : { opacity: "1" }}>
+      style={
+        scrollDown
+          ? { opacity: "0", top: "-65px" }
+          : { opacity: "1", top: "0px" }
+      }>
       <span className='menu-title'>
         <MyBrand width={45} height={45} fontSize={"24px"} cursor='pointer' />
       </span>
@@ -126,7 +128,12 @@ const Header = () => {
         {isAuth() ? (
           <ul className='log-ul'>
             <li>
-              <a onClick={() => signout(() => router.replace("/signin"))}>
+              <a
+                onClick={() =>
+                  signout(() => {
+                    router.replace("/signin");
+                  })
+                }>
                 退出登录
               </a>
             </li>{" "}
@@ -146,15 +153,19 @@ const Header = () => {
           {isAuth() && (
             <Link href={isAuth() && isAuth().role === 1 ? `/admin/` : `/user/`}>
               <div className='my-avatar'>
-                <Avatar
-                  title='个人主页'
-                  size={38}
-                  src={`${process.env.NEXT_PUBLIC_API}/user/photo/${userData.username}`}
-                />
+                {!!isAuth().username && (
+                  <Avatar
+                    title='个人主页'
+                    size={38}
+                    src={`${process.env.NEXT_PUBLIC_API}/user/photo/${
+                      isAuth().username
+                    }`}
+                  />
+                )}
               </div>
             </Link>
           )}
-          {isAuth() && <p className='menu-avtar-name'>{userData.name}</p>}
+          {isAuth() && <p className='menu-avtar-name'>{isAuth().name}</p>}
         </div>
       </div>
 

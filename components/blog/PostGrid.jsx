@@ -1,11 +1,10 @@
 import { Pagination } from "antd";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { TagRow } from "./index";
 import Link from "next/link";
 import "antd/dist/antd.css";
 import PostImg from "./PostImg";
 import useWindowSize from "../../helper/useWindowSize";
-import Image from "next/image";
 import { DateTime } from "luxon";
 
 const PostGrid = ({ posts }) => {
@@ -15,6 +14,9 @@ const PostGrid = ({ posts }) => {
   const [pageSize, setPageSize] = useState(9);
   const [current, setCurrent] = useState(1);
 
+  const paginationRef = useRef(null);
+  let paginationPos;
+
   const paginatedPosts = useMemo(() => {
     const lastIndex = pageSize * current;
     const firstIndex = lastIndex - pageSize;
@@ -23,12 +25,15 @@ const PostGrid = ({ posts }) => {
   }, [current, pageSize, posts]);
 
   // useEffect(() => {
-  //   window.scroll({
-  //     top: 800,
-  //     left: 0,
-  //     behavior: "smooth",
-  //   });
-  // });
+  //   paginationPos = paginationRef.current.offsetTop;
+  //   if (typeof window !== "undefined") {
+  //     window.scroll({
+  //       top: paginationPos,
+  //       left: 0,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // }, []);
 
   return (
     <section className='grid-pagination-container'>
@@ -77,7 +82,7 @@ const PostGrid = ({ posts }) => {
           </div>
         ))}
       </section>
-      <div className='pagination-container'>
+      <div className='pagination-container' ref={paginationRef}>
         <Pagination
           simple
           showSizeChanger
