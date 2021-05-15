@@ -18,6 +18,7 @@
 @import "tagBlogs";
 @import "categoryBlogs";
 @import "carousel.scss";
+@import "image.scss";
 @import "./NotoSans.scss";
 
 html,
@@ -85,7 +86,8 @@ a {
 }
 
 .overlay::before {
-  z-index: 1;
+  transition: all ease-out 250ms;
+  z-index: 11;
   content: "";
   position: absolute;
   top: 0;
@@ -101,7 +103,7 @@ a {
   );
 }
 
-.overlay::after {
+.overlay:hover::before {
   z-index: 1;
   content: "";
   position: absolute;
@@ -109,13 +111,9 @@ a {
   right: 0;
   bottom: 0;
   left: 0;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    transparent 0%,
-    rgba(0, 0, 0, 0) 99%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  background: transparent;
+
+  color: white;
 }
 
 .error {

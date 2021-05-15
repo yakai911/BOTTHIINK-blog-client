@@ -1,14 +1,38 @@
+import Image from "next/image";
+import useWindowSize from "../helper/useWindowSize";
+
+const myLoader = ({ src, width, quality }) => {
+  return `${process.env.NEXT_PUBLIC_API}${src}?w=${width}&q=${quality || 75}`;
+};
+
 const SlideImage = ({ img }) => {
+  const windowSize = useWindowSize();
+
   return (
     <div
-      className='banner'
+      className='banner-container'
       style={{
-        height: "500px",
+        height: windowSize.width > 900 ? "500px" : "300px",
         width: "100%",
-        background: `url('${img}') no-repeat`,
-        backgroundSize: "cover",
-        backgroundPosition: "center center",
-      }}></div>
+        // backgroundSize: "cover",
+        // backgroundPositionX: "center",
+        // bcakgroundPositionY: "center",
+        // backgroundRepeat: "no-repeat",
+        position: "relative",
+      }}>
+      {windowSize && (
+        <Image
+          className='banner-img'
+          priority={true}
+          src={img}
+          layout='fill'
+          alt='banner'
+          objectFit='cover'
+          objectPosition='50% 50%'
+          loader={myLoader}
+        />
+      )}
+    </div>
   );
 };
 

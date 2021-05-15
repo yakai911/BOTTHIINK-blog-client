@@ -5,8 +5,7 @@ import NProgress from "nprogress";
 import { signout, isAuth } from "../actions/auth";
 import Search from "./blog/Search";
 import { useRouter } from "next/router";
-import { MenuOutlined, SecurityScanTwoTone } from "@ant-design/icons";
-import { APP_NAME } from "../config";
+import { MenuOutlined } from "@ant-design/icons";
 import Avatar from "../components/profile/Avatar";
 
 //使用nprogress
@@ -96,16 +95,7 @@ const Header = () => {
       className='site-navigation'
       style={scrollDown ? { opacity: "0" } : { opacity: "1" }}>
       <span className='menu-title'>
-        {/* <Link href='/'>
-          <a style={{ fontWeight: 700, fontFamily: "-apple-system" }}>
-            BOT THK
-          </a>
-        </Link>
-        <a href='/' style={{ marginLeft: "5px" }}>
-          <MyIcon width={45} height={45} />
-        </a>
-      */}
-        <MyBrand width={45} height={45} fontSize={"24px"} />
+        <MyBrand width={45} height={45} fontSize={"24px"} cursor='pointer' />
       </span>
       <div
         className={`menu-content-container ${menuActive && "active"}`}

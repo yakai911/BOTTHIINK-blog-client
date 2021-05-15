@@ -155,12 +155,12 @@ const SingleBlog = ({ blog, query }) => {
   return (
     <>
       {head()}
+      <SlideImage
+        img={`/blog/image/${blog._id}`}
+        alt={blog.title}
+        className='banner'
+      />
       <main className='blog-article'>
-        <SlideImage
-          img={`${process.env.NEXT_PUBLIC_API}/blog/image/${blog._id}`}
-          alt={blog.title}
-          className='banner'
-        />
         <article className='article-header-container'>
           <section className='article-header'>
             <>
@@ -186,7 +186,6 @@ const SingleBlog = ({ blog, query }) => {
             <TagRow tags={blog.tags} />
           </section>
         </article>
-
         {voices.length > 0 && (
           <div className='speaker-container'>
             <form onSubmit={handleRead}>
@@ -207,11 +206,9 @@ const SingleBlog = ({ blog, query }) => {
         <article className='article-content'>
           <section>{renderHTML(blog.body)}</section>
         </article>
-
         <div className='contaienr' style={{ padding: "35px" }}>
           {showComents()}
         </div>
-
         <div className='container'>
           <h4 className='text-center'>相关推荐</h4>
           <div className='related-blogs'>{showRelatedBlog()}</div>

@@ -2,22 +2,18 @@ import React from "react";
 import Image from "next/image";
 
 const PostImg = ({ src, width, height, radius = "50", shadow = true }) => {
-  const contentfulLoader = ({ src, quality, width }) => {
-    const params = [`w=${width}`];
-
-    if (quality) {
-      params.push(`q=${quality}`);
-    }
-
-    return `${src}?${params.join("&")}`;
+  const myLoader = ({ src, width, quality }) => {
+    return `${process.env.NEXT_PUBLIC_API}${src}?w=${width}&q=${quality || 75}`;
   };
+
   return (
     <div
+      className='post-image-warper overlay'
       style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: src ? `url('${src}')` : "#e6f7ff",
+        background: "#e6f7ff",
         width: `${width}`,
         height: `${height}`,
         borderRadius: `${radius}px`,
@@ -29,15 +25,14 @@ const PostImg = ({ src, width, height, radius = "50", shadow = true }) => {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
       }}>
-      {/* <Image
+      <Image
+        className='post-img'
+        loader={myLoader}
         src={src}
-        quality={100}
-        width={width}
-        height={height}
-        layout='responsive'
-        objectFit='contain'
-        alt='background image'
-      /> */}
+        layout='fill'
+        objectFit='cover'
+        alt='post image'
+      />
     </div>
   );
 };

@@ -10,6 +10,7 @@ const ReactQuill = dynamic(() => import("react-quill"), {
 });
 import { UploadOutlined } from "@ant-design/icons";
 import { QuillModules, QuillFormats } from "../../helper/quill";
+import SlideImage from "../SlideImage";
 
 const BlogUpdate = ({ router }) => {
   const myRouter = useRouter();
@@ -103,7 +104,7 @@ const BlogUpdate = ({ router }) => {
     }
 
     setChecked(all);
-    formData.set("categories", all);
+    if (formData) formData.set("categories", all);
   };
 
   const handleTagsToggle = (t) => () => {
@@ -256,12 +257,23 @@ const BlogUpdate = ({ router }) => {
     <div className='blog-update-container'>
       <div className='blogUpdate-form'>
         {body && (
-          <div>
-            <img
-              src={`${process.env.NEXT_PUBLIC_API}/blog/image/${router.query.id}`}
-              alt=''
-              style={{ width: "100%", marginBottom: "20px" }}
-            />
+          // <div>
+          //   {/* <img
+          //     src={`${process.env.NEXT_PUBLIC_API}/blog/image/${router.query.id}`}
+          //     style={{ width: "100%", marginBottom: "20px" }}
+          //   /> */}
+          //   {router.query.id && (
+          //     <Image
+          //       src={`/blog/image/${router.query.id}`}
+          //       layout='fill'
+          //       objectFit='cover'
+          //       alt='post image'
+          //       loader={myLoader}
+          //     />
+          //   )}
+          // </div>
+          <div style={{ marginBottom: "20px" }}>
+            <SlideImage img={`/blog/image/${router.query.id}`} />
           </div>
         )}
         {error && showError()}

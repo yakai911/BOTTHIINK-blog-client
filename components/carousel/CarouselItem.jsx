@@ -1,6 +1,5 @@
 import useWindowSize from "../../helper/useWindowSize";
 import Image from "next/image";
-import classNames from "classnames";
 
 export const CarouselItem = ({ item, items, goToIndex }) => {
   const size = useWindowSize();
@@ -30,8 +29,8 @@ export const CarouselItem = ({ item, items, goToIndex }) => {
           <Image
             src={item.src}
             alt='banner'
-            loading='eager'
-            objectFit='contain'
+            priority={true}
+            objectFit='cover'
             width={item.width}
             height={item.height}
             className='slider-image'

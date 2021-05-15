@@ -1,26 +1,30 @@
 import React from "react";
-import useWindowSize from "../../helper/useWindowSize";
 import { TagRow } from "./index";
 import Link from "next/link";
 import { DateTime } from "luxon";
+import Image from "next/image";
+import useWindowSize from "../../helper/useWindowSize";
 
 const BlogPost = ({ post, tagsOnTop }) => {
-  const size = useWindowSize();
-  const windowWidth = size.width;
+  const windowSize = useWindowSize();
+  const windowWidth = windowSize.width;
 
-  const imageBackground = {
-    backgroundImage: `url('${process.env.NEXT_PUBLIC_API}/blog/image/${post._id}')`,
-    cursor: "pointer",
-    boxShadow: `6px 6px 10px rgba(0, 0, 0, 0.6),
-        -6px -6px 26px rgba(255, 255, 255, 0.8)`,
+  const myLoader = ({ src, width, quality }) => {
+    return `${process.env.NEXT_PUBLIC_API}${src}?w=${width}&q=${quality || 75}`;
   };
 
-  const style =
-    windowWidth > 900 ? { ...imageBackground, ...post.style } : imageBackground;
+  const style = windowWidth > 900 ? { ...post.style } : {};
 
   return (
     <Link href='/blogs/[id]' as={`/blogs/${post._id}`}>
       <div className='post overlay' style={style}>
+        <Image
+          src={`/blog/image/${post._id}`}
+          layout='fill'
+          objectFit='cover'
+          alt='post image'
+          loader={myLoader}
+        />
         <div
           className='image-text'
           style={{

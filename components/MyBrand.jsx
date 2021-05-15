@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const MyBrand = ({ width, height, fontSize }) => (
+const MyBrand = ({ width, height, fontSize, cursor = "default" }) => (
   <div
     style={{
       display: "flex",
@@ -16,11 +16,12 @@ const MyBrand = ({ width, height, fontSize }) => (
           fontWeight: 700,
           fontFamily: "-apple-system",
           marginRight: "10px",
+          cursor: "default",
         }}>
         BOT THK
       </span>
     </Link>
-    <div>
+    <div style={{ cursor }}>
       <Image
         src='/moshIcon.svg'
         alt='brand'
