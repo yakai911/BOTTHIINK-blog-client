@@ -274,7 +274,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 }
 
@@ -283,7 +283,7 @@ export async function getStaticProps({ params }) {
     if (data.error) {
       console.log(data.error);
     } else {
-      return { props: { blog: data }, revalidate: 1 };
+      return { props: { blog: data } };
     }
   });
 }

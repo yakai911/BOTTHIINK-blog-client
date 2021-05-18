@@ -75,7 +75,6 @@ const Index = ({ router, recentPost, trending, featured }) => {
       />
       <meta property='og:image:type' content='image/jpg' />
       <meta name='theme-color' content='#eff3f8' />
-      <link rel='manifest' href='/manifest.json' />
     </Head>
   );
 
