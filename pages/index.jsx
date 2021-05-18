@@ -55,7 +55,7 @@ const Index = ({ router, recentPost, trending, featured }) => {
         name='description'
         content='Cruel Literature,novels,poemes,and else'
       />
-      <link rel='canonical' href={`${DOMAIN}${router.pathname}/`} />
+      <link rel='canonical' href={`${DOMAIN}${router.pathname}`} />
       <meta
         property='og:title'
         content={`Cruel Literature,novels,poemes,and else | ${APP_NAME}`}
