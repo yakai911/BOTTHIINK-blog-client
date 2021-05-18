@@ -110,16 +110,16 @@
       }
     }
 
-    & .slider-image::before {
-      -webkit-transition: opacity 1s ease-in-out;
-      -moz-transition: opacity 1s ease-in-out;
-      transition: opacity 2s ease-in-out;
-      transform: translate(-100%);
+    // & .slider-image::before {
+    //   -webkit-transition: opacity 1s ease-in-out;
+    //   -moz-transition: opacity 1s ease-in-out;
+    //   transition: opacity 2s ease-in-out;
+    //   transform: translate(-100%);
 
-      &::after {
-        transform: translate(100%);
-      }
-    }
+    //   &::after {
+    //     transform: translate(100%);
+    //   }
+    // }
   }
 }
 

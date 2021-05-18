@@ -28,12 +28,12 @@ export const CarouselItem = ({ item, items, goToIndex }) => {
           </ol>
           <Image
             src={item.src}
+            loading='lazy'
             alt='banner'
-            priority={true}
-            objectFit='cover'
             width={item.width}
             height={item.height}
             className='slider-image'
+            quality={size.width > 900 ? 75 : 50}
           />
         </div>
       </a>

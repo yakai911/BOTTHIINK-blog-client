@@ -18,6 +18,7 @@ const Index = ({ router, recentPost, trending, featured }) => {
     0: {
       gridArea: "1/2/3/3",
     },
+    1: { height: "173px" },
     3: {
       height: "173px",
     },
