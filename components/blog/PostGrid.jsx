@@ -68,10 +68,7 @@ const PostGrid = ({ posts }) => {
                 </span>
               </p>
               <div className='description-text'>
-                {post.description.replace(/<[^>]+>/g, "").length >= 60
-                  ? post.description.replace(/<[^>]+>/g, "").slice(0, 57) +
-                    " ..."
-                  : post.description.replace(/<[^>]+>/g, "")}
+                {post.description.replace(/<[^>]+>/g, "")}
               </div>
             </section>
             <p className='author-text'>

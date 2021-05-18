@@ -30,6 +30,7 @@ const PostImg = ({ src, width, height, radius = "50", shadow = true }) => {
         objectFit='cover'
         alt='post image'
         loading='lazy'
+        quality={65}
       />
     </div>
   );

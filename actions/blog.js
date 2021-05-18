@@ -1,4 +1,3 @@
-import fetch from "isomorphic-fetch";
 import queryString from "query-string";
 import { isAuth, handleResponse } from "./auth";
 
@@ -45,6 +44,7 @@ export const listBlogsWithCategoriesAndTags = (skip, limit) => {
     limit,
     skip,
   };
+
   return fetch(`${process.env.NEXT_PUBLIC_API}/blogs-categories-tags`, {
     method: "POST",
     headers: {

@@ -117,14 +117,14 @@ const UserProfile = ({ user, blogs, query }) => {
   );
 };
 
-UserProfile.getInitialProps = ({ query }) => {
+export async function getServerSideProps({ query }) {
   return userPublicProfile(query.username).then((data) => {
     if (data.error) {
       console.log(data.error);
     } else {
-      return { user: data.user, blogs: data.blogs, query };
+      return { props: { user: data.user, blogs: data.blogs, query } };
     }
   });
-};
+}
 
 export default UserProfile;

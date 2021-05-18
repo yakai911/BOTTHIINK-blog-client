@@ -7,8 +7,13 @@ import { APP_NAME, DOMAIN } from "../config";
 import Carousel from "../components/carousel/Carousel";
 import Footer from "../components/Footer";
 import Link from "next/link";
+import useSWR from "swr";
 
 const Index = ({ router, recentPost, trending, featured }) => {
+  const { data: recentPosts } = useSWR("/category/recent-post", initRecent, {
+    initialData: recentPost,
+  });
+
   const trendingConfig = {
     0: {
       gridArea: "1/2/3/3",
@@ -50,7 +55,7 @@ const Index = ({ router, recentPost, trending, featured }) => {
         name='description'
         content='Cruel Literature,novels,poemes,and else'
       />
-      <link rel='canonical' href={`${DOMAIN}${router.pathname}`} />
+      <link rel='canonical' href={`${DOMAIN}${router.pathname}/`} />
       <meta
         property='og:title'
         content={`Cruel Literature,novels,poemes,and else | ${APP_NAME}`}
@@ -63,15 +68,14 @@ const Index = ({ router, recentPost, trending, featured }) => {
       <meta property='og:url' content={`${DOMAIN}${router.pathname}`} />
       <meta property='og:site_name' content={`${APP_NAME}`} />
 
-      <meta
-        property='og:image'
-        content={`${DOMAIN}/static/images/seoblog.jpg`}
-      />
+      <meta property='og:image' content={`${DOMAIN}/images/recent.jpg`} />
       <meta
         property='og:image:secure_url'
-        content={`${DOMAIN}/static/images/seoblog.jpg`}
+        content={`${DOMAIN}/images/recent.jpg`}
       />
       <meta property='og:image:type' content='image/jpg' />
+      <meta name='theme-color' content='#eff3f8' />
+      <link rel='manifest' href='/manifest.json' />
     </Head>
   );
 
@@ -98,7 +102,7 @@ const Index = ({ router, recentPost, trending, featured }) => {
             <Link href='/categories/recent-post'>
               <h1>Reacent Post</h1>
             </Link>
-            <PostGrid posts={recentPost} />
+            <PostGrid posts={recentPosts} />
           </div>
         </section>
 

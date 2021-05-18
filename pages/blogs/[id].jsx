@@ -10,8 +10,9 @@ import { DateTime } from "luxon";
 import { singleBlog, listRelated } from "../../actions/blog";
 import { mergeStyles } from "../../helper/mergeStyles";
 import DisqusThread from "../../components/DisqusThread";
+import { singleCategory } from "../../actions/category";
 
-const SingleBlog = ({ blog, query }) => {
+const SingleBlog = ({ blog }) => {
   const [related, setRelated] = useState([]);
   const [voices, setVoices] = useState([]);
   const [selectedVoice, setSelectedVoice] = useState("");
@@ -62,7 +63,7 @@ const SingleBlog = ({ blog, query }) => {
       if (synth.speaking) {
         if (!synth.paused) {
           synth.pause();
-          console.log("已暂停", synth.paused);
+          console.log("已暂停朗读", synth.paused);
         } else {
           synth.resume();
           console.log("已继续朗读", synth.paused);
@@ -118,13 +119,12 @@ const SingleBlog = ({ blog, query }) => {
         {blog.title} | {APP_NAME}
       </title>
       <meta name='description' content={blog.description} />
-      <link rel='canonical' href={`${DOMAIN}/blogs/${query._id}`} />
+      <link rel='canonical' href={`${DOMAIN}/blogs/${blog._id}`} />
       <meta property='og:title' content={`${blog.title}| ${APP_NAME}`} />
       <meta property='og:description' content={blog.description} />
       <meta property='og:type' content='webiste' />
-      <meta property='og:url' content={`${DOMAIN}/blogs/${query._id}`} />
+      <meta property='og:url' content={`${DOMAIN}/blogs/${blog._id}`} />
       <meta property='og:site_name' content={`${APP_NAME}`} />
-
       <meta
         property='og:image'
         content={`${process.env.NEXT_PUBLIC_API}/blog/image/${blog._id}`}
@@ -134,6 +134,7 @@ const SingleBlog = ({ blog, query }) => {
         ccontent={`${process.env.NEXT_PUBLIC_API}/blog/image/${blog._id}`}
       />
       <meta property='og:image:type' content='image/jpg' />
+      <meta name='theme-color' content='#eff3f8' />
     </Head>
   );
 
@@ -218,14 +219,73 @@ const SingleBlog = ({ blog, query }) => {
   );
 };
 
-SingleBlog.getInitialProps = async ({ query }) => {
-  return singleBlog(query.id).then((data) => {
+function initRecent() {
+  return new Promise((resolve, reject) => {
+    singleCategory("recent-post").then((data) => {
+      if (data.error) {
+        // console.log(data.error);
+        reject(data.error);
+      } else {
+        // return { recentPost: data.blogs };
+        resolve(data.blogs);
+      }
+    });
+  });
+}
+
+function initTrending() {
+  return new Promise((resolve, reject) => {
+    singleCategory("trending").then((data) => {
+      if (data.error) {
+        // console.log(data.error);
+        reject(data.error);
+      } else {
+        // return { recentPost: data.blogs };
+        resolve(data.blogs);
+      }
+    });
+  });
+}
+
+function initFeatured() {
+  return new Promise((resolve, reject) => {
+    singleCategory("featured").then((data) => {
+      if (data.error) {
+        // console.log(data.error);
+        reject(data.error);
+      } else {
+        // return { recentPost: data.blogs };
+        resolve(data.blogs);
+      }
+    });
+  });
+}
+
+export async function getStaticPaths() {
+  const recentPosts = await initRecent();
+  const trendingPosts = await initTrending();
+  const featuredPosts = await initFeatured();
+  const posts = [...recentPosts, ...trendingPosts, ...featuredPosts];
+  const paths = posts.map((post) => ({
+    params: {
+      id: post._id,
+    },
+  }));
+
+  return {
+    paths,
+    fallback: true,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  return singleBlog(params.id).then((data) => {
     if (data.error) {
       console.log(data.error);
     } else {
-      return { blog: data, query };
+      return { props: { blog: data }, revalidate: 1 };
     }
   });
-};
+}
 
 export default SingleBlog;
