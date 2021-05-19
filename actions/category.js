@@ -1,4 +1,3 @@
-import fetch from "isomorphic-fetch";
 import { handleResponse } from "./auth";
 
 //创建类别，注意必须是英语的类别

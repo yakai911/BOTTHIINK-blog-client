@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { CustomerServiceOutlined } from "@ant-design/icons";
 import SlideImage from "../../components/SlideImage";
 import { APP_NAME, DOMAIN } from "../../config";
-import { DateTime } from "luxon";
+import dayjs from "dayjs";
 import { singleBlog, listRelated } from "../../actions/blog";
 import { mergeStyles } from "../../helper/mergeStyles";
 import DisqusThread from "../../components/DisqusThread";
@@ -178,10 +178,7 @@ const SingleBlog = ({ blog }) => {
               </span>
               <span className='description-text'>
                 {" "}
-                |{" "}
-                {DateTime.fromISO(blog.createdAt)
-                  .setLocale()
-                  .toFormat("MMMM,dd,yyyy")}
+                | {dayjs(blog.createdAt, "zh", true).format("MMMM,DD,YYYY")}
               </span>
             </p>
             <TagRow tags={blog.tags} />

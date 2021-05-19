@@ -3,7 +3,10 @@ import { useState, useEffect } from "react";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { getCookie, isAuth } from "../../actions/auth";
 import { list, removeBlog } from "../../actions/blog";
-import { DateTime } from "luxon";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 const BlogRead = ({ username }) => {
   const [blogs, setBlogs] = useState([]);
@@ -74,8 +77,7 @@ const BlogRead = ({ username }) => {
           <h5>{blog.title}</h5>
           <p className='description-text'>
             By: {blog.author.name} | Updated:
-            {"  " +
-              DateTime.fromISO(blog.updatedAt).setLocale("en").toRelative()}
+            {"  " + dayjs(blog.updatedAt, "zh", true).fromNow()}
           </p>
           <div>
             <p>

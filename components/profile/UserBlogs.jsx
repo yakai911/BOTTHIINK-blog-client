@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { DateTime } from "luxon";
+import dayjs from "dayjs";
 import { Pagination } from "antd";
 import "antd/dist/antd.css";
 import MyBrand from "../MyBrand";
@@ -56,11 +56,7 @@ const UserBlogs = ({ blogs, user }) => {
                 <div className='blog-card'>
                   <h5>{b.title}</h5>
                   <span className='desc-text'>
-                    By: {user.name} |{" "}
-                    {/* {moment(b.createdAt).format("MMM.DD-YYYY")} */}
-                    {DateTime.fromISO(b.createdAt)
-                      .setLocale()
-                      .toFormat("MMM,dd,yyyy")}
+                    By: {user.name} | {dayjs(b.createdAt).format("MMM,DD-YYYY")}
                   </span>
                   <div>
                     <p>{b.description.replace(/<[^>]+>/g, "")}</p>

@@ -2,11 +2,14 @@ import Head from "next/head";
 import { useState, useMemo } from "react";
 import { userPublicProfile } from "../../actions/user";
 import { DOMAIN, APP_NAME } from "../../config";
-import { DateTime } from "luxon";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import Avatar from "../../components/profile/Avatar";
 import MyBrand from "../../components/MyBrand";
 import { Pagination } from "antd";
 import "antd/dist/antd.css";
+
+dayjs.extend(relativeTime);
 
 const UserProfile = ({ user, blogs, query }) => {
   const head = () => (
@@ -63,10 +66,7 @@ const UserProfile = ({ user, blogs, query }) => {
                 <b>{user.about}</b>
               </p>
             )}
-            <p>
-              Joined{" "}
-              {DateTime.fromISO(user.createdAt).setLocale("en").toRelative()}
-            </p>
+            <p>Joined {dayjs(user.createdAt, "zh").fromNow()}</p>
           </div>
         </div>
 
@@ -87,9 +87,7 @@ const UserProfile = ({ user, blogs, query }) => {
                       <h5>{b.title}</h5>
                       <span className='desc-text'>
                         By: {user.name} |{" "}
-                        {DateTime.fromISO(b.createdAt)
-                          .setLocale()
-                          .toFormat("MMM,dd,yyyy")}
+                        {dayjs(b.createdAt, "zh").format("MMMM,DD,YYYY")}
                       </span>
                       <div>
                         <p>{b.description.replace(/<[^>]+>/g, "")}</p>

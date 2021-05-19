@@ -1,4 +1,3 @@
-import fetch from "isomorphic-fetch";
 import cookie from "js-cookie";
 import Router from "next/dist/next-server/lib/router/router";
 

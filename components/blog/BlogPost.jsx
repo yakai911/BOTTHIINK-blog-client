@@ -1,7 +1,7 @@
 import React from "react";
 import { TagRow } from "./index";
 import Link from "next/link";
-import { DateTime } from "luxon";
+import dayjs from "dayjs";
 import Image from "next/image";
 import useWindowSize from "../../helper/useWindowSize";
 import myLoader from "../../helper/myloader";
@@ -31,9 +31,9 @@ const BlogPost = ({ post, tagsOnTop }) => {
           <div>
             <h2 className='image-title'>{post.title}</h2>
             <span className='image-date'>
-              {DateTime.fromISO(post.createdAt)
-                .setLocale()
-                .toFormat("MMMM,dd,yyyy")}
+              {dayjs(post.createdAt, "MMM,DD,YYYY", "zh", true).format(
+                "MMMM,DD,YYYY"
+              )}
             </span>
           </div>
         </div>

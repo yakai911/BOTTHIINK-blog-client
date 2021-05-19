@@ -1,5 +1,3 @@
-import fetch from "isomorphic-fetch";
-
 export const emailContactForm = (data) => {
   let emailEndpoint;
 

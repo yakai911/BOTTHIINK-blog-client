@@ -4,10 +4,13 @@ import { withRouter } from "next/router";
 import Avatar from "./Avatar";
 import { isAuth } from "../../actions/auth";
 import { FormOutlined, HomeOutlined, EditOutlined } from "@ant-design/icons";
-import { DateTime } from "luxon";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import { useSelector, useDispatch } from "react-redux";
 import { loadUser, loadUserProfile } from "../../redux/actions";
 import UserBlogs from "./UserBlogs";
+
+dayjs.extend(relativeTime);
 
 const UserDashboard = (router) => {
   const user = useSelector((state) => state.user);
@@ -38,10 +41,8 @@ const UserDashboard = (router) => {
             <span className='userInfo-text'>{user.email}</span>
             {userProfile && (
               <span className='userInfo-text'>
-                Joined <b>BOT THK</b>{" "}
-                {DateTime.fromISO(userProfile.user.createdAt)
-                  .setLocale("en")
-                  .toRelative()}
+                Joined <b>BOT THK</b>
+                {dayjs(userProfile.user.createdAt, "zh").fromNow()}
               </span>
             )}
           </div>

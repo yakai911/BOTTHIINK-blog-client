@@ -1,4 +1,3 @@
-import fetch from "isomorphic-fetch";
 import { handleResponse } from "./auth";
 
 export const userPublicProfile = (username) => {
