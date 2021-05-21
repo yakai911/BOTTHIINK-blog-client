@@ -59,7 +59,7 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScrolling);
     };
-  }, []);
+  }, [handleScrolling]);
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside, true);

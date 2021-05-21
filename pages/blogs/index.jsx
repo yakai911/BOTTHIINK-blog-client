@@ -1,12 +1,48 @@
-import { PostGrid } from "../../components/blog";
 import { withRouter } from "next/router";
 import Head from "next/head";
-
+import { useEffect, useState, useRef } from "react";
 import { APP_NAME, DOMAIN } from "../../config";
+import PostCard from "../../components/blog/PostCard";
+import { useSWRInfinite } from "swr";
 
-import { listBlogsWithCategoriesAndTags } from "../../actions/blog";
+const Blogs = ({ router }) => {
+  const getKey = (index) => {
+    return `${process.env.NEXT_PUBLIC_API}/blogs-tags?page=${index}&count=9`;
+  };
+  const [observedPost, setObservedPost] = useState("");
+  const { data, error, size, setSize } = useSWRInfinite(getKey, (url) =>
+    fetch(url).then((r) => r.json())
+  );
 
-const Blogs = ({ posts, router }) => {
+  const isInitialLoading = !data && !error;
+
+  const posts = data ? [].concat(...data) : [];
+
+  const observeElement = (element) => {
+    if (!element) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting === true) {
+          setSize(size + 1);
+          observer.unobserve(element);
+        }
+      },
+      { threshold: 1 }
+    );
+    observer.observe(element);
+  };
+
+  useEffect(() => {
+    if (!posts || posts.length === 0) return;
+
+    const id = posts[posts.length - 1]._id;
+
+    if (id !== observedPost) {
+      setObservedPost(id);
+      observeElement(document.getElementById(id));
+    }
+  }, [posts]);
+
   const head = () => (
     <Head>
       <title>All Blogs | {APP_NAME}</title>
@@ -29,35 +65,24 @@ const Blogs = ({ posts, router }) => {
   return (
     <>
       {head()}
-      <main className='tagBlogs'>
-        <section className='tagBlogs-container'>
+      <main className='allBlogs'>
+        <section className='all-blogs-container'>
           <h1>All Blogs</h1>
-          <div className='tag-blog-cards'>
-            <PostGrid posts={posts} />
+          <div className='all-blog-cards'>
+            {isInitialLoading ? (
+              <p>正在加载...</p>
+            ) : (
+              <section className='post-grid'>
+                {posts?.map((post) => (
+                  <PostCard post={post} key={post._id} id={post._id} />
+                ))}
+              </section>
+            )}
           </div>
         </section>
       </main>
     </>
   );
-};
-
-Blogs.getInitialProps = async (ctx) => {
-  let skip = 0;
-  let limit = 9;
-  return listBlogsWithCategoriesAndTags(skip, limit).then((data) => {
-    if (data.error) {
-      console.log(data.error);
-    } else {
-      return {
-        posts: data.blogs,
-        categories: data.categories,
-        tags: data.tags,
-        totalBlogs: data.size,
-        blogsLimit: limit,
-        blogSkip: skip,
-      };
-    }
-  });
 };
 
 export default withRouter(Blogs);

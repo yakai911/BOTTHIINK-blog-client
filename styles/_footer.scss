@@ -1,0 +1,25 @@
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  .footer-text {
+    font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+    color: #444;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .footer-container {
+    margin: 0;
+
+    height: max-content;
+    .footer-text {
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+}

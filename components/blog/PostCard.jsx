@@ -5,11 +5,11 @@ import { TagRow } from "./index";
 import Link from "next/link";
 import useWindowSize from "../../helper/useWindowSize";
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, id }) => {
   const size = useWindowSize();
   const windowWidth = size.width;
   return (
-    <div className='post-container'>
+    <div className='post-container' id={id}>
       <figure>
         <a href={`/blogs/${post._id}`}>
           <PostImg

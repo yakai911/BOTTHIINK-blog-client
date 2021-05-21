@@ -1,5 +1,6 @@
 import useWindowSize from "../../helper/useWindowSize";
 import Image from "next/image";
+import Link from "next/link";
 
 export const CarouselItem = ({ item, items, goToIndex }) => {
   const size = useWindowSize();
@@ -7,7 +8,7 @@ export const CarouselItem = ({ item, items, goToIndex }) => {
 
   return (
     <>
-      <a href={item.link}>
+      <Link href={item.link}>
         <div
           style={{
             height: windowWidth > 900 ? "600px" : "300px",
@@ -36,7 +37,7 @@ export const CarouselItem = ({ item, items, goToIndex }) => {
             quality={size.width > 900 ? 75 : 50}
           />
         </div>
-      </a>
+      </Link>
     </>
   );
 };

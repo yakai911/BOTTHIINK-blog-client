@@ -1,9 +1,9 @@
-.tagBlogs {
+.allBlogs {
   width: 100%;
   display: flex;
   justify-content: center;
 
-  .tagBlogs-container {
+  .all-blogs-container {
     width: 1290px;
     margin: 45px;
     display: flex;
@@ -13,9 +13,10 @@
 
     & h1 {
       margin-bottom: 50px;
+      text-align: center;
     }
 
-    & .tag-blog-cards {
+    & .all-blog-cards {
       width: 100%;
     }
   }
@@ -23,15 +24,23 @@
 
 @media screen and (max-width: 900px) {
   .allBlogs {
+    width: 100%;
     padding: 0;
-    .tagBlogs-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .all-blogs-container {
+      width: 100%;
+      margin: 0;
+      justify-content: center;
       & h1 {
-        margin-top: 0px;
+        margin-top: 50px;
       }
 
       & .all-blog-cards {
         display: flex;
         flex-direction: column;
+        width: 305px;
       }
     }
   }
