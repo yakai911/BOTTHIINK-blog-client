@@ -1,16 +1,14 @@
 import { Pagination } from "antd";
-import { useState, useMemo, useRef, useEffect } from "react";
-
+import { useState, useMemo, useRef } from "react";
 import "antd/dist/antd.css";
-
 import PostCard from "./PostCard";
 
 const PostGrid = ({ posts }) => {
   const [pageSize, setPageSize] = useState(9);
   const [current, setCurrent] = useState(1);
 
-  const paginationRef = useRef(null);
-  let paginationPos;
+  const firstPostRef = useRef(null);
+  let postRefPos;
 
   const paginatedPosts = useMemo(() => {
     const lastIndex = pageSize * current;
@@ -19,33 +17,37 @@ const PostGrid = ({ posts }) => {
     return posts.slice(firstIndex, lastIndex);
   }, [current, pageSize, posts]);
 
-  // useEffect(() => {
-  //   paginationPos = paginationRef.current.offsetTop;
-  //   if (typeof window !== "undefined") {
-  //     window.scroll({
-  //       top: paginationPos,
-  //       left: 0,
-  //       behavior: "smooth",
-  //     });
-  //   }
-  // }, []);
+  const handleSilder = () => {
+    postRefPos = firstPostRef.current.offsetTop;
+
+    if (typeof window !== "undefined") {
+      window.scroll({
+        top: postRefPos,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <section className='grid-pagination-container'>
-      <section className='post-grid'>
+      <section className='post-grid' ref={firstPostRef}>
         {paginatedPosts.map((post, index) => (
           <PostCard post={post} key={index} />
         ))}
       </section>
-      <div className='pagination-container' ref={paginationRef}>
+      <div className='pagination-container'>
         <Pagination
           simple
           showSizeChanger
-          onShowSizeChange={setPageSize}
           pageSize={pageSize}
+          onShowSizeChange={setPageSize}
           total={posts.length}
-          defaultCurrent={current}
-          onChange={setCurrent}
+          defaultCurrent={1}
+          onChange={(e) => {
+            handleSilder(e);
+            setCurrent(e);
+          }}
         />
       </div>
     </section>

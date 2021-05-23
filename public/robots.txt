@@ -1,0 +1,9 @@
+Sitemap:https://bot-thk.vercel.app/api/posts-sitemap
+
+User-agent: *
+Disallow: /admin/
+Disallow: /auth/
+Disallow:/user/
+Disallow:/api/*
+Allow:/*
+Crawl-delay: 10

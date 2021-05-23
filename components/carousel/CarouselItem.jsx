@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const CarouselItem = ({ item, items, goToIndex }) => {
-  const size = useWindowSize();
-  const windowWidth = size.width;
+  const windowSize = useWindowSize();
+  const windowWidth = windowSize.width;
 
   return (
     <>
@@ -12,6 +12,7 @@ export const CarouselItem = ({ item, items, goToIndex }) => {
         <div
           style={{
             height: windowWidth > 900 ? "600px" : "300px",
+            width: "100%",
             position: "relative",
           }}
           className='carousel-item'>
@@ -27,15 +28,17 @@ export const CarouselItem = ({ item, items, goToIndex }) => {
                 }}></li>
             ))}
           </ol>
-          <Image
-            src={item.src}
-            loading='lazy'
-            alt='banner'
-            width={item.width}
-            height={item.height}
-            className='slider-image'
-            quality={size.width > 900 ? 75 : 50}
-          />
+          {windowWidth && (
+            <Image
+              src={item.src}
+              priority={true}
+              alt='banner'
+              layout='fill'
+              objectFit='cover'
+              objectPosition='50% 50%'
+              className='slider-image'
+            />
+          )}
         </div>
       </Link>
     </>

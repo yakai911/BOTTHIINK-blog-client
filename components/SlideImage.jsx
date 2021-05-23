@@ -14,10 +14,6 @@ const SlideImage = ({ img }) => {
       style={{
         height: windowSize.width > 900 ? "500px" : "300px",
         width: "100%",
-        // backgroundSize: "cover",
-        // backgroundPositionX: "center",
-        // bcakgroundPositionY: "center",
-        // backgroundRepeat: "no-repeat",
         position: "relative",
       }}>
       {windowSize && (
@@ -30,6 +26,7 @@ const SlideImage = ({ img }) => {
           objectFit='cover'
           objectPosition='50% 50%'
           loader={myLoader}
+          quality={windowSize.width > 900 ? 75 : 45}
         />
       )}
     </div>

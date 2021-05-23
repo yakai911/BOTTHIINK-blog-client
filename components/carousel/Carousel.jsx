@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CarouselItem } from "./CarouselItem";
 import { RightOutlined, LeftOutlined } from "@ant-design/icons";
 
@@ -33,8 +33,7 @@ const CarouselComponent = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
 
-  const next = (e) => {
-    e.preventDefault();
+  const next = () => {
     if (animating) return;
     const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
     setActiveIndex(nextIndex);
@@ -51,6 +50,26 @@ const CarouselComponent = () => {
     if (animating) return;
     setActiveIndex(newIndex);
   };
+
+  let cycleInterval;
+  const set = () => {
+    clear();
+
+    cycleInterval = setInterval(() => {
+      next();
+    }, 5000);
+  };
+
+  const clear = () => {
+    clearInterval(cycleInterval);
+  };
+
+  useEffect(() => {
+    set();
+    return () => {
+      clear();
+    };
+  }, [activeIndex]);
 
   return (
     <div className='carousel'>

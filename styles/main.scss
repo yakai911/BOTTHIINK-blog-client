@@ -40,7 +40,7 @@ body {
 }
 
 #nprogress .bar {
-  height: 4px !important;
+  height: 3px !important;
   background-color: #1bb2f9 !important;
 }
 
@@ -85,6 +85,20 @@ a {
 
 .row {
   margin: 4rem 10px;
+}
+
+.loading-text {
+  text-align: center;
+  color: #1bb2f9;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+
+  & svg {
+    color: #1bb2f9;
+  }
 }
 
 .overlay::before {

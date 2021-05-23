@@ -11,3 +11,14 @@
     z-index: 2;
   }
 }
+
+@media screen and (max-width: 900px) {
+  .banner-container {
+    height: 300px;
+    z-index: 2;
+
+    & img {
+      z-index: 3;
+    }
+  }
+}

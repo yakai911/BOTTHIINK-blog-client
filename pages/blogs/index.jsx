@@ -1,7 +1,8 @@
 import { withRouter } from "next/router";
 import Head from "next/head";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { APP_NAME, DOMAIN } from "../../config";
+import { LoadingOutlined } from "@ant-design/icons";
 import PostCard from "../../components/blog/PostCard";
 import { useSWRInfinite } from "swr";
 
@@ -10,8 +11,9 @@ const Blogs = ({ router }) => {
     return `${process.env.NEXT_PUBLIC_API}/blogs-tags?page=${index}&count=9`;
   };
   const [observedPost, setObservedPost] = useState("");
-  const { data, error, size, setSize } = useSWRInfinite(getKey, (url) =>
-    fetch(url).then((r) => r.json())
+  const { data, error, size, setSize, isValidating } = useSWRInfinite(
+    getKey,
+    (url) => fetch(url).then((r) => r.json())
   );
 
   const isInitialLoading = !data && !error;
@@ -70,12 +72,17 @@ const Blogs = ({ router }) => {
           <h1>All Blogs</h1>
           <div className='all-blog-cards'>
             {isInitialLoading ? (
-              <p>正在加载...</p>
+              <div className='loading-container'>
+                <LoadingOutlined />
+              </div>
             ) : (
               <section className='post-grid'>
                 {posts?.map((post) => (
                   <PostCard post={post} key={post._id} id={post._id} />
                 ))}
+                {isValidating && posts.length > 0 && (
+                  <p className='loading-text'>正在加载</p>
+                )}
               </section>
             )}
           </div>

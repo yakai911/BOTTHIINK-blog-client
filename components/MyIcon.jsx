@@ -5,7 +5,13 @@ const MyIcon = ({ width, height }) => {
   return (
     <Link href='/'>
       <>
-        <Image src='/moshIcon.svg' alt='logo' width={width} height={height} />
+        <Image
+          src='/moshIcon.svg'
+          alt='logo'
+          width={width}
+          height={height}
+          quality={75}
+        />
       </>
     </Link>
   );

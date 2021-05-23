@@ -24,8 +24,8 @@ const MyBrand = ({ width, height, fontSize, cursor = "default" }) => (
     <div style={{ cursor }}>
       <Image
         src='/moshIcon.svg'
-        alt='brand'
-        qulity={100}
+        alt='logo'
+        qulity={70}
         width={width}
         height={height}
       />
