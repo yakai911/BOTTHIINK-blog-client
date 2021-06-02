@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://bot-thk.vercel.app</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/signin</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/signup</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/index</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/categories/[slug]</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/tags/[slug]</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/60785c98fbde0a0017ba12e2</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/605171f095fd160017e9f6a2</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/6022a17208fdc500174e1ecd</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/6022991d08fdc500174e1ecc</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/5fe734cda92dc400179d7da3</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/5fcfaa8a6fe3870017b4e9dc</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/5fcce8fb7e4b4f001727f47f</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/5fc643cd7e89bd18e8706f7c</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/5fc4b38f008c581a540f3019</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/5fc107499542782c2ce759d5</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/5fb3e3c4b0c521319095ac4c</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/5fb252beb4f8523308e0630f</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/5fafdaefa4014424cc341024</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/5fafda95a4014424cc341023</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/5fafd97aa4014424cc341020</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/5fafd927a4014424cc34101f</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/blogs/5fafa9a2495d4e230c037cd8</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/categories/recent-post</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/categories/featured</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/categories/trending</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/tags/novel</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/tags/poetry</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/tags/original</loc>
+    </url>
+
+    <url>
+        <loc>https://bot-thk.vercel.app/tags/else</loc>
+    </url>
+</urlset>
