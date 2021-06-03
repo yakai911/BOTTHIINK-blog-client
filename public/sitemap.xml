@@ -17,14 +17,6 @@
     </url>
 
     <url>
-        <loc>https://bot-thk.vercel.app/categories/[slug]</loc>
-    </url>
-
-    <url>
-        <loc>https://bot-thk.vercel.app/tags/[slug]</loc>
-    </url>
-
-    <url>
         <loc>https://bot-thk.vercel.app/blogs/60785c98fbde0a0017ba12e2</loc>
     </url>
 
