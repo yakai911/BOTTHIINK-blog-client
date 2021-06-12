@@ -1,146 +1,155 @@
-@import "variables";
-@import "index";
-@import "editor";
-@import "sign";
-@import "blogPost";
-@import "tagRow";
-@import "allBlogs";
-@import "blogCategory";
-@import "postGrid";
-@import "article";
-@import "search";
-@import "header";
-@import "userDashboard";
-@import "userBlogs";
-@import "publicProfile";
-@import "updateProfile";
-@import "blogUpdate";
-@import "manageBlogs";
-@import "tagBlogs";
-@import "categoryBlogs";
-@import "carousel.scss";
-@import "image.scss";
-@import "footer.scss";
-@import "./NotoSans.scss";
+@import 'variables';
+@import 'index';
+@import 'editor';
+@import 'sign';
+@import 'blogPost';
+@import 'tagRow';
+@import 'allBlogs';
+@import 'blogCategory';
+@import 'postGrid';
+@import 'article';
+@import 'search';
+@import 'header';
+@import 'userDashboard';
+@import 'userBlogs';
+@import 'publicProfile';
+@import 'updateProfile';
+@import 'blogUpdate';
+@import 'manageBlogs';
+@import 'tagBlogs';
+@import 'categoryBlogs';
+@import 'carousel.scss';
+@import 'image.scss';
+@import 'footer.scss';
+@import './NotoSans.scss';
 
 html,
 body {
-  box-sizing: border-box;
-  font-family: "Noto Sans SC", sans-serif;
-  font-weight: 400;
-  margin: 0;
-  height: 100%;
-  width: 100%;
-  background-color: $background;
+    box-sizing: border-box;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 400;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: $background;
 }
 
 #__next {
-  height: 100%;
-  background-color: $background;
+    height: 100%;
+    background-color: $background;
 }
 
 #nprogress .bar {
-  height: 3px !important;
-  background-color: #1bb2f9 !important;
+    height: 3px !important;
+    background-color: #1bb2f9 !important;
 }
 
 h1 {
-  font-size: 2rem;
+    font-size: 2rem;
 }
 
 h2 {
-  font-family: "Noto Sans SC", sans-serif;
-  font-weight: 400;
-  font-size: 32px;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 400;
+    font-size: 32px;
 }
 
 h3 {
-  font-weight: 700;
+    font-weight: 700;
 }
 
 h4 {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 h5 {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 a {
-  text-decoration: none;
-  cursor: pointer;
-  color: $text-color !important;
-  font-family: "Noto Sans SC", sans-serif;
-  font-weight: 400;
+    text-decoration: none;
+    cursor: pointer;
+    color: $text-color !important;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 400;
 
-  &:hover {
-    color: $text-light !important;
-  }
+    &:hover {
+        color: $text-light !important;
+    }
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .row {
-  margin: 4rem 10px;
+    margin: 4rem 10px;
 }
 
 .loading-text {
-  text-align: center;
-  color: #1bb2f9;
+    text-align: center;
+    color: #1bb2f9;
 }
 
 .loading-container {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 
-  & svg {
-    color: #1bb2f9;
-  }
+    & svg {
+        color: #1bb2f9;
+    }
 }
 
 .overlay::before {
-  transition: all ease-in-out 0.2s;
-  z-index: 11;
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    transparent 15%,
-    rgba(0, 0, 0, 0.8) 99%,
-    rgba(0, 0, 0, 0.8) 100%
-  );
+    transition: all ease-in-out 0.2s;
+    z-index: 11;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        transparent 15%,
+        rgba(0, 0, 0, 0.8) 99%,
+        rgba(0, 0, 0, 0.8) 100%
+    );
 }
 
 .overlay:hover::before {
-  z-index: 1;
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: linear-gradient(
-    -180deg,
-    transparent 0%,
-    transparent 12%,
-    rgba(0, 0, 0, 0.2) 99%,
-    rgba(0, 0, 0, 0.2) 100%
-  );
-  box-shadow: -3px -3px 5px rgb(195 200 205 / 9%), 3px 3px 5px #121417;
+    z-index: 1;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+        -180deg,
+        transparent 0%,
+        transparent 12%,
+        rgba(0, 0, 0, 0.2) 99%,
+        rgba(0, 0, 0, 0.2) 100%
+    );
+    box-shadow: -3px -3px 5px rgb(195 200 205 / 9%), 3px 3px 5px #121417;
 }
 
 .error {
-  color: #aa1b19 !important;
+    color: #aa1b19 !important;
 }
 
 .isInvalid {
-  border-color: #aa1b19 !important;
+    border-color: #aa1b19 !important;
+}
+
+.alert {
+    border-radius: 8px;
+    margin: 5px;
+    display: block;
+    float: left;
+    text-align: center;
+    color: #aa1b19 !important;
 }
