@@ -11,12 +11,19 @@ import { singleBlog, listRelated } from '../../actions/blog'
 import { mergeStyles } from '../../helper/mergeStyles'
 import DisqusThread from '../../components/DisqusThread'
 import { singleCategory } from '../../actions/category'
-import { useSWR } from 'swr'
+import useSWR from 'swr'
 
-const SingleBlog = ({ blog }) => {
+const SingleBlog = ({ initialBlog, id }) => {
     const [related, setRelated] = useState([])
     const [voices, setVoices] = useState([])
     const [selectedVoice, setSelectedVoice] = useState('')
+    const { data: blog } = useSWR(
+        [`${process.env.NEXT_PUBLIC_API}/blog/`, id],
+        (url, id) => fetch(url, { id }).then((r = r.json())),
+        {
+            initialData: initialBlog,
+        }
+    )
 
     const loadRelated = () => {
         listRelated({ blog }).then((data) => {
@@ -286,14 +293,21 @@ export async function getStaticPaths() {
     }
 }
 
-export async function getStaticProps({ params }) {
-    return singleBlog(params.id).then((data) => {
-        if (data.error) {
-            console.log(data.error)
-        } else {
-            return { props: { blog: data }, revalidate: 1 }
-        }
+function initBlog(id) {
+    return new Promise((resolve, reject) => {
+        singleBlog(id).then((data) => {
+            if (data.error) {
+                reject(data.error)
+            } else {
+                resolve(data)
+            }
+        })
     })
+}
+
+export async function getStaticProps({ params }) {
+    const initialBlog = await initBlog(params.id)
+    return { props: { initialBlog, id: params.id } }
 }
 
 export default SingleBlog
