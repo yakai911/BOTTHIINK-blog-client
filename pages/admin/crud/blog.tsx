@@ -1,13 +1,13 @@
-import Private from "../../../components//auth/Private";
+import Admin from "../../../components/auth/Admin";
 import BlogCreate from "../../../components/crud/BlogCreate";
 
 const Blog = () => {
   return (
-    <Private>
+    <Admin>
       <div className='creator-container'>
         <BlogCreate />
       </div>
-    </Private>
+    </Admin>
   );
 };
 

@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://bot-thk.vercel.app</loc>
-    </url>
-
-    <url>
-        <loc>https://bot-thk.vercel.app/signin</loc>
-    </url>
-
-    <url>
-        <loc>https://bot-thk.vercel.app/signup</loc>
-    </url>
-
-    <url>
-        <loc>https://bot-thk.vercel.app/blogs/index</loc>
+        <loc>https://bot-thk.vercel.app/blogs/60d177ef8e96e00017c438ee</loc>
     </url>
 
     <url>

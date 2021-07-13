@@ -1,5 +1,5 @@
 import { PostGrid, BlogCategory } from '../components/blog'
-import { withRouter } from 'next/router'
+import { NextRouter, withRouter } from 'next/router'
 import Head from 'next/head'
 import { singleCategory } from '../actions/category'
 import { mergeStyles } from '../helper/mergeStyles'
@@ -8,11 +8,28 @@ import Carousel from '../components/carousel/Carousel'
 import Footer from '../components/Footer'
 import Link from 'next/link'
 import useSWR from 'swr'
+import { IBlog } from 'types'
 
-const Index = ({ router, recentPost, trending, featured }) => {
-    const { data: recentPosts } = useSWR('/category/recent-post', initRecent, {
-        initialData: recentPost,
-    })
+interface IndexProps {
+    router: NextRouter
+    recentPost: IBlog[]
+    trending: IBlog[]
+    featured: IBlog[]
+}
+
+const Index: React.FC<IndexProps> = ({
+    router,
+    recentPost,
+    trending,
+    featured,
+}) => {
+    const { data: recentPosts } = useSWR(
+        `${process.env.NEXT_PUBLIC_API}/category/recent-post`,
+        initRecent,
+        {
+            initialData: recentPost,
+        }
+    )
 
     const trendingConfig = {
         0: {
@@ -166,7 +183,7 @@ function initFeatured() {
     })
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps() {
     const recentPost = await initRecent()
     const trending = await initTrending()
     const featured = await initFeatured()
